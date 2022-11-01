@@ -40,17 +40,33 @@
                         break;
                     case "2":
                         Console.WriteLine("");
-
-                        foreach (var employee in Employees)
+                        if (Employees.Count == 0)
                         {
-                            Console.WriteLine("NAMN: {0}, LÖN: {1}", employee.Fullname, employee.Salary);
+                            Console.WriteLine("(registret är tomt)");
                         }
+                        else
+                        {
+                            foreach (var employee in Employees)
+                            {
+                                Console.WriteLine("NAMN: {0}, LÖN: {1}", employee.Fullname, employee.Salary);
+                            }
+                        }
+                        Console.WriteLine("");
+
                         break;
                     case "3":
-                        aktiv = false;
+
+                        Console.WriteLine("Är du säker (j/n)?");
+                        string konfirmeraAvslut = Console.ReadLine();
+                        if (konfirmeraAvslut.ToLower() == "j")
+                        {
+                            aktiv = false;
+                        }
                         break;
                     default:
+                        Console.WriteLine("");
                         Console.WriteLine("Ogiltigt val, försök igen");
+                        Console.WriteLine("");
                         break;
                 }
             }
