@@ -27,9 +27,9 @@
                         Console.Write("Lön: ");
                         string salary = Console.ReadLine();
 
-                        if (fullname == "" || salary == "")
+                        if (fullname == "" || salary == "" || !salary.All(Char.IsDigit))
                         {
-                            Console.WriteLine("Information saknas, ingen ny post läggs till");
+                            Console.WriteLine("*INFO* Namn eller lön saknar riktig data, ingen ny post läggs till");
                         }
                         else
                         {
@@ -48,7 +48,7 @@
                         {
                             foreach (var employee in Employees)
                             {
-                                Console.WriteLine("NAMN: {0}, LÖN: {1}", employee.Fullname, employee.Salary);
+                                Console.WriteLine("NAMN: {0}, LÖN: {1}", employee.Fullname, employee.Salary.ToString());
                             }
                         }
                         Console.WriteLine("");
@@ -86,7 +86,7 @@
         public Employee(string? fullname, string salary)
         {
             this.fullname = fullname;
-            this.salary = Int32.Parse(salary);
+            this.salary = Int32.Parse(salary); // Ingen koll för värden större än vad "int" klarar av
         }
 
         public string Fullname
