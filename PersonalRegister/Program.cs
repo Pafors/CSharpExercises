@@ -8,8 +8,6 @@
             bool aktiv = true;
             while (aktiv)
             {
-
-
                 Console.WriteLine("== Personal registret ==");
                 Console.WriteLine("(1) Skriv in post");
                 Console.WriteLine("(2) Visa alla registerposter");
@@ -38,6 +36,7 @@
                         }
                         Console.WriteLine("");
                         break;
+
                     case "2":
                         Console.WriteLine("");
                         if (Employees.Count == 0)
@@ -52,10 +51,9 @@
                             }
                         }
                         Console.WriteLine("");
-
                         break;
-                    case "3":
 
+                    case "3":
                         Console.WriteLine("Är du säker (j/n)?");
                         string konfirmeraAvslut = Console.ReadLine();
                         if (konfirmeraAvslut.ToLower() == "j")
@@ -63,6 +61,7 @@
                             aktiv = false;
                         }
                         break;
+
                     default:
                         Console.WriteLine("");
                         Console.WriteLine("Ogiltigt val, försök igen");
@@ -70,11 +69,6 @@
                         break;
                 }
             }
-
-
-
-
-
         }
     }
 
