@@ -64,7 +64,7 @@
 
                     default:
                         Console.WriteLine("");
-                        Console.WriteLine("Ogiltigt val, försök igen");
+                        Console.WriteLine("*INFO* Ogiltigt val, försök igen");
                         Console.WriteLine("");
                         break;
                 }
