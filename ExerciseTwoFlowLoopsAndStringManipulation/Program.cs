@@ -3,11 +3,9 @@ using System;
 
 bool exitRequested = false;
 
-
-
 while (!exitRequested)
 {
-    Console.WriteLine("-== HUVUDMENYN ==-");
+    Console.WriteLine("    -== HUVUDMENYN ==-");
     Console.WriteLine("(1) Biljettpris för ungdom eller pensionär");
     Console.WriteLine("(2) Biljettpris för sällskap");
     Console.WriteLine("(3) Skriva ut vald text tio gånger");
@@ -71,7 +69,7 @@ while (!exitRequested)
             // Extract the third word and write it
             Console.WriteLine("Skriv meningen som ska delas upp, vars tredje ord kommer visas:");
             string userSelectedSentence = Console.ReadLine()!;
-            var splitSentence = userSelectedSentence.Trim().Split(" ");
+            var splitSentence = userSelectedSentence.Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (splitSentence.Length < 3)
             {
                 Console.WriteLine("Meningen har färre än 3 ord, så inget skrivs ut");
