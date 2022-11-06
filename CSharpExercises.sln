@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalRegister", "PersonalRegister\PersonalRegister.csproj", "{645F22D4-FBCB-4499-9E7C-E7F072BC4099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalRegister", "PersonalRegister\PersonalRegister.csproj", "{645F22D4-FBCB-4499-9E7C-E7F072BC4099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseTwoFlowLoopsAndStringManipulation", "ExerciseTwoFlowLoopsAndStringManipulation\ExerciseTwoFlowLoopsAndStringManipulation.csproj", "{0983B149-3DB8-477E-9620-A7D5506E232C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{645F22D4-FBCB-4499-9E7C-E7F072BC4099}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{645F22D4-FBCB-4499-9E7C-E7F072BC4099}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{645F22D4-FBCB-4499-9E7C-E7F072BC4099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0983B149-3DB8-477E-9620-A7D5506E232C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0983B149-3DB8-477E-9620-A7D5506E232C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0983B149-3DB8-477E-9620-A7D5506E232C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0983B149-3DB8-477E-9620-A7D5506E232C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
