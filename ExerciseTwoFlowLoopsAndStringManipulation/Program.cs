@@ -5,19 +5,19 @@ bool exitRequested = false;
 
 while (!exitRequested)
 {
-    Console.WriteLine("    -== HUVUDMENYN ==-");
-    Console.WriteLine("(1) Biljettpris för ungdom eller pensionär");
-    Console.WriteLine("(2) Biljettpris för sällskap");
-    Console.WriteLine("(3) Skriva ut vald text tio gånger");
-    Console.WriteLine("(4) Skriv en mening vars tredje ord kommer att skrivas ut");
-    Console.WriteLine("(0) Avsluta");
+    Console.WriteLine("   --== HUVUDMENYN ==--");
+    Console.WriteLine($"({MenuItems.TicketPriceOne}) Biljettpris för ungdom eller pensionär");
+    Console.WriteLine($"({MenuItems.TicketPriceMulti}) Biljettpris för sällskap");
+    Console.WriteLine($"({MenuItems.OutputTenTimes}) Skriva ut vald text tio gånger");
+    Console.WriteLine($"({MenuItems.OutputThirdWord}) Skriv en mening vars tredje ord kommer att skrivas ut");
+    Console.WriteLine($"({MenuItems.Quit}) Avsluta");
     Console.WriteLine("");
     Console.Write("Skriv siffran för ditt val: ");
     string userMenuSelection = Console.ReadLine()!;
 
     switch (userMenuSelection)
     {
-        case "0":
+        case MenuItems.Quit:
             // User selected to exit the application
             if (Utilities.confirm("Avslutar, är du säker (j/n)? "))
             {
@@ -25,13 +25,13 @@ while (!exitRequested)
             };
             break;
 
-        case "1":
+        case MenuItems.TicketPriceOne:
             // Show cost for one ticket
             Ticket ticket = new(Utilities.getUintInput("Ange ålder: "));
             Console.WriteLine($"{ticket.Category}: {ticket.Price} kr");
             break;
 
-        case "2":
+        case MenuItems.TicketPriceMulti:
             // Calculate ticket cost for groups
             uint groupSize = 0, totalTicketCost = 0;
             List<Ticket> tickets = new List<Ticket>();
@@ -49,7 +49,7 @@ while (!exitRequested)
             Console.WriteLine($"TOTAL KOSTNAD FÖR GRUPPEN: {totalTicketCost}");
             break;
 
-        case "3":
+        case MenuItems.OutputTenTimes:
             // Write text ten (10) times on the same line (unless wrapped)
             Console.WriteLine("Ange text som ska skrivas ut tio (10) gånger:");
             int loopAmount = 10;
@@ -65,7 +65,7 @@ while (!exitRequested)
             Console.WriteLine();
             break;
 
-        case "4":
+        case MenuItems.OutputThirdWord:
             // Extract the third word and write it
             Console.WriteLine("Skriv meningen som ska delas upp, vars tredje ord kommer visas:");
             string userSelectedSentence = Console.ReadLine()!;
