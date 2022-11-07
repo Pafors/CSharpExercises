@@ -21,7 +21,7 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
                 }
                 else
                 {
-                    ui.OutputData("Felaktig inmatning, försök igen");
+                    ui.OutputData("Felaktig inmatning, försök igen\n");
                 };
             }
             while (true);
@@ -38,7 +38,7 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
                 }
                 else
                 {
-                    ui.OutputData("Felaktigt värde, försök igen");
+                    ui.OutputData("Felaktigt värde, försök igen\n");
                 }
             }
             while (true);
