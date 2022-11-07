@@ -12,14 +12,13 @@ while (!exitRequested)
     Console.WriteLine($"({MenuItems.OutputThirdWord}) Skriv en mening vars tredje ord kommer att skrivas ut");
     Console.WriteLine($"({MenuItems.Quit}) Avsluta");
     Console.WriteLine("");
-    Console.Write("Skriv siffran för ditt val: ");
-    string userMenuSelection = Console.ReadLine()!;
+    string userMenuSelection = Utilities.GetStringInput("Skriv siffran för ditt val: "); // For future use, keep as "string"
 
     switch (userMenuSelection)
     {
         case MenuItems.Quit:
             // User selected to exit the application
-            if (Utilities.confirm("Avslutar, är du säker (j/n)? "))
+            if (Utilities.Confirm("Avslutar, är du säker (j/n)? "))
             {
                 exitRequested = true;
             };
@@ -27,21 +26,22 @@ while (!exitRequested)
 
         case MenuItems.TicketPriceOne:
             // Show cost for one ticket
-            Ticket ticket = new(Utilities.getUintInput("Ange ålder: "));
-            Console.WriteLine($"{ticket.Category}: {ticket.Price} kr");
+            Ticket ticket = new(Utilities.GetUintInput("Ange ålder: "));
+            Console.WriteLine($"{ticket.Category.ToUpper()}: {ticket.Price} kr");
             break;
 
         case MenuItems.TicketPriceMulti:
             // Calculate ticket cost for groups
             uint groupSize = 0, totalTicketCost = 0;
             List<Ticket> tickets = new List<Ticket>();
-            groupSize = Utilities.getUintInput("Ange antalet personer i gruppen: ");
-
+            groupSize = Utilities.GetUintInput("Ange antalet personer i gruppen: ");
+            // Add tickets
             for (int i = 0; i < groupSize; i++)
             {
-                tickets.Add(new(Utilities.getUintInput($"Ange ålder för person {i + 1}: ")));
+                tickets.Add(new(Utilities.GetUintInput($"Ange ålder för person {i + 1}: ")));
             }
             Console.WriteLine($"ANTAL I SÄLLSKAPET: {tickets.Count}");
+            // Calculate total cost for the group, and output the result
             foreach (Ticket singleTicket in tickets)
             {
                 totalTicketCost += singleTicket.Price;

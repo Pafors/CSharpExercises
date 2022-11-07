@@ -23,33 +23,33 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
             private set { price = value; }
         }
 
-        public Ticket(uint age)
+        protected virtual void DeterminePrice(uint age)
         {
             if (age < 5 || age > 100)
             {
                 Category = "Fritt inträde";
-                price = 0;
+                Price = 0;
             }
             else if (age < 20)
             {
                 Category = "Ungdomspris";
-                price = 80;
-                //Console.WriteLine("Ungdomspris: 80 kr");
+                Price = 80;
             }
             else if (age > 64)
             {
                 Category = "Pensionärspris";
                 Price = 90;
-                //Console.WriteLine("Pensionärspris: 90 kr");
             }
             else
             {
                 Category = "Standardpris";
                 Price = 120;
-                //Console.WriteLine("Standardpris: 120 kr");
             }
-            Category = category;
-            Price = price;
+        }
+
+        public Ticket(uint age)
+        {
+            DeterminePrice(age);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
 {
     static class Utilities
     {
-        public static string getStringInput(string inputPrompt)
+        public static string GetStringInput(string inputPrompt)
         {
             do
             {
@@ -27,12 +27,12 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
             while (true);
         }
 
-        public static uint getUintInput(string inputPrompt)
+        public static uint GetUintInput(string inputPrompt)
         {
             do
             {
-
-                if (uint.TryParse(getStringInput(inputPrompt), out uint userInput))
+                // Check that the received input is a valid number (valid uint)
+                if (uint.TryParse(GetStringInput(inputPrompt), out uint userInput))
                 {
                     return userInput;
                 }
@@ -44,10 +44,10 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
             while (true);
         }
     
-        public static bool confirm(string confirmPrompt)
+        public static bool Confirm(string confirmPrompt)
         {
-            string confirmExit = getStringInput(confirmPrompt);
-            if (confirmExit.ToLower() == "j")
+            string confirmExit = GetStringInput(confirmPrompt);
+            if (confirmExit.ToLower() == "j" || confirmExit.ToLower() == "ja")
             {
                 return true;
             }
