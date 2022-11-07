@@ -16,7 +16,7 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
 
         internal static void WriteMenu(IUI ui)
         {
-            ui.OutputData("   --== HUVUDMENYN ==--\n");
+            ui.OutputData("\n   --== HUVUDMENYN ==--\n");
             ui.OutputData($"({TicketPriceOne}) Biljettpris för ungdom eller pensionär\n");
             ui.OutputData($"({TicketPriceMulti}) Biljettpris för sällskap\n");
             ui.OutputData($"({OutputTenTimes}) Skriva ut vald text tio gånger\n");

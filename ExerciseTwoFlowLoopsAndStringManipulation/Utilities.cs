@@ -44,7 +44,7 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
             while (true);
         }
     
-        public static bool Confirm(string confirmPrompt, IUI ui)
+        public static bool ConfirmYes(string confirmPrompt, IUI ui)
         {
             string confirmExit = GetStringInput(confirmPrompt, ui);
             if (confirmExit.ToLower() == "j" || confirmExit.ToLower() == "ja")

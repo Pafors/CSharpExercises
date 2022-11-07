@@ -4,6 +4,8 @@ using System;
 bool exitRequested = false;
 IUI ui = new ConsoleUI();
 
+ui.OutputData("Välkomna till övning 2, nedan finns menyl med möjliga val.\nDu skriver in siffran för det menyval du önskar.\n");
+
 while (!exitRequested)
 {
     MenuItems.WriteMenu(ui);
@@ -13,7 +15,7 @@ while (!exitRequested)
     {
         case MenuItems.Quit:
             // User selected to exit the application
-            if (Utilities.Confirm("Avslutar, är du säker (j/n)? ", ui))
+            if (Utilities.ConfirmYes("Avslutar, är du säker (j/n)? ", ui))
             {
                 exitRequested = true;
             };
@@ -35,17 +37,17 @@ while (!exitRequested)
             {
                 tickets.Add(new(Utilities.GetUintInput($"Ange ålder för person {i + 1}: ", ui)));
             }
-            ui.OutputData($"ANTAL I SÄLLSKAPET: {tickets.Count}\n");
+            ui.OutputData($"ANTAL I SÄLLSKAPET: {tickets.Count} personer\n");
             // Calculate total cost for the group, and output the result
             foreach (Ticket singleTicket in tickets)
             {
                 totalTicketCost += singleTicket.Price;
             }
-            ui.OutputData($"TOTAL KOSTNAD FÖR GRUPPEN: {totalTicketCost}\n");
+            ui.OutputData($"TOTAL KOSTNAD FÖR GRUPPEN: {totalTicketCost} kr\n");
             break;
 
         case MenuItems.OutputTenTimes:
-            // Write text ten (10) times on the same line (unless wrapped)
+            // Write input text ten (10) times, without line breaks
             ui.OutputData("Ange text som ska skrivas ut tio (10) gånger:\n");
             int loopAmount = 10;
             string loopText = ui.InputData()!;
@@ -67,11 +69,11 @@ while (!exitRequested)
             var splitSentence = userSelectedSentence.Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (splitSentence.Length < 3)
             {
-                ui.OutputData("Meningen har färre än 3 ord, så inget skrivs ut\n");
+                ui.OutputData("Meningen har färre än 3 ord, inget skrivs ut\n");
             }
             else
             {
-                ui.OutputData($"Det tredje ordet är: '{splitSentence[2]}'\n");
+                ui.OutputData($"DET TREDJE ORDET ÄR: '{splitSentence[2]}'\n");
             }
             break;
 
