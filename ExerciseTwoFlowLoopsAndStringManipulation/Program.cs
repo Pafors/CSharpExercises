@@ -31,7 +31,7 @@ while (!exitRequested)
             // Calculate ticket cost for groups
             uint groupSize = 0, totalTicketCost = 0;
             List<Ticket> tickets = new List<Ticket>();
-            groupSize = Utilities.GetUintInput("Ange antalet personer i gruppen: ", ui);
+            groupSize = Utilities.GetUintInput("Ange antalet personer i sällskapet: ", ui);
             // Add tickets
             for (int i = 0; i < groupSize; i++)
             {
@@ -43,7 +43,7 @@ while (!exitRequested)
             {
                 totalTicketCost += singleTicket.Price;
             }
-            ui.OutputData($"TOTAL BIOBILJETT KOSTNAD FÖR GRUPPEN: {totalTicketCost} kr\n");
+            ui.OutputData($"TOTAL BIOBILJETT KOSTNAD FÖR SÄLLSKAPET: {totalTicketCost} kr\n");
             break;
 
         case MenuItems.OutputTenTimes:
@@ -67,7 +67,8 @@ while (!exitRequested)
             // Extract the third word and write it
             ui.OutputData("Skriv meningen som ska delas upp, vars tredje ord kommer visas:\n");
             string userSelectedSentence =ui.InputData()!;
-            var splitSentence = userSelectedSentence.Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            // TODO (test of Visual Studio "Task list" feature): Remove tabs ('\t')
+            var splitSentence = userSelectedSentence.Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (splitSentence.Length < 3)
             {
                 ui.OutputData("Meningen har färre än 3 ord, inget skrivs ut\n");
