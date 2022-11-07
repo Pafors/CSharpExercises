@@ -14,15 +14,15 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
         public const string OutputTenTimes = "3";
         public const string OutputThirdWord = "4";
 
-        internal static void WriteMenu()
+        internal static void WriteMenu(IUI ui)
         {
-            Console.WriteLine("   --== HUVUDMENYN ==--");
-            Console.WriteLine($"({TicketPriceOne}) Biljettpris för ungdom eller pensionär");
-            Console.WriteLine($"({TicketPriceMulti}) Biljettpris för sällskap");
-            Console.WriteLine($"({OutputTenTimes}) Skriva ut vald text tio gånger");
-            Console.WriteLine($"({OutputThirdWord}) Skriv en mening vars tredje ord kommer att skrivas ut");
-            Console.WriteLine($"({Quit}) Avsluta");
-            Console.WriteLine("");
+            ui.OutputData("   --== HUVUDMENYN ==--\n");
+            ui.OutputData($"({TicketPriceOne}) Biljettpris för ungdom eller pensionär\n");
+            ui.OutputData($"({TicketPriceMulti}) Biljettpris för sällskap\n");
+            ui.OutputData($"({OutputTenTimes}) Skriva ut vald text tio gånger\n");
+            ui.OutputData($"({OutputThirdWord}) Skriv en mening vars tredje ord kommer att skrivas ut\n");
+            ui.OutputData($"({Quit}) Avsluta\n");
+            ui.OutputData("\n");
         }
     }
 }

@@ -2,17 +2,18 @@
 using System;
 
 bool exitRequested = false;
+IUI ui = new ConsoleUI();
 
 while (!exitRequested)
 {
-    MenuItems.WriteMenu();
-    string userMenuSelection = Utilities.GetStringInput("Skriv siffran för ditt val: "); // For future use, keep as "string"
+    MenuItems.WriteMenu(ui);
+    string userMenuSelection = Utilities.GetStringInput("Skriv siffran för ditt val: ", ui); // For future use, keep as "string"
 
     switch (userMenuSelection)
     {
         case MenuItems.Quit:
             // User selected to exit the application
-            if (Utilities.Confirm("Avslutar, är du säker (j/n)? "))
+            if (Utilities.Confirm("Avslutar, är du säker (j/n)? ", ui))
             {
                 exitRequested = true;
             };
@@ -20,62 +21,62 @@ while (!exitRequested)
 
         case MenuItems.TicketPriceOne:
             // Show cost for one ticket
-            Ticket ticket = new(Utilities.GetUintInput("Ange ålder: "));
-            Console.WriteLine($"{ticket.Category.ToUpper()}: {ticket.Price} kr");
+            Ticket ticket = new(Utilities.GetUintInput("Ange ålder: ", ui));
+            ui.OutputData($"{ticket.Category.ToUpper()}: {ticket.Price} kr\n");
             break;
 
         case MenuItems.TicketPriceMulti:
             // Calculate ticket cost for groups
             uint groupSize = 0, totalTicketCost = 0;
             List<Ticket> tickets = new List<Ticket>();
-            groupSize = Utilities.GetUintInput("Ange antalet personer i gruppen: ");
+            groupSize = Utilities.GetUintInput("Ange antalet personer i gruppen: ", ui);
             // Add tickets
             for (int i = 0; i < groupSize; i++)
             {
-                tickets.Add(new(Utilities.GetUintInput($"Ange ålder för person {i + 1}: ")));
+                tickets.Add(new(Utilities.GetUintInput($"Ange ålder för person {i + 1}: ", ui)));
             }
-            Console.WriteLine($"ANTAL I SÄLLSKAPET: {tickets.Count}");
+            ui.OutputData($"ANTAL I SÄLLSKAPET: {tickets.Count}\n");
             // Calculate total cost for the group, and output the result
             foreach (Ticket singleTicket in tickets)
             {
                 totalTicketCost += singleTicket.Price;
             }
-            Console.WriteLine($"TOTAL KOSTNAD FÖR GRUPPEN: {totalTicketCost}");
+            ui.OutputData($"TOTAL KOSTNAD FÖR GRUPPEN: {totalTicketCost}\n");
             break;
 
         case MenuItems.OutputTenTimes:
             // Write text ten (10) times on the same line (unless wrapped)
-            Console.WriteLine("Ange text som ska skrivas ut tio (10) gånger:");
+            ui.OutputData("Ange text som ska skrivas ut tio (10) gånger:\n");
             int loopAmount = 10;
-            string loopText = Console.ReadLine()!;
+            string loopText = ui.InputData()!;
             for (int i = 0; i < 10; i++)
             {
-                Console.Write($"{i + 1}.{loopText}");
+                ui.OutputData($"{i + 1}.{loopText}");
                 if ((i + 1) < loopAmount)
                 {
-                    Console.Write(", ");
+                    ui.OutputData(", ");
                 }
             }
-            Console.WriteLine();
+            ui.OutputData("\n");
             break;
 
         case MenuItems.OutputThirdWord:
             // Extract the third word and write it
-            Console.WriteLine("Skriv meningen som ska delas upp, vars tredje ord kommer visas:");
-            string userSelectedSentence = Console.ReadLine()!;
+            ui.OutputData("Skriv meningen som ska delas upp, vars tredje ord kommer visas:\n");
+            string userSelectedSentence =ui.InputData()!;
             var splitSentence = userSelectedSentence.Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (splitSentence.Length < 3)
             {
-                Console.WriteLine("Meningen har färre än 3 ord, så inget skrivs ut");
+                ui.OutputData("Meningen har färre än 3 ord, så inget skrivs ut\n");
             }
             else
             {
-                Console.WriteLine($"Det tredje ordet är: '{splitSentence[2]}'");
+                ui.OutputData($"Det tredje ordet är: '{splitSentence[2]}'\n");
             }
             break;
 
         default:
-            Console.WriteLine("Ogiltigt menyval, försök igen");
+            ui.OutputData("Ogiltigt menyval, försök igen\n");
             break;
     }
 }
