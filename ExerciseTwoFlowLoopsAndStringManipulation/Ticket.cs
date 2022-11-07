@@ -25,6 +25,7 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
 
         protected virtual void DeterminePrice(uint age)
         {
+            // Overridable class if derived tickets have other price settings
             if (age < 5 || age > 100)
             {
                 Category = "Fritt inträde";

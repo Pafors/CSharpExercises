@@ -5,13 +5,7 @@ bool exitRequested = false;
 
 while (!exitRequested)
 {
-    Console.WriteLine("   --== HUVUDMENYN ==--");
-    Console.WriteLine($"({MenuItems.TicketPriceOne}) Biljettpris för ungdom eller pensionär");
-    Console.WriteLine($"({MenuItems.TicketPriceMulti}) Biljettpris för sällskap");
-    Console.WriteLine($"({MenuItems.OutputTenTimes}) Skriva ut vald text tio gånger");
-    Console.WriteLine($"({MenuItems.OutputThirdWord}) Skriv en mening vars tredje ord kommer att skrivas ut");
-    Console.WriteLine($"({MenuItems.Quit}) Avsluta");
-    Console.WriteLine("");
+    MenuItems.WriteMenu();
     string userMenuSelection = Utilities.GetStringInput("Skriv siffran för ditt val: "); // For future use, keep as "string"
 
     switch (userMenuSelection)
@@ -84,5 +78,4 @@ while (!exitRequested)
             Console.WriteLine("Ogiltigt menyval, försök igen");
             break;
     }
-    Console.WriteLine("");
 }
