@@ -17,10 +17,10 @@ namespace ExerciseTwoFlowLoopsAndStringManipulation
         internal static void WriteMenu(IUI ui)
         {
             ui.OutputData("\n   --== HUVUDMENYN ==--\n");
-            ui.OutputData($"({TicketPriceOne}) Biljettpris för ungdom eller pensionär\n");
-            ui.OutputData($"({TicketPriceMulti}) Biljettpris för sällskap\n");
-            ui.OutputData($"({OutputTenTimes}) Skriva ut vald text tio gånger\n");
-            ui.OutputData($"({OutputThirdWord}) Skriv en mening vars tredje ord kommer att skrivas ut\n");
+            ui.OutputData($"({TicketPriceOne}) Biobiljett pris för en person\n");
+            ui.OutputData($"({TicketPriceMulti}) Biobiljett pris för sällskap\n");
+            ui.OutputData($"({OutputTenTimes}) Upprepa tio gånger, skriver ut vald text tio gånger\n");
+            ui.OutputData($"({OutputThirdWord}) Det tredje ordet, skriv en mening vars tredje ord kommer att skrivas ut\n");
             ui.OutputData($"({Quit}) Avsluta\n");
             ui.OutputData("\n");
         }

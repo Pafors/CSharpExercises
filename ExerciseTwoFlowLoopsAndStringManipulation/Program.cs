@@ -43,7 +43,7 @@ while (!exitRequested)
             {
                 totalTicketCost += singleTicket.Price;
             }
-            ui.OutputData($"TOTAL KOSTNAD FÖR GRUPPEN: {totalTicketCost} kr\n");
+            ui.OutputData($"TOTAL BIOBILJETT KOSTNAD FÖR GRUPPEN: {totalTicketCost} kr\n");
             break;
 
         case MenuItems.OutputTenTimes:
@@ -54,6 +54,7 @@ while (!exitRequested)
             for (int i = 0; i < 10; i++)
             {
                 ui.OutputData($"{i + 1}.{loopText}");
+                // Add comma-sign if not the last iteration
                 if ((i + 1) < loopAmount)
                 {
                     ui.OutputData(", ");
