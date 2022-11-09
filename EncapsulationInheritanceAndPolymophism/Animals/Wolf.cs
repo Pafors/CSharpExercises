@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EncapsulationInheritanceAndPolymophism
+namespace EncapsulationInheritanceAndPolymophism.Animals
 {
     internal class Wolf : Animal
     {

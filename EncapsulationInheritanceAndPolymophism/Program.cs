@@ -1,4 +1,5 @@
 ﻿using EncapsulationInheritanceAndPolymophism;
+using EncapsulationInheritanceAndPolymophism.Animals;
 
 // 3.1 Encapsulation
 
@@ -93,7 +94,6 @@ foreach (var animal in animals)
     }
 }
 
-
 //animals[1].Whatever();
 
 // Fråga: Skapa en ny metod med valfritt namn i klassen Dog som endast returnerar en valfri
@@ -102,7 +102,6 @@ foreach (var animal in animals)
 //       basklassen "Animal". För att komma åt den så måste man först se om objektet på
 //       list positionen är klassen "Dog", sen "casta" till underklassen och därefter anropa.
 //       "if(animal is Dog dog){ dog.Whatever(); }" likt "foreach" loopen ovan med "Stats()".
-
 
 Console.WriteLine("");
 foreach (var animal in animals)

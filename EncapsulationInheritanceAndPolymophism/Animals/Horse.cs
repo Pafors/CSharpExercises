@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EncapsulationInheritanceAndPolymophism
+namespace EncapsulationInheritanceAndPolymophism.Animals
 {
-    internal class Horse: Animal
+    internal class Horse : Animal
     {
         public bool IsTrained { get; set; }
         public override void DoSound()
