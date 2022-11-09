@@ -1,4 +1,5 @@
 ﻿using EncapsulationInheritanceAndPolymophism.Animals;
+using EncapsulationInheritanceAndPolymophism.Animals.Birds;
 using EncapsulationInheritanceAndPolymophism.Errors;
 using EncapsulationInheritanceAndPolymophism.PersonManagement;
 

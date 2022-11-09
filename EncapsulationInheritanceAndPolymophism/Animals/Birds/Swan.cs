@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EncapsulationInheritanceAndPolymophism.Animals
+namespace EncapsulationInheritanceAndPolymophism.Animals.Birds
 {
     internal class Swan : Bird
     {
