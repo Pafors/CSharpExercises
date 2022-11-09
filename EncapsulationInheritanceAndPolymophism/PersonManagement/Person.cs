@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EncapsulationInheritanceAndPolymophism
+namespace EncapsulationInheritanceAndPolymophism.PersonManagement
 {
     internal class Person
     {
@@ -32,7 +32,7 @@ namespace EncapsulationInheritanceAndPolymophism
             }
         }
 
-        private string fName = String.Empty;
+        private string fName = string.Empty;
         public string FName
         {
             get { return fName; }
@@ -56,7 +56,7 @@ namespace EncapsulationInheritanceAndPolymophism
             }
         }
 
-        private string lName = String.Empty;
+        private string lName = string.Empty;
 
         public string LName
         {

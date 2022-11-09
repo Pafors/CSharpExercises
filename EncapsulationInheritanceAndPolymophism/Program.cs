@@ -1,7 +1,11 @@
-﻿using EncapsulationInheritanceAndPolymophism;
-using EncapsulationInheritanceAndPolymophism.Animals;
+﻿using EncapsulationInheritanceAndPolymophism.Animals;
+using EncapsulationInheritanceAndPolymophism.Errors;
+using EncapsulationInheritanceAndPolymophism.PersonManagement;
 
 // 3.1 Encapsulation
+
+//Person bob = new Person(51, "John", "Tailor", 197, 100);
+//bob.FName = "Johnny";
 
 PersonHandler ph = new PersonHandler();
 Person p1 = ph.CreatePerson(42, "Bob", "Smith", 170, 80);
@@ -19,7 +23,6 @@ ph.SetAge(p1, 44);
 ph.SetName(p1, "Joe", "Smithy");
 ph.SetHeight(p1, 171);
 ph.SetWeight(p1, 85);
-
 Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {p1.Height} cm ; WEIGHT: {p1.Weight} kg");
 
 // 3.2 Polymorphism
