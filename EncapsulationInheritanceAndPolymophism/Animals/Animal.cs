@@ -17,7 +17,7 @@ namespace EncapsulationInheritanceAndPolymophism.Animals
 
         public virtual string Stats()
         {
-            return $"Name:{Name}, Short descr:{ShortDescription}, Age:{Age}, Weight:{Weight}";
+            return $"Name:{Name}, Short descr:{ShortDescription}, Age:{Age} years, Weight:{Weight} kg";
         }
 
         public Animal(string name, string shortDescription, int age, int weight)

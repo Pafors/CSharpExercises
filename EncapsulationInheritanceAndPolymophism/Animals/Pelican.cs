@@ -11,7 +11,7 @@ namespace EncapsulationInheritanceAndPolymophism.Animals
         public int BeakVolume { get; set; }
         public override string Stats()
         {
-            return $"{base.Stats()}, Beak volume: {BeakVolume}";
+            return $"{base.Stats()}, Beak volume: {BeakVolume} liters";
         }
         public Pelican(string name, string shortDescription, int age, int weight, int wingSpan, int beakVolume) : base(name, shortDescription, age, weight, wingSpan)
         {

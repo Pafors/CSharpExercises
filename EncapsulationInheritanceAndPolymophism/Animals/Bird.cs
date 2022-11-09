@@ -16,7 +16,7 @@ namespace EncapsulationInheritanceAndPolymophism.Animals
 
         public override string Stats()
         {
-            return $"{base.Stats()}, Wingspan: {WingSpan}";
+            return $"{base.Stats()}, Wingspan: {WingSpan} cm";
         }
         public override void DoSound()
         {

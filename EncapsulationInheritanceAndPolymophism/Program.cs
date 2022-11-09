@@ -14,10 +14,13 @@ Person p7 = ph.CreatePerson(21, "LongLaName", "HoHohohohohohohohohohoho", 177, 9
 
 // See the changes of using a PersonHandler:
 Console.WriteLine();
-Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {p1.Height} WEIGHT: {p1.Weight}");
+Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {p1.Height} cm ; WEIGHT: {p1.Weight} kg");
+ph.SetAge(p1, 44);
 ph.SetName(p1, "Joe", "Smithy");
 ph.SetHeight(p1, 171);
-Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {p1.Height} WEIGHT: {p1.Weight}");
+ph.SetWeight(p1, 85);
+
+Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {p1.Height} cm ; WEIGHT: {p1.Weight} kg");
 
 // 3.2 Polymorphism
 

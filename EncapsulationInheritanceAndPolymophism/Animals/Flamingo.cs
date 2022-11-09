@@ -12,7 +12,7 @@ namespace EncapsulationInheritanceAndPolymophism.Animals
 
         public override string Stats()
         {
-            return $"{base.Stats()}, Necklength: {NeckLength}";
+            return $"{base.Stats()}, Necklength: {NeckLength} cm";
         }
         public Flamingo(string name, string shortDescription, int age, int weight, int wingSpan, int neckLength) : base(name, shortDescription, age, weight, wingSpan)
         {

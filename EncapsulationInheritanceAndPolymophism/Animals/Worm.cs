@@ -15,7 +15,7 @@ namespace EncapsulationInheritanceAndPolymophism.Animals
         }
         public override string Stats()
         {
-            return $"{base.Stats()}, Length: {Length}";
+            return $"{base.Stats()}, Length: {Length} cm";
         }
         public Worm(string name, string shortDescription, int age, int weight, int length) : base(name, shortDescription, age, weight)
         {
