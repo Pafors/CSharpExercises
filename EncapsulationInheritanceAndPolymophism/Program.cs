@@ -97,8 +97,8 @@ foreach (var animal in animals)
 // Fråga: Förklara vad det är som händer
 // Svar: Metoden "Stats()" finns i basklassen "Animal", vilket görs en override på i
 //       dess underklasser vars metod anropar basklassens "Stats()" samt bygger på med egna.
-//       Detta gör att även underklassernas mer specifika egenskaper kommer med, även från
-//       "Pelican" klassen som är en "Bird" som är ett "Animal" där utskrifts ordningen
+//       Detta gör att även sub-underklassernas mer specifika egenskaper kommer med, även från
+//       "Pelican" klassen som är en "Bird" som är ett "Animal" där utskriftsordningen
 //       på egenskaperna blir "Animal", "Bird", "Pelican".
 
 Console.WriteLine("");
