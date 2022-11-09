@@ -6,7 +6,14 @@ using EncapsulationInheritanceAndPolymophism.Animals;
 PersonHandler ph = new PersonHandler();
 Person p1 = ph.CreatePerson(42, "Bob", "Smith", 170, 80);
 Person p2 = ph.CreatePerson(43, "Tim", "Smith", 177, 90);
+Person p3 = ph.CreatePerson(0, "Low", "Age", 177, 90);
+Person p4 = ph.CreatePerson(20, "X", "ShortFirstName", 177, 90);
+Person p5 = ph.CreatePerson(21, "Looooooooooooooooooong", "FirstName", 177, 90);
+Person p6 = ph.CreatePerson(21, "ShrtLaName", "Ho", 177, 90);
+Person p7 = ph.CreatePerson(21, "LongLaName", "HoHohohohohohohohohohoho", 177, 90);
 
+// See the changes of using a PersonHandler:
+Console.WriteLine();
 Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {p1.Height} WEIGHT: {p1.Weight}");
 ph.SetName(p1, "Joe", "Smithy");
 ph.SetHeight(p1, 171);
@@ -14,6 +21,7 @@ Console.WriteLine($"NAME: {p1.FName} {p1.LName} ({p1.Age} years old) ; HEIGHT: {
 
 // 3.2 Polymorphism
 
+Console.WriteLine();
 List<UserError> ueList = new List<UserError>() { new NumericInputError(), new TextInputError() };
 foreach (UserError ue in ueList)
 {
@@ -46,6 +54,7 @@ List<Animal> animals = new List<Animal>()
     new Worm("Earth worm", "Common in gardens", 1, 1, 10)
 };
 
+Console.WriteLine();
 foreach (Animal animal in animals)
 {
     Console.Write($"{animal.Name}: ");
