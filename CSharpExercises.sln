@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExerciseTwoFlowLoopsAndStri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncapsulationInheritanceAndPolymophism", "EncapsulationInheritanceAndPolymophism\EncapsulationInheritanceAndPolymophism.csproj", "{73494A7C-C76F-4153-9A5F-DAED9BE2A491}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkalProj_Datastrukturer_Minne", "..\Ovning4_SkalProj\SkalProj_Datastrukturer_Minne\SkalProj_Datastrukturer_Minne.csproj", "{C173FC5F-0F0A-4CC8-B971-B60B28DC354B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Övning 4 - Minneshantering", "Övning 4 - Minneshantering\Övning 4 - Minneshantering.csproj", "{C77303A6-0BE8-4CBB-BFE1-3EC96F55AF9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{73494A7C-C76F-4153-9A5F-DAED9BE2A491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73494A7C-C76F-4153-9A5F-DAED9BE2A491}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73494A7C-C76F-4153-9A5F-DAED9BE2A491}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C173FC5F-0F0A-4CC8-B971-B60B28DC354B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C173FC5F-0F0A-4CC8-B971-B60B28DC354B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C173FC5F-0F0A-4CC8-B971-B60B28DC354B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C173FC5F-0F0A-4CC8-B971-B60B28DC354B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77303A6-0BE8-4CBB-BFE1-3EC96F55AF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77303A6-0BE8-4CBB-BFE1-3EC96F55AF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77303A6-0BE8-4CBB-BFE1-3EC96F55AF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77303A6-0BE8-4CBB-BFE1-3EC96F55AF9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
