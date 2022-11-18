@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics.Metrics;
+using System.Formats.Asn1;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 // Frågor:
@@ -48,6 +51,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
+                    + "\n5. CheckRecursion"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -73,10 +77,13 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        CheckRecursion();
+                        break;
                     /*
-                     * Extend the menu to include the recursive 
-                     * and iterative exercises.
-                     */
+                 * Extend the menu to include the recursive 
+                 * and iterative exercises.
+                 */
                     case '0':
                         Environment.Exit(0);
                         break;
@@ -365,6 +372,64 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
             while (!validInput);
+        }
+
+        static void CheckRecursion()
+        {
+            // Calculate the n:th even number with recursion
+            int RecursiveEven(int value)
+            {
+                // The escape value of "0"
+                if (value == 0) return 0;
+                return RecursiveEven(value - 1) + 2;
+            }
+
+            // fibonaccisekvensen: (f(n) = f(n - 1) + f(n - 2))
+            // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
+            int FibonacciSequence(int value)
+            {
+                // Two fixed "excape" values since it's called with "value -2" which
+                // could lead to a "-1" value and stack overflow.
+                // Can be reduced to one "if-statement" with: if (value <= 1) return value;
+                if (value == 0) return 0;
+                if (value == 1) return 1;
+                return FibonacciSequence(value - 1) + FibonacciSequence(value - 2);
+            }
+
+            // Start of feature
+            bool wantsToQuit = false;
+            do
+            {
+                Console.WriteLine("Options:\n'eNNN' Find the n:th even number with recursion ('e42')\n'fNNN' Classical Fibonacci sequence ('f21')\n'q' Quit to main menu");
+                Console.Write("Your selection: ");
+                string recursionSelection = Console.ReadLine()!;
+                if (recursionSelection.Length > 0)
+                {
+                    char command = recursionSelection[0];
+                    // Set value to 0 if user omits it
+                    string valueString = recursionSelection.Substring(1).ToLower();
+                    if (!int.TryParse(valueString, out var value))
+                    {
+                        value = 0;
+                    }
+                    switch (command)
+                    {
+                        case 'e':
+                            Console.WriteLine(RecursiveEven(value));
+                            break;
+                        case 'f':
+                            Console.WriteLine(FibonacciSequence(value));
+                            break;
+                        case 'q':
+                            wantsToQuit = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Empty input, please try again");
+                }
+            } while (!wantsToQuit);
         }
     }
 }
