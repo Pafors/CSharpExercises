@@ -392,6 +392,7 @@ namespace SkalProj_Datastrukturer_Minne
 
             // fibonaccisekvensen: (f(n) = f(n - 1) + f(n - 2))
             // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
+            // A tail-recursion variant might be better, but it's too late on friday
             int FibonacciSequenceRecursion(int n)
             {
                 // No check for large values of "n", which can take time or "int" wraps
@@ -404,6 +405,7 @@ namespace SkalProj_Datastrukturer_Minne
                 if (n == 1) return 1;
                 return FibonacciSequenceRecursion(n - 1) + FibonacciSequenceRecursion(n - 2);
             }
+
 
             // Start of feature
             bool wantsToQuit = false;
@@ -512,6 +514,12 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             } while (!wantsToQuit);
         }
+
+        // Fråga: Utgå ifrån era nyvunna kunskaper om iteration, rekursion och minneshantering.Vilken av
+        //        ovanstående funktioner är mest minnesvänlig och varför?
+        // Svar: Iterationen är mycket mer minnesvänlig, stacken används enormt i rekursions-varianten då
+        //       alla anrop som inte är färdiga måste läggas där.
+        //       Det går att göra tail-recursion som inte använder stacken mer än iterations-varianten. :-)
     }
 }
 
