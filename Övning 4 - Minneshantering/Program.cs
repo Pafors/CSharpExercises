@@ -52,6 +52,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
                     + "\n5. CheckRecursion"
+                    + "\n6. CheckIteration"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -77,13 +78,16 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    /*
+                    * Extend the menu to include the recursive 
+                    * and iterative exercises.
+                    */
                     case '5':
                         CheckRecursion();
                         break;
-                    /*
-                 * Extend the menu to include the recursive 
-                 * and iterative exercises.
-                 */
+                    case '6':
+                        CheckIteration();
+                        break;
                     case '0':
                         Environment.Exit(0);
                         break;
@@ -294,6 +298,7 @@ namespace SkalProj_Datastrukturer_Minne
             while (!validInput);
         }
 
+        // Check validity of pairs of paranthesis (and brackets plus braces)
         static void CheckParanthesis()
         {
             /*
@@ -374,33 +379,37 @@ namespace SkalProj_Datastrukturer_Minne
             while (!validInput);
         }
 
+        // Recursion, find the n:th even numbers and the n:th number in the Fibinacci sequence
         static void CheckRecursion()
         {
             // Calculate the n:th even number with recursion
-            int RecursiveEven(int value)
+            int RecursiveEven(int n)
             {
-                // The escape value of "0"
-                if (value == 0) return 0;
-                return RecursiveEven(value - 1) + 2;
+                // The escape value of "0", the "base case"
+                if (n == 0) return 0;
+                return RecursiveEven(n - 1) + 2;
             }
 
             // fibonaccisekvensen: (f(n) = f(n - 1) + f(n - 2))
             // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
-            int FibonacciSequence(int value)
+            int FibonacciSequenceRecursion(int n)
             {
-                // Two fixed "excape" values since it's called with "value -2" which
+                // No check for large values of "n", which can take time or "int" wraps
+                // into negative numbers (47th does). Using "ulong" would be better.
+
+                // Two "excape" values since it's called with "n -2" which
                 // could lead to a "-1" value and stack overflow.
-                // Can be reduced to one "if-statement" with: if (value <= 1) return value;
-                if (value == 0) return 0;
-                if (value == 1) return 1;
-                return FibonacciSequence(value - 1) + FibonacciSequence(value - 2);
+                // Can be reduced to one if-statement with: "if (n <= 1) return n;"
+                if (n == 0) return 0;
+                if (n == 1) return 1;
+                return FibonacciSequenceRecursion(n - 1) + FibonacciSequenceRecursion(n - 2);
             }
 
             // Start of feature
             bool wantsToQuit = false;
             do
             {
-                Console.WriteLine("Options:\n'eNNN' Find the n:th even number with recursion ('e42')\n'fNNN' Classical Fibonacci sequence ('f21')\n'q' Quit to main menu");
+                Console.WriteLine("Options:\n'eNNN' Find the n:th even number with recursion ('e42')\n'fNNN' Classical Fibonacci sequence with recursion('f21')\n'q' Quit to main menu");
                 Console.Write("Your selection: ");
                 string recursionSelection = Console.ReadLine()!;
                 if (recursionSelection.Length > 0)
@@ -418,7 +427,79 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine(RecursiveEven(value));
                             break;
                         case 'f':
-                            Console.WriteLine(FibonacciSequence(value));
+                            Console.WriteLine(FibonacciSequenceRecursion(value));
+                            break;
+                        case 'q':
+                            wantsToQuit = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Empty input, please try again");
+                }
+            } while (!wantsToQuit);
+        }
+
+        // Iteration, find the n:th even numbers and the n:th number in the Fibinacci sequence
+        static void CheckIteration()
+        {
+            // Calculate the n:th even number with iteration
+            int IterateEven(int n)
+            {
+                int result = 2;
+                for (int i = 0; i < n - 1; i++)
+                {
+                    result += 2;
+                }
+                return result;
+            }
+
+            // fibonaccisekvensen: (f(n) = f(n - 1) + f(n - 2))
+            // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
+            int FibonacciSequenceIteration(int n)
+            {
+                // No check for large values of "n", which can take time or "int" wraps
+                // into negative numbers.
+
+                // Initial setup of values, "pm1" is "past minus 1"
+                int fibonacciNumber = 0;
+                int pm1FibonacciNumber = 0;
+                int pm2FibonacciNumber = 1;
+                for (int i = 0; i < n; i++)
+                {
+                    // Add past value for previous step ("pm1") and it before ("pm2")
+                    fibonacciNumber = pm1FibonacciNumber + pm2FibonacciNumber;
+                    // Keep past values
+                    pm2FibonacciNumber = pm1FibonacciNumber;
+                    pm1FibonacciNumber = fibonacciNumber;
+                }
+                return fibonacciNumber;
+            }
+
+            // Start of feature
+            bool wantsToQuit = false;
+            do
+            {
+                Console.WriteLine("Options:\n'eNNN' Find the n:th even number with iteration ('e42')\n'fNNN' Classical Fibonacci sequence with iteration ('f21')\n'q' Quit to main menu");
+                Console.Write("Your selection: ");
+                string iterationSelection = Console.ReadLine()!;
+                if (iterationSelection.Length > 0)
+                {
+                    char command = iterationSelection[0];
+                    // Set value to 0 if user omits it
+                    string valueString = iterationSelection.Substring(1).ToLower();
+                    if (!int.TryParse(valueString, out var value))
+                    {
+                        value = 0;
+                    }
+                    switch (command)
+                    {
+                        case 'e':
+                            Console.WriteLine(IterateEven(value));
+                            break;
+                        case 'f':
+                            Console.WriteLine(FibonacciSequenceIteration(value));
                             break;
                         case 'q':
                             wantsToQuit = true;
@@ -433,4 +514,5 @@ namespace SkalProj_Datastrukturer_Minne
         }
     }
 }
+
 
