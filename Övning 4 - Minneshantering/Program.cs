@@ -6,27 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Frågor:
-// 1. Hur fungerar stacken och heapen ? Förklara gärna med exempel eller skiss på dess
+// 1. Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess
 //    grundläggande funktion
 // Svar: Stacken är som en hög med papper, det man lägger senast hamnar överst
-//       och plockas upp först. För att komma åt det sista pappret måste de plockas 
+//       och plockas upp först. För att komma åt det sista pappret måste papper plockas 
 //       upp i tur och ordning från översta (senast inkomna) till det sista (först
-//       inkomna). Stacken är "linjär", en dimensionell.
-//       Heapen är mer som en stor yta där data läggs på ledig plats och allt är snabbt
+//       inkomna). Stacken är "linjär", endimensionell.
+//       Heapen är mer som en stor yta där data läggs på ledig plats och allt är snabbt-
 //       och lättåtkomligt. Eftersom heapen inte är "linjär" så måste en "städare" komma
-//       in och rensa bort data där kopplingen försvunnit, en "garbage collect" (GC).
+//       in och rensa bort data där kopplingen försvunnit, en "garbage collect" (GC),
+//       annars fylls arbetsminnet upp.
 // 
 // 2. Vad är Value Types repsektive Reference Types och vad skiljer dem åt?
 // Svar: Beroende på vilken typ det är så lagras de olika. Value Types lagras normalt
-//       direkt på stacken, om de inte är inbakade i en Reference Type då hamnar de på
+//       direkt på stacken, men om de inte är inbakade i en Reference Type hamnar de på
 //       heapen där alla Reference Types lagras. Om jag inte minns fel så lagras en
 //       pointer till Reference Type på stacken.
 //
 // 3. Följande metoder ( se bild nedan ) genererar olika svar. Den första returnerar 3, den
 //    andra returnerar 4, varför?
 // Svar: Det beror på att "ReturnValue2()" använder en MyInt klass som är en reference type,
-//       vilket gör att när "y = x;" exekveras i metoden så sätts "y" till exakt samma objekt
-//       som "x" (samma pekare), och det leder till att även "x" blir "4" när "y = 4;". 
+//       vilket gör att när "y = x;" exekveras i "ReturnValue2()" så sätts "y" till exakt
+//       samma objekt som "x" (samma pekare), och det leder till att även "x" blir "4"
+//       när "y = 4;" eftersom de är samma objekt. 
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -111,21 +113,24 @@ namespace SkalProj_Datastrukturer_Minne
             // Svar: Se koden nedan
             //
             // 2.När ökar listans kapacitet ? (Alltså den underliggande arrayens storlek)
-            // Svar: Den underliggande arrayens storlek är initiellt 0 och ökar varje gång kapaciteten på arrayen inte 
-            //       räcker till för antalet i listan.
+            // Svar: Den underliggande arrayens storlek är initiellt 0 och ökar varje gång kapaciteten
+            //       på arrayen inte räcker till för antalet element i listan.
             //
             // 3.Med hur mycket ökar kapaciteten?
-            // Svar: Först 4, sedan dubblas kapaciteten, dvs 4, 8, 16, 32. Klassiska binära värden. :)
+            // Svar: Först till 4, sedan dubblas kapaciteten, dvs från 4 till 8, sedan 16, 32 osv.
+            //       Klassiska binära värden. :)
             //
             // 4.Varför ökar inte listans kapacitet i samma takt som element läggs till ?
-            // Svar: En array har en fast storlek och kan inte utökas eller minskas, den underliggande arrayen i för listan
-            //       måste skapas och all data överföras till nya vilket tar tid och resurser från processorn.
+            // Svar: En array har en fast storlek och kan inte utökas eller minskas, vilket innebär att
+            //       den underliggande arrayen för listan måste skapas på nytt och all data överföras
+            //       till den nya arrayen vilket tar tid och resurser från processorn. 
             //
             // 5.Minskar kapaciteten när element tas bort ur listan?
             // Svar: Nej
             //
             // 6.När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
-            // Svar: När man vet storleken och att den inte kommer att förändras (bli större).
+            // Svar: När man vet storleken och att den inte kommer att förändras (bli större), det kan
+            //       t ex vara att läsa in en fil, se storleken, allokera array och sen läsa in i den.
 
             var userMadeList = new List<string>();
             bool isActiveWithList = true;
@@ -160,7 +165,7 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input, try again (+item, -item, q)");
+                    Console.WriteLine("Empty input, try again (+item, -item, q)");
                 }
             } while (isActiveWithList);
         }
@@ -214,11 +219,9 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input, try again (+item, -, q)");
+                    Console.WriteLine("Empty input, try again (+item, -, q)");
                 }
             } while (isActiveWithQueue);
-
-
         }
 
         /// <summary>
@@ -240,10 +243,11 @@ namespace SkalProj_Datastrukturer_Minne
             // 2. Implementera en ReverseText - metod som läser in en sträng från användaren och
             //    med hjälp av en stack vänder ordning på teckenföljden för att sedan skriva ut den
             //    omvända strängen till användaren.
-            // Svar: Texten i kommentaren direkt under "ExamineStack()" anger
-            //       att vi ska göra något annat än den i PDF:en.
-            //       Jag följde PDF:ens anvisning, och på två olika sätt.
+            // Svar: Texten i kommentaren direkt under "static void ExamineStack()" (ovan) anger
+            //       att vi ska göra något annat än den i PDF:en. Jag följde PDF:ens anvisning.
 
+            // Gissar att "ReverseText" ska egentligen vara "ExamineStack", men jag passade på att
+            // testa inline-metoder (även om det inte är bra standard). :-)
             string ReverseText(string text)
             {
                 var userMadeStack = new Stack<char>();
@@ -262,6 +266,7 @@ namespace SkalProj_Datastrukturer_Minne
                 return reversedText.ToString();
             }
 
+            // Start of feature
             bool validInput = false;
             Console.WriteLine("Write some text that will be reversed using a stack");
             do
@@ -272,7 +277,7 @@ namespace SkalProj_Datastrukturer_Minne
                 if (userInput.Length > 0)
                 {
                     validInput = true;
-                    Console.WriteLine(ReverseText(userInput));
+                    Console.WriteLine($"The reversed text: '{ReverseText(userInput)}'\n");
                 }
                 else
                 {
@@ -293,11 +298,13 @@ namespace SkalProj_Datastrukturer_Minne
             // 1. Skapa med hjälp av er nya kunskap funktionalitet för att kontrollera en välformad
             //    sträng på papper.Du ska använda dig av någon eller några av de datastrukturer vi
             //    precis gått igenom.Vilken datastruktur använder du?
-            // Svar:
+            // Svar: "Stack" för att lägga in varje ny "öppning" på parantesen, och "dictionary" 
+            //       för matching av paren (dvs "(" och ")" m fl).
             //
             // 2. Implementera funktionaliteten i metoden CheckParentheses. Låt programmet läsa
             //    in en sträng från användaren och returnera ett svar som reflekterar huruvida
             //    strängen är välformad eller ej.
+            // Svar: Se koden nedan.
 
             bool validCharPairs(Dictionary<char, char> pairs, string text)
             {
@@ -305,17 +312,19 @@ namespace SkalProj_Datastrukturer_Minne
                 var charStack = new Stack<char>();
                 foreach (var character in text)
                 {
+                    // New opening of a pair (a "start"), add it to the stack
                     if (pairs.ContainsKey(character))
                     {
                         charStack.Push(character);
                     }
+                    // A closing of a pair (an "end")
                     if (pairs.ContainsValue(character))
                     {
-                        // Since it's and "end" parentheses and no "open" are on the stack it's a non-valid match
+                        // If the stack of "start" of pairs is empty and it found an "end" of a pair it's a non-valid match
                         if (charStack.Count == 0) { return false; }
                         // Pop from the stack
                         char lastOnStack = charStack.Pop();
-                        // And check if it's a match, if so, continue to the next
+                        // And check if it's a pair-match, if so, continue to the next character in the string
                         if (pairs[lastOnStack] != character) { return false; }
                     }
                 }
@@ -323,7 +332,7 @@ namespace SkalProj_Datastrukturer_Minne
                 return true;
             }
 
-            // Make a dictionary with matching parentheses (brackets and braces) pairs
+            // Make a dictionary with matching parentheses (brackets and braces) pairs (others can be added, like "<" and ">")
             var matchingParenthesesPairs = new Dictionary<char, char>()
             {
                 { '(', ')' },
@@ -332,7 +341,7 @@ namespace SkalProj_Datastrukturer_Minne
             };
 
             bool validInput = false;
-            Console.WriteLine("Write some text that will checked for valid parentheses");
+            Console.WriteLine("Write some text that will checked for valid pairs of parentheses, brackets and braces");
             do
             {
                 Console.Write("Enter text: ");
@@ -343,11 +352,11 @@ namespace SkalProj_Datastrukturer_Minne
                     validInput = true;
                     if (validCharPairs(matchingParenthesesPairs, userInput))
                     {
-                        Console.WriteLine("The text has valid pairs of parentheses, brackets and braces\n");
+                        Console.WriteLine("The text has VALID pairs of parentheses, brackets and braces\n");
                     }
                     else
                     {
-                        Console.WriteLine("The text has non-valid pairs of parentheses, brackets and braces\n");
+                        Console.WriteLine("The text has NON-VALID pairs of parentheses, brackets and braces\n");
                     }
                 }
                 else
