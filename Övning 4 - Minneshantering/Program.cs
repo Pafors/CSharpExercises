@@ -411,7 +411,7 @@ namespace SkalProj_Datastrukturer_Minne
             bool wantsToQuit = false;
             do
             {
-                Console.WriteLine("Options:\n'eNNN' Find the n:th even number with recursion ('e42')\n'fNNN' Classical Fibonacci sequence with recursion('f21')\n'q' Quit to main menu");
+                Console.WriteLine("Options:\n'eNN' Find the n:th even number with recursion ('e42')\n'fNN' n:th number in the Fibonacci sequence with recursion('f21')\n'q' Quit to main menu");
                 Console.Write("Your selection: ");
                 string recursionSelection = Console.ReadLine()!;
                 if (recursionSelection.Length > 0)
@@ -462,7 +462,7 @@ namespace SkalProj_Datastrukturer_Minne
             int FibonacciSequenceIteration(int n)
             {
                 // No check for large values of "n", which can take time or "int" wraps
-                // into negative numbers.
+                // into negative numbers (47th does). Using "ulong" would be better.
 
                 // Initial setup of values, "pm1" is "past minus 1"
                 int fibonacciNumber = 0;
@@ -483,7 +483,7 @@ namespace SkalProj_Datastrukturer_Minne
             bool wantsToQuit = false;
             do
             {
-                Console.WriteLine("Options:\n'eNNN' Find the n:th even number with iteration ('e42')\n'fNNN' Classical Fibonacci sequence with iteration ('f21')\n'q' Quit to main menu");
+                Console.WriteLine("Options:\n'eNN' Find the n:th even number with iteration ('e42')\n'fNN' n:th number in the Fibonacci sequence with iteration ('f21')\n'q' Quit to main menu");
                 Console.Write("Your selection: ");
                 string iterationSelection = Console.ReadLine()!;
                 if (iterationSelection.Length > 0)
