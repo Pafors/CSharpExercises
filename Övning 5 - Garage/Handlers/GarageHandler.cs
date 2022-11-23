@@ -19,12 +19,27 @@ namespace Exercise_5_Garage.Handlers
 
         public bool ParkVehicle(T vehicle)
         {
-            // TODO FIX park
             return garageToHandle.ParkVehicle(vehicle);
         }
-        public void UnParkVehicle(IVehicle vehicle) 
+        //public void UnParkVehicle(IVehicle vehicle) 
+        public bool UnParkVehicle(int id)
         {
-            // TODO garageToHandle.remove(vehicle)
+            return garageToHandle.UnParkVehicle(id);
+        }
+
+        public IEnumerable<IVehicle> GetParkedVehicles()
+        {
+            return (IEnumerable<IVehicle>)garageToHandle.ToList();
+        }
+
+        public int GetNumberOfAvailableParkingSpots()
+        {
+            return garageToHandle.GetNumberOfAvailableParkingSpots();
+        }
+
+        public int NumberOfParkedVehicles()
+        {
+            return garageToHandle.NumberOfParkedVehicles();
         }
     }
 }
