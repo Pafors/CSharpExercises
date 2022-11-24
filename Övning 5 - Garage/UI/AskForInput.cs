@@ -27,7 +27,7 @@ namespace Exercise_5_Garage.UI
                 }
                 else
                 {
-                    ui.OutputData("Felaktig inmatning, försök igen\n");
+                    ui.OutputData("*** Felaktig inmatning, försök igen\n");
                 };
             }
             while (true);
@@ -44,7 +44,7 @@ namespace Exercise_5_Garage.UI
                 }
                 else
                 {
-                    ui.OutputData("Felaktigt värde, försök igen\n");
+                    ui.OutputData("*** Felaktigt värde, försök igen\n");
                 }
             }
             while (true);

@@ -108,5 +108,10 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             return (IEnumerable<IVehicle>)vehicleStorage
                 .Where(v => v != null && v.RegistrationNumber.ToUpper().Contains(searchTerm.ToUpper()));
         }
+
+        public int GetSize()
+        {
+            return size;
+        }
     }
 }

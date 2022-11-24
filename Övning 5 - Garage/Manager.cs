@@ -40,62 +40,24 @@ namespace Exercise_5_Garage
             askForInput = new AskForInput(ui);
         }
 
-        internal void StartUp()
+        internal void StartUpLoop()
         {
+            Menu.WriteMenu(ui);
             // Command loop
             while (true)
             {
-                Menu.WriteMenu(ui);
                 showStats();
                 (string command, string[]? cmdArgs) = askForInput.GetCommand();
-                //foreach (var arg in cmdArgs!)
-                //{
-                //    ui.OutputData($"'{arg}'");
-                //}
-                //ui.OutputData("\n");
                 if (commandMenu.ContainsKey(command))
                 {
-                    commandMenu[command]?.Invoke(cmdArgs);
+                    commandMenu[command]?.Invoke(cmdArgs!);
                 }
                 else
                 {
-                    ui.OutputData($"Kommandot '{command}' saknas, försök igen\n");
+                    ui.OutputData($"*** Kommandot '{command}' saknas, försök igen\n");
+                    Menu.WriteMenu(ui);
                 }
-
             }
-
-
-            //ui.OutputData($"Parked before: {gh.NumberOfParkedVehicles()}\n");
-            //gh.ParkVehicle(new Car("Volvo 240", "Blue", 4, PowerType.Diesel, "JAC495", convertible: false));
-            //gh.ParkVehicle(new Car("Honda CRV", "Silver", 4, PowerType.Petrol, "QWE123", convertible: false));
-            //gh.ParkVehicle(new Bus("Scania", "Green", 8, PowerType.Diesel, "BUS042", 40));
-            //gh.ParkVehicle(new Bus("Scania", "Yellow", 8, PowerType.Diesel, "BUS043", 40));
-            //gh.ParkVehicle(new Bus("Scania", "Red", 8, PowerType.Diesel, "BUS044", 40));
-            //ui.OutputData($"Parked after: {gh.NumberOfParkedVehicles()}\n");
-            //foreach (var v in gh.GetParkedVehicles())
-            //{
-            //    ui.OutputData($"Vehicle before: {v}\n");
-            //}
-            //ui.OutputData("---\n");
-            //gh.UnParkVehicle(1);
-            //gh.ParkVehicle(new Bus("Scania", "Pink", 8, PowerType.Diesel, "BUS044", 40));
-
-            //foreach (var v in gh.GetParkedVehicles())
-            //{
-            //    ui.OutputData($"Vehicle after: {v}\n");
-            //}
-
-            //ui.OutputData($"Free parking spots: {gh.GetNumberOfAvailableParkingSpots()}\n");
-
-            //var searchResult = gh.Find("Scania");
-            //ui.OutputData("__________________\n");
-            //foreach (var match in searchResult)
-            //{
-            //    ui.OutputData($"FOUND: '{match}'\n");
-
-            //}
-            //ui.OutputData("__________________\n");
-
         }
 
         private void showStats()
@@ -103,7 +65,7 @@ namespace Exercise_5_Garage
             ui.OutputData("[ ");
             if (gh.HaveAGarage())
             {
-                ui.OutputData($"LEDIGA PLATSER: {gh.GetNumberOfAvailableParkingSpots()}");
+                ui.OutputData($"LEDIGA PLATSER: {gh.GetNumberOfAvailableParkingSpots()}/{gh.GetSizeOfGarage()}");
             }
             else
             {

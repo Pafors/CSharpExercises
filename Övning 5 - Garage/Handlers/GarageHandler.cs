@@ -71,6 +71,11 @@ namespace Exercise_5_Garage.Handlers
             if (garageToHandle == null) { return 0; }
             return garageToHandle.NumberOfParkedVehicles();
         }
+        public int GetSizeOfGarage()
+        {
+            if (garageToHandle == null) { return 0; }
+            return garageToHandle.GetSize();
+        }
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
