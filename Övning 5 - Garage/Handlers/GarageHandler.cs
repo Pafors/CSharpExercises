@@ -20,47 +20,60 @@ namespace Exercise_5_Garage.Handlers
             garageToHandle = garage;
         }
 
-        public void newGarage(int wantedSize)
+        public void NewGarage(int wantedSize)
         {
             SetGarageToHandle(new Garage<T>(wantedSize));
         }
 
         public void SetGarageToHandle(Garage<T> garage)
         {
-            if(garage != null)
-            { 
+            if (garage != null)
+            {
                 garageToHandle = garage;
             }
         }
 
         public bool ParkVehicle(T vehicle)
         {
+            if (garageToHandle == null) { return false; }
             return garageToHandle.ParkVehicle(vehicle);
         }
         //public void UnParkVehicle(IVehicle vehicle) 
         public bool UnParkVehicle(int id)
         {
+            if (garageToHandle == null) { return false; }
             return garageToHandle.UnParkVehicle(id);
         }
 
         public IEnumerable<IVehicle> GetParkedVehicles()
         {
+            if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
             // TODO Make it a copy/clone
             return (IEnumerable<IVehicle>)garageToHandle.ToList();
         }
-        
 
+        public IEnumerable<List<IVehicle>> GetParkedVehiclesByType()
+        { 
+            if (garageToHandle == null)
+            { 
+                return Enumerable.Empty<List<IVehicle>>();
+            }    
+            return (IEnumerable<List<IVehicle>>)garageToHandle.GroupBy(v => v.GetType()).ToList();
+        }
         public int GetNumberOfAvailableParkingSpots()
         {
+            if (garageToHandle == null) { return 0; }
             return garageToHandle.GetNumberOfAvailableParkingSpots();
         }
 
         public int NumberOfParkedVehicles()
         {
+            if (garageToHandle == null) { return 0; }
             return garageToHandle.NumberOfParkedVehicles();
         }
         public IEnumerable<IVehicle> Find(string searchTerm)
         {
+            if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
             // TODO Make safe copy/clone/string
             return garageToHandle.Find(searchTerm);
         }

@@ -14,6 +14,7 @@ namespace Exercise_5_Garage.Helpers
         public const string Park = "park";
         public const string UnPark = "unpark";
         public const string ListVehicles = "list";
+        public const string ListVehiclesByType = "types";
         public const string Quit = "quit";
         public const string ShortQuit = "q";
 
@@ -25,6 +26,7 @@ namespace Exercise_5_Garage.Helpers
             ui.OutputData($"'{Park}' Parkerar ett fordon\n");
             ui.OutputData($"'{UnPark}' Avparkerar ett fordon\n");
             ui.OutputData($"'{ListVehicles}' Visar parkerade fordon\n");
+            ui.OutputData($"'{ListVehiclesByType}' Visar parkerade fordon per typ\n");
             ui.OutputData($"'{Quit}' Avsluta\n");
             ui.OutputData("\n");
         }

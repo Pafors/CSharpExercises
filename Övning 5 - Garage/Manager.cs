@@ -8,6 +8,7 @@ using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,7 @@ namespace Exercise_5_Garage
                 //{ Menu.Park, Park },
                 //{ Menu.UnPark, UnPark },
                 { Menu.ListVehicles, ListVehicles },
+                { Menu.ListVehiclesByType, ListVehiclesByType },
                 { Menu.Quit, ExitApplication },
                 { Menu.ShortQuit, ExitApplication }
             };
@@ -51,8 +53,8 @@ namespace Exercise_5_Garage
                 }
                 ui.OutputData("\n");
                 if (commandMenu.ContainsKey(command))
-                { 
-                    commandMenu[command]?.Invoke(cmdArgs); 
+                {
+                    commandMenu[command]?.Invoke(cmdArgs);
                 }
                 else
                 {
@@ -98,7 +100,7 @@ namespace Exercise_5_Garage
         private void showStats()
         {
             ui.OutputData("[ ");
-            if(gh.HaveAGarage())
+            if (gh.HaveAGarage())
             {
                 ui.OutputData($"LEDIGA PLATSER: {gh.GetNumberOfAvailableParkingSpots()}");
             }
@@ -112,7 +114,7 @@ namespace Exercise_5_Garage
         internal void NewGarage(string[] size)
         {
             int wantedSize = 0;
-            if (gh.HaveAGarage() && askForInput.ConfirmYes("Det finns redan ett garage, vill du fortsätta (j/n)?"))
+            if (!gh.HaveAGarage() || (gh.HaveAGarage() && askForInput.ConfirmYes("Det finns redan ett garage, vill du fortsätta (j/n)?")))
             {
                 if (size.Length > 0)
                 {
@@ -127,12 +129,17 @@ namespace Exercise_5_Garage
                 }
                 if (wantedSize > 0)
                 {
-                    gh.newGarage(wantedSize);
+                    gh.NewGarage(wantedSize);
                 }
             }
         }
         internal void Populate(string[] _)
         {
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
             var vehicles = new List<IVehicle>() {
                 new Car("Volvo 240", "Blue", 4, PowerType.Diesel, "JAC495", convertible: false),
                 new Car("Honda CRV", "Silver", 4, PowerType.Petrol, "QWE123", convertible: false),
@@ -159,14 +166,35 @@ namespace Exercise_5_Garage
         internal void UnPark() { }
         internal void ListVehicles(string[] _)
         {
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
             foreach (var vehicle in gh.GetParkedVehicles())
             {
                 ui.OutputData($"{vehicle}\n");
+            }
+        }
+        internal void ListVehiclesByType(string[] _)
+        {
+            if (!gh.HaveAGarage())
+            { return; }
+            var v = gh.GetParkedVehicles();
+            var groups = v.GroupBy(
+                v => v.GetType().ToString(),
+                v => v.GetType(),
+                (vtGrp, vt) => new { VehicleType = vtGrp.Split(".").Last(), Count = vt.Count() });
+            foreach (var grping in groups)
+            {
+                ui.OutputData($"{grping.VehicleType}: ");
+                ui.OutputData($"{grping.Count}\n");
             }
         }
         internal void ExitApplication(string[] _)
         {
             Environment.Exit(0);
         }
+
     }
 }
