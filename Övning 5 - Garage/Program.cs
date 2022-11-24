@@ -46,7 +46,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // TODO ● Lägga till och ta bort fordon ur garaget
 // ● Sätta en kapacitet (antal parkeringsplatser) vid instansieringen av ett nytt garage
 // ● Möjlighet att populera garaget med ett antal fordon från start.
-// TODO ● Hitta ett specifikt fordon via registreringsnumret. Det ska gå fungera med både
+// ● Hitta ett specifikt fordon via registreringsnumret. Det ska gå fungera med både
 //   ABC123 samt Abc123 eller AbC123.
 // TODO ● Söka efter fordon utifrån en egenskap eller flera (alla möjliga kombinationer från
 //   basklassen Vehicle ). Exempelvis:

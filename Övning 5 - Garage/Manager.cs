@@ -33,6 +33,7 @@ namespace Exercise_5_Garage
                 //{ Menu.UnPark, UnPark },
                 { Menu.ListVehicles, ListVehicles },
                 { Menu.ListVehiclesByType, ListVehiclesByType },
+                { Menu.FindByRegistration, FindByRegistration },
                 { Menu.Quit, ExitApplication },
                 { Menu.ShortQuit, ExitApplication }
             };
@@ -47,11 +48,11 @@ namespace Exercise_5_Garage
                 Menu.WriteMenu(ui);
                 showStats();
                 (string command, string[]? cmdArgs) = askForInput.GetCommand();
-                foreach (var arg in cmdArgs!)
-                {
-                    ui.OutputData($"'{arg}'");
-                }
-                ui.OutputData("\n");
+                //foreach (var arg in cmdArgs!)
+                //{
+                //    ui.OutputData($"'{arg}'");
+                //}
+                //ui.OutputData("\n");
                 if (commandMenu.ContainsKey(command))
                 {
                     commandMenu[command]?.Invoke(cmdArgs);
@@ -110,7 +111,6 @@ namespace Exercise_5_Garage
             }
             ui.OutputData(" ]\n");
         }
-
         internal void NewGarage(string[] size)
         {
             int wantedSize = 0;
@@ -179,7 +179,10 @@ namespace Exercise_5_Garage
         internal void ListVehiclesByType(string[] _)
         {
             if (!gh.HaveAGarage())
-            { return; }
+            { 
+                ui.OutputData("Garage saknas\n"); 
+                return; 
+            }
             var v = gh.GetParkedVehicles();
             var groups = v.GroupBy(
                 v => v.GetType().ToString(),
@@ -189,6 +192,27 @@ namespace Exercise_5_Garage
             {
                 ui.OutputData($"{grping.VehicleType}: ");
                 ui.OutputData($"{grping.Count}\n");
+            }
+        }
+        internal void FindByRegistration(string[] rnToFind)
+        {
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
+            string searchString;
+            if(rnToFind.Length < 1) {
+                searchString = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");
+            }
+            else
+            {
+                searchString = rnToFind[0];
+            }
+            ui.OutputData("MATCHES:\n");
+            foreach (var match in gh.FindByRegistration(searchString))
+            {
+                ui.OutputData($"{match}\n");
             }
         }
         internal void ExitApplication(string[] _)

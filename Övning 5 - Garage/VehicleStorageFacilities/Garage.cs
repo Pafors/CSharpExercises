@@ -77,11 +77,11 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             return AvailableParkingSpots().Count;
         }
 
-        public IEnumerable<IVehicle> Find(string searchTerm)
+        public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
             // TODO Make safe copy/clone/string
             return (IEnumerable<IVehicle>)vehicleStorage
-                .Where(v => v != null && v.BrandAndModel.Contains(searchTerm));
+                .Where(v => v != null && v.RegistrationNumber.Contains(searchTerm.ToUpper()));
         }
     }
 }

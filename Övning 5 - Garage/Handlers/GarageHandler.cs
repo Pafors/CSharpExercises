@@ -71,11 +71,11 @@ namespace Exercise_5_Garage.Handlers
             if (garageToHandle == null) { return 0; }
             return garageToHandle.NumberOfParkedVehicles();
         }
-        public IEnumerable<IVehicle> Find(string searchTerm)
+        public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
             // TODO Make safe copy/clone/string
-            return garageToHandle.Find(searchTerm);
+            return garageToHandle.FindByRegistration(searchTerm);
         }
         public bool HaveAGarage()
         {
