@@ -29,5 +29,5 @@ namespace Exercise_5_Garage.Vehicles
             return $"{BrandAndModel}, {Color}, {NumberOfWheels}, {PowerSource}, {RegistrationNumber}";
         }
     }
-    // Registreringsnumret är unikt
+    // TODO Registreringsnumret är unikt
 }

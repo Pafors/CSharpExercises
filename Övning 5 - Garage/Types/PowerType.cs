@@ -10,6 +10,7 @@ namespace Exercise_5_Garage.Types
     {
         Petrol,
         Diesel,
+        Jet,
         Electrical,
         Biogas,
         Human

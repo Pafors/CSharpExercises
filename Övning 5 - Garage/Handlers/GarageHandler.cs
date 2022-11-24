@@ -10,11 +10,27 @@ namespace Exercise_5_Garage.Handlers
 {
     public class GarageHandler<T> where T : IVehicle
     {
-        private Garage<T> garageToHandle;
+        // TODO Make it an "IGarage"
+        private Garage<T>? garageToHandle;
 
+        public GarageHandler()
+        { }
         public GarageHandler(Garage<T> garage)
         {
             garageToHandle = garage;
+        }
+
+        public void newGarage(int wantedSize)
+        {
+            SetGarageToHandle(new Garage<T>(wantedSize));
+        }
+
+        public void SetGarageToHandle(Garage<T> garage)
+        {
+            if(garage != null)
+            { 
+                garageToHandle = garage;
+            }
         }
 
         public bool ParkVehicle(T vehicle)
@@ -29,8 +45,10 @@ namespace Exercise_5_Garage.Handlers
 
         public IEnumerable<IVehicle> GetParkedVehicles()
         {
+            // TODO Make it a copy/clone
             return (IEnumerable<IVehicle>)garageToHandle.ToList();
         }
+        
 
         public int GetNumberOfAvailableParkingSpots()
         {
@@ -41,6 +59,21 @@ namespace Exercise_5_Garage.Handlers
         {
             return garageToHandle.NumberOfParkedVehicles();
         }
+        public IEnumerable<IVehicle> Find(string searchTerm)
+        {
+            // TODO Make safe copy/clone/string
+            return garageToHandle.Find(searchTerm);
+        }
+        public bool HaveAGarage()
+        {
+            if (garageToHandle != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }
 

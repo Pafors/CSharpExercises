@@ -5,6 +5,8 @@ using System.Reflection.Metadata;
 using System;
 using System.Security.Cryptography;
 using Exercise_5_Garage.UI;
+using Exercise_5_Garage.Handlers;
+using Exercise_5_Garage.VehicleStorageFacilities;
 
 // I MER PROGRAMMERINGS VÄNLIGA TERMER SKALL VI ALLTSÅ SOM MINIMUM HA:
 // ● En kollektion av fordon; klassen Garage.
@@ -73,6 +75,7 @@ using Exercise_5_Garage.UI;
 // Implementera sen funktionaliteten tills testet går igenom.
 
 IUI ui = new ConsoleUI();
-var storageFacilityManager = new Manager(ui);
+//var storageFacilityManager = new Manager(ui, new GarageHandler<IVehicle>(new Garage<IVehicle>(4)));
+var storageFacilityManager = new Manager(ui, new GarageHandler<IVehicle>());
 storageFacilityManager.StartUp();
 

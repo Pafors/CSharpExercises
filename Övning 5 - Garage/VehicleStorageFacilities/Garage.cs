@@ -25,10 +25,10 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             {
                 if (vehicle != null)
                 { yield return vehicle; }
-                else
-                {
-                    Console.WriteLine("NULL");
-                }
+                //else
+                //{
+                //    Console.WriteLine("NULL");
+                //}
             }
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -75,6 +75,13 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         {
             // Count the values in the list
             return AvailableParkingSpots().Count;
+        }
+
+        public IEnumerable<IVehicle> Find(string searchTerm)
+        {
+            // TODO Make safe copy/clone/string
+            return (IEnumerable<IVehicle>)vehicleStorage
+                .Where(v => v != null && v.BrandAndModel.Contains(searchTerm));
         }
     }
 }
