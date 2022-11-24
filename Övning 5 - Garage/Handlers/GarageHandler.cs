@@ -39,10 +39,10 @@ namespace Exercise_5_Garage.Handlers
             return garageToHandle.ParkVehicle(vehicle);
         }
         //public void UnParkVehicle(IVehicle vehicle) 
-        public bool UnParkVehicle(int id)
+        public bool UnParkVehicle(string registrationNumber)
         {
             if (garageToHandle == null) { return false; }
-            return garageToHandle.UnParkVehicle(id);
+            return garageToHandle.UnParkVehicle(registrationNumber);
         }
 
         public IEnumerable<IVehicle> GetParkedVehicles()

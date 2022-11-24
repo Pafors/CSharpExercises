@@ -7,7 +7,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
 {
     public class Garage<T> : IEnumerable<T> where T : IVehicle
     {
-        private readonly T?[] vehicleStorage;
+        private T?[] vehicleStorage;
         private readonly int size;
         public Medium TransportType { get; private set; }
         public Garage(int garageSizeWanted, Medium transportType = Medium.Land)
@@ -25,10 +25,6 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             {
                 if (vehicle != null)
                 { yield return vehicle; }
-                //else
-                //{
-                //    Console.WriteLine("NULL");
-                //}
             }
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -49,13 +45,42 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             return true;
         }
 
-        public bool UnParkVehicle(int id)
+        public bool UnParkVehicle(string registrationNumber)
         {
+            //var matchingVehicles = FindByRegistration(registrationNumber);
+            //if (matchingVehicles != null && matchingVehicles.Count() != 1)
+            //{
+            //    return false;
+            //}
+
             // Check for valid id (array index)
-            if (id < 0 || id > size || vehicleStorage[id] == null)
-            { return false; }
-            vehicleStorage[id] = default;
-            return true;
+            //if (id < 0 || id > size || vehicleStorage[id] == null)
+            //{ return false; }
+            //vehicleStorage[id] = default;
+
+            for (int i = 0; i < vehicleStorage.Length; i++)
+            {
+                if (vehicleStorage[i] == null) { continue; }
+                if (vehicleStorage[i]!.RegistrationNumber.ToUpper() == registrationNumber.ToUpper())
+                { 
+                    vehicleStorage[i] = default(T); 
+                    return true; 
+                }
+            }
+            return false;
+            
+            //var onlyMatch = matchingVehicles!.First();
+            //var vehicleStorageUpdated = vehicleStorage.Where(v => v != null && !v.Equals(onlyMatch)).ToArray();
+            //vehicleStorage = vehicleStorageUpdated;
+            //foreach (var v in vehicleStorage)
+            //{
+            //    Console.WriteLine($"1: {v}");
+            //}
+            //foreach (var v in vehicleStorageUpdated)
+            //{
+            //    Console.WriteLine($"2: {v}");
+            //}
+            //return true;
         }
 
         public int NumberOfParkedVehicles()
@@ -67,7 +92,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         {
             // Build a new anonymous object with array index and vehicle data, then
             // find the first "null" and return the index. Return the index found as a list.
-            return vehicleStorage.Select((v, i) => new { Index = i, Vehicle = v }) 
+            return vehicleStorage.Select((v, i) => new { Index = i, Vehicle = v })
                                  .Where(p => p.Vehicle == null)
                                  .Select(p => p.Index).ToList();
         }
@@ -81,7 +106,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         {
             // TODO Make safe copy/clone/string
             return (IEnumerable<IVehicle>)vehicleStorage
-                .Where(v => v != null && v.RegistrationNumber.Contains(searchTerm.ToUpper()));
+                .Where(v => v != null && v.RegistrationNumber.ToUpper().Contains(searchTerm.ToUpper()));
         }
     }
 }

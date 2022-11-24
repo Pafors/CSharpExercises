@@ -30,7 +30,7 @@ namespace Exercise_5_Garage
                 { Menu.NewGarage, NewGarage },
                 { Menu.Populate, Populate },
                 //{ Menu.Park, Park },
-                //{ Menu.UnPark, UnPark },
+                { Menu.UnPark, UnPark },
                 { Menu.ListVehicles, ListVehicles },
                 { Menu.ListVehiclesByType, ListVehiclesByType },
                 { Menu.FindByRegistration, FindByRegistration },
@@ -147,7 +147,7 @@ namespace Exercise_5_Garage
                 new Bus("Scania", "Yellow", 8, PowerType.Diesel, "BUS043", 40),
                 new Bus("Scania", "Red", 8, PowerType.Diesel, "BUS044", 40),
                 new Airplane("Airbus 340", "White", 12, PowerType.Jet, "JA8090", 4),
-                new Boat("Vindö 32", "White", 0, PowerType.Diesel, "JA8090", 9, 1.3),
+                new Boat("Vindö 32", "White", 0, PowerType.Diesel, "WNDPWR42x", 9, 1.3),
                 new Motorcycle("Honda Goldwing", "Black", 2, PowerType.Petrol, "CRZ001", 1833)
             };
             foreach (var vehicle in vehicles)
@@ -163,7 +163,26 @@ namespace Exercise_5_Garage
             }
         }
         internal void Park() { }
-        internal void UnPark() { }
+        internal void UnPark(string[] registrationSearch) 
+        {
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
+            // TODO registrationSearch
+            string regNumber;
+            if (registrationSearch.Length < 1)
+            {
+                regNumber = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");
+            }
+            else
+            {
+                regNumber = registrationSearch[0];
+            }
+            // TODO Success or not
+            gh.UnParkVehicle(regNumber);
+        }
         internal void ListVehicles(string[] _)
         {
             if (!gh.HaveAGarage())
