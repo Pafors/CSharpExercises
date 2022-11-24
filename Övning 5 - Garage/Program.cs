@@ -18,7 +18,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 //   kontakt mellan användargränssnittet och garage klassen. Detta görs lämpligen
 //   genom en klass som hanterar funktionaliteten som gränssnittet behöver ha
 //   tillgång till.
-// ● Vi programmerar inte direkt mot konkreta typer så vi använder oss av Interfaces
+// TODO ● Vi programmerar inte direkt mot konkreta typer så vi använder oss av Interfaces
 //   för det tex I UI, IHandler, IVehicle. (Tips är att bryta ut till interface när
 //   implementationen är klar om man tycker den här delen är svår)
 
@@ -26,7 +26,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Fordonen ska implementeras som klassen Vehicle och subklasser till den.
 // ● Vehicle innehåller samtliga egenskaper som ska finnas i samtliga fordonstyper.
 //   T.ex. registreringsnummer, färg, antal hjul och andra egenskaper ni kan komma på.
-// ● Registreringsnumret är unikt
+// TODO ●  Registreringsnumret är unikt
 // ● Det måste minst finnas följande subklasser:
 //   ○ Airplane
 //   ○ Motorcycle
@@ -43,12 +43,12 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Det ska gå att:
 // ● Lista samtliga parkerade fordon
 // ● Lista fordonstyper och hur många av varje som står i garaget
-// ● Lägga till och ta bort fordon ur garaget
+// TODO ● Lägga till och ta bort fordon ur garaget
 // ● Sätta en kapacitet (antal parkeringsplatser) vid instansieringen av ett nytt garage
 // ● Möjlighet att populera garaget med ett antal fordon från start.
-// ● Hitta ett specifikt fordon via registreringsnumret. Det ska gå fungera med både
+// TODO ● Hitta ett specifikt fordon via registreringsnumret. Det ska gå fungera med både
 //   ABC123 samt Abc123 eller AbC123.
-// ● Söka efter fordon utifrån en egenskap eller flera (alla möjliga kombinationer från
+// TODO ● Söka efter fordon utifrån en egenskap eller flera (alla möjliga kombinationer från
 //   basklassen Vehicle ). Exempelvis:
 //   ○ Alla svarta fordon med fyra hjul.
 //   ○ Alla motorcyklar som är rosa och har 3 hjul.
@@ -66,7 +66,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Applikationen skall fel hantera indata på ett robust sätt, så att den inte kraschar vid
 // felaktig inmatning eller användning.
 
-// UNIT TESTING
+// TODO UNIT TESTING
 // Testen ska skapas i ett eget testprojekt. Vi begränsar oss till att testa de publika
 // metoderna i klassen Garage . (Att skriva test för hela applikationen ses som en extra
 // uppgift om tid finns)

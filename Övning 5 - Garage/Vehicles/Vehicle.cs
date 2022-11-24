@@ -13,7 +13,7 @@ namespace Exercise_5_Garage.Vehicles
         public string Color { get; set; }
         public int NumberOfWheels { get; set; }
         public PowerType PowerSource { get; set; } 
-        public string RegistrationNumber { get; set; } // TODO Registreringsnumret är unikt
+        public string RegistrationNumber { get; set; } 
 
         public Vehicle(string brandAndModel, string color, int numberOfWheels, PowerType powerSource, string registrationNumber)
         {
@@ -29,5 +29,5 @@ namespace Exercise_5_Garage.Vehicles
             return $"{BrandAndModel}, {Color}, {NumberOfWheels}, {PowerSource}, {RegistrationNumber}";
         }
     }
-    // TODO Registreringsnumret är unikt
+    
 }
