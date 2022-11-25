@@ -1,16 +1,7 @@
 ﻿using Exercise_5_Garage.Handlers;
 using Exercise_5_Garage.Helpers;
-using Exercise_5_Garage.Types;
 using Exercise_5_Garage.UI;
 using Exercise_5_Garage.Vehicles;
-using Exercise_5_Garage.VehicleStorageFacilities;
-using Microsoft.VisualBasic.FileIO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exercise_5_Garage
 {
@@ -246,7 +237,6 @@ namespace Exercise_5_Garage
         }
         internal void FindAny(string[] searchTerms)
         {
-            // TODO add multiple matches as an boolean AND
             if (!gh.HaveAGarage())
             {
                 ui.OutputData("Garage saknas\n");
@@ -255,16 +245,21 @@ namespace Exercise_5_Garage
             string searchString;
             if (searchTerms.Length < 1)
             {
-                searchString = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");
+                searchTerms = askForInput.GetString("Ange sök termer: ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
-            else
+
+            // Get each terms match into a list
+            List<IVehicle> intersectResult = gh.GetParkedVehicles().ToList();
+
+            foreach (var searchTerm in searchTerms)
             {
-                searchString = searchTerms[0];
+                intersectResult = intersectResult.Intersect(gh.FindAny(searchTerm)).ToList();
             }
-            ui.OutputData("MATCHES:\n");
-            foreach (var match in gh.FindAny(searchString))
+
+            // TODO add multiple matches as an boolean AND
+            foreach (var match in intersectResult)
             {
-                ui.OutputData($"{match}\n");
+                ui.OutputData($"MATCHY: {match}\n");
             }
         }
         internal void FindByRegistration(string[] rnToFind)
