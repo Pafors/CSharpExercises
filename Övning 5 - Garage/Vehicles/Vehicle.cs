@@ -12,16 +12,16 @@ namespace Exercise_5_Garage.Vehicles
         public string BrandAndModel { get ; set; }
         public string Color { get; set; }
         public int NumberOfWheels { get; set; }
-        public PowerType PowerSource { get; set; } 
+        public string PowerSource { get; set; } 
         public string RegistrationNumber { get; set; } 
 
-        public Vehicle(string brandAndModel, string color, int numberOfWheels, PowerType powerSource, string registrationNumber)
+        public Vehicle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber)
         {
             BrandAndModel = brandAndModel;
             Color = color;
             NumberOfWheels = numberOfWheels;
             PowerSource = powerSource;
-            RegistrationNumber = registrationNumber.ToUpper();
+            RegistrationNumber = registrationNumber;
         }
 
         public override string ToString()

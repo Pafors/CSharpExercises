@@ -54,7 +54,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 //   ○ Alla motorcyklar som är rosa och har 3 hjul.
 //   ○ Alla lastbilar
 //   ○ Alla röda fordon
-// ● Användaren ska få feedback på att saker gått bra eller dåligt. Till exempel när vi
+// TODO ● Användaren ska få feedback på att saker gått bra eller dåligt. Till exempel när vi
 //   parkerat ett fordon vill vi få en bekräftelse på att fordonet är parkerat. Om det inte
 //   går vill användaren få veta varför.
 

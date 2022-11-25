@@ -29,8 +29,11 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        // TODO add tuple with fail info
         public bool ParkVehicle(T vehicle)
         {
+            if (GetAllRegistrationNumbers().Contains(vehicle.RegistrationNumber, StringComparer.OrdinalIgnoreCase))
+            { return false; }
             // Find the first available free "parking spot" in the array
             int? freeParkingSpot;
             var availableParkingSpots = AvailableParkingSpots();
@@ -112,6 +115,11 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         public int GetSize()
         {
             return size;
+        }
+
+        public List<string> GetAllRegistrationNumbers()
+        {
+            return vehicleStorage.Where(v => v != null).Select(v => v.RegistrationNumber).ToList();
         }
     }
 }

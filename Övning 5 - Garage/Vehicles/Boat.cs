@@ -11,7 +11,7 @@ namespace Exercise_5_Garage.Vehicles
     {
         public int Length { get; protected set; }
         public double Draft { get; protected set; }
-        public Boat(string brandAndModel, string color, int numberOfWheels, PowerType powerSource, string registrationNumber, int length, double draft) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
+        public Boat(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, int length, double draft) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             Length = length;
             Draft = draft;

@@ -10,7 +10,7 @@ namespace Exercise_5_Garage.Vehicles
     public class Bus : Vehicle
     {
         public int NumberOfSeats { get; protected set; }
-        public Bus(string brandAndModel, string color, int numberOfWheels, PowerType powerSource, string registrationNumber, int numberOfSeats) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
+        public Bus(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, int numberOfSeats) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             NumberOfSeats = numberOfSeats;
         }

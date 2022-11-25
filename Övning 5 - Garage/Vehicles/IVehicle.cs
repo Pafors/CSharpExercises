@@ -7,7 +7,7 @@ namespace Exercise_5_Garage.Vehicles
         string BrandAndModel { get; set; }   
         string Color { get; set; }
         int NumberOfWheels { get; set; }
-        PowerType PowerSource { get; set; }
+        string PowerSource { get; set; }
         string RegistrationNumber { get; set; }
     }
 }

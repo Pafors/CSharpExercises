@@ -11,8 +11,7 @@ namespace Exercise_5_Garage.Vehicles
     {
         public bool Convertible { get; protected set; }
 
-        public Car(string brandAndModel, string color, int numberOfWheels, 
-            PowerType powerSource, string registrationNumber, bool convertible) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
+        public Car(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, bool convertible) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             Convertible= convertible;
         }

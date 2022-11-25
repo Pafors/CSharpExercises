@@ -10,7 +10,7 @@ namespace Exercise_5_Garage.Vehicles
     public class Motorcycle : Vehicle
     {
         public int CylinderVolume { get; protected set; }
-        public Motorcycle(string brandAndModel, string color, int numberOfWheels, PowerType powerSource, string registrationNumber, int cylinderVolume) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
+        public Motorcycle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, int cylinderVolume) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             CylinderVolume = cylinderVolume;
         }

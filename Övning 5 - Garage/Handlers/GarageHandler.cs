@@ -12,19 +12,15 @@ namespace Exercise_5_Garage.Handlers
     {
         // TODO Make it an "IGarage"
         private Garage<T>? garageToHandle;
-
-        public GarageHandler()
-        { }
+        public GarageHandler() { }
         public GarageHandler(Garage<T> garage)
         {
             garageToHandle = garage;
         }
-
         public void NewGarage(int wantedSize)
         {
             SetGarageToHandle(new Garage<T>(wantedSize));
         }
-
         public void SetGarageToHandle(Garage<T> garage)
         {
             if (garage != null)
@@ -32,32 +28,32 @@ namespace Exercise_5_Garage.Handlers
                 garageToHandle = garage;
             }
         }
-
         public bool ParkVehicle(T vehicle)
         {
             if (garageToHandle == null) { return false; }
+
+
+
+
             return garageToHandle.ParkVehicle(vehicle);
         }
-        //public void UnParkVehicle(IVehicle vehicle) 
         public bool UnParkVehicle(string registrationNumber)
         {
             if (garageToHandle == null) { return false; }
             return garageToHandle.UnParkVehicle(registrationNumber);
         }
-
         public IEnumerable<IVehicle> GetParkedVehicles()
         {
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
             // TODO Make it a copy/clone
             return (IEnumerable<IVehicle>)garageToHandle.ToList();
         }
-
         public IEnumerable<List<IVehicle>> GetParkedVehiclesByType()
-        { 
+        {
             if (garageToHandle == null)
-            { 
+            {
                 return Enumerable.Empty<List<IVehicle>>();
-            }    
+            }
             return (IEnumerable<List<IVehicle>>)garageToHandle.GroupBy(v => v.GetType()).ToList();
         }
         public int GetNumberOfAvailableParkingSpots()
@@ -65,7 +61,6 @@ namespace Exercise_5_Garage.Handlers
             if (garageToHandle == null) { return 0; }
             return garageToHandle.GetNumberOfAvailableParkingSpots();
         }
-
         public int NumberOfParkedVehicles()
         {
             if (garageToHandle == null) { return 0; }
@@ -82,16 +77,33 @@ namespace Exercise_5_Garage.Handlers
             // TODO Make safe copy/clone/string
             return garageToHandle.FindByRegistration(searchTerm);
         }
+        public List<string> GetAllRegistrationNumbers()
+        {
+            if (garageToHandle == null)
+            {
+                return new List<string>();
+            }
+            return garageToHandle.GetAllRegistrationNumbers();
+        }
         public bool HaveAGarage()
         {
-            if (garageToHandle != null)
-            {
-                return true;
-            }
-            return false;
+            return garageToHandle != null;
+            //if (garageToHandle != null)
+            //{
+            //    return true;
+            //}
+            //return false;
         }
+        public IEnumerable<Type> GetVehicleTypes()
+        {
+            //return new List<string>() { "Airplane", "Boat", "Bus", "Car", "Motorcycle" };
 
-
+            // TODO add filter for "medium"
+            var type = typeof(IVehicle);
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p) && !p.IsAbstract);
+        }
     }
 }
 

@@ -33,12 +33,47 @@ namespace Exercise_5_Garage.UI
             while (true);
         }
 
+        public string GetFromSelectionString(string inputPrompt, List<string> selection)
+        {
+            do
+            {
+                var userInput = GetString(inputPrompt);
+                if(selection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
+                ui.OutputData("*** Finns inte som valmöjlighet, försök igen");
+            } while (true);
+        }
+        public string GetFromUnSelectionString(string inputPrompt, List<string> nonSelection)
+        {
+            do
+            {
+                var userInput = GetString(inputPrompt);
+                if(!nonSelection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
+                ui.OutputData("*** Finns redan, skriv ett nytt");
+            } while (true);
+        }
+
         public int GetInt(string inputPrompt)
         {
             do
             {
                 // Check that the received input is a valid number (valid uint)
                 if (int.TryParse(GetString(inputPrompt), out int userInput))
+                {
+                    return userInput;
+                }
+                else
+                {
+                    ui.OutputData("*** Felaktigt värde, försök igen\n");
+                }
+            }
+            while (true);
+        }
+        public double GetDouble(string inputPrompt)
+        {
+            do
+            {
+                // Check that the received input is a valid number (valid uint)
+                if (double.TryParse(GetString(inputPrompt), out double userInput))
                 {
                     return userInput;
                 }

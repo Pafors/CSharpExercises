@@ -29,7 +29,7 @@ namespace Exercise_5_Garage
             {
                 { Menu.NewGarage, NewGarage },
                 { Menu.Populate, Populate },
-                //{ Menu.Park, Park },
+                { Menu.Park, Park },
                 { Menu.UnPark, UnPark },
                 { Menu.ListVehicles, ListVehicles },
                 { Menu.ListVehiclesByType, ListVehiclesByType },
@@ -39,7 +39,6 @@ namespace Exercise_5_Garage
             };
             askForInput = new AskForInput(ui);
         }
-
         internal void StartUpLoop()
         {
             Menu.WriteMenu(ui);
@@ -59,7 +58,6 @@ namespace Exercise_5_Garage
                 }
             }
         }
-
         private void showStats()
         {
             ui.OutputData("[ ");
@@ -103,14 +101,15 @@ namespace Exercise_5_Garage
                 return;
             }
             var vehicles = new List<IVehicle>() {
-                new Car("Volvo 240", "Blue", 4, PowerType.Diesel, "JAC495", convertible: false),
-                new Car("Honda CRV", "Silver", 4, PowerType.Petrol, "QWE123", convertible: false),
-                new Bus("Scania", "Green", 8, PowerType.Diesel, "BUS042", 40),
-                new Bus("Scania", "Yellow", 8, PowerType.Diesel, "BUS043", 40),
-                new Bus("Scania", "Red", 8, PowerType.Diesel, "BUS044", 40),
-                new Airplane("Airbus 340", "White", 12, PowerType.Jet, "JA8090", 4),
-                new Boat("Vindö 32", "White", 0, PowerType.Diesel, "WNDPWR42x", 9, 1.3),
-                new Motorcycle("Honda Goldwing", "Black", 2, PowerType.Petrol, "CRZ001", 1833)
+                new Car("Volvo 240", "Blue", 4, "Diesel", "JAC495", convertible: false),
+                new Car("Honda CRV", "Silver", 4, "Petrol", "QWE123", convertible: false),
+                new Bus("Scania", "Green", 8,"Diesel", "BUS042", 40),
+                new Bus("Scania", "Yellow", 8, "Diesel", "BUS043", 40),
+                new Bus("Scania", "Red", 8, "Diesel", "BUS044", 40),
+                new Airplane("Airbus 340", "White", 12, "Jet", "JA8090", 4),
+                new Boat("Vindö 32", "White", 0, "Diesel", "WNDPWR42x", 9, 1.3),
+                new Motorcycle("Honda Goldwing", "Black", 2, "Petrol", "CRZ001", 1833),
+                new Motorcycle("Honda Silverwing", "Purple", 2, "Petrol", "CRZ001", 1433)
             };
             foreach (var vehicle in vehicles)
             {
@@ -124,8 +123,69 @@ namespace Exercise_5_Garage
                 }
             }
         }
-        internal void Park() { }
-        internal void UnPark(string[] registrationSearch) 
+        internal void Park(string[] vehicleData)
+        {
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
+
+            if (vehicleData.Length > 1)
+            {
+                // TODO parse
+            }
+
+            ui.OutputData("Fordons typer: ");
+            var vehicleTypes = gh.GetVehicleTypes();
+            var vehicleNames = gh.GetVehicleTypes().Select(t => t.Name.ToLower()).ToList();
+            foreach (var vehicleName in vehicleNames) { ui.OutputData($"{vehicleName} "); }
+            ui.OutputData("\n");
+            var selectedVehicleTypeString = askForInput.GetFromSelectionString("Välj typ: ", vehicleNames);
+            Type? selectedVehicleType = vehicleTypes.Where(t => t.Name.ToLower() == selectedVehicleTypeString.ToLower()).FirstOrDefault();
+            ArgumentNullException.ThrowIfNull(selectedVehicleType);
+            ui.OutputData($"FULLNAME {selectedVehicleType.FullName}\n");
+            
+            string brandAndModel = askForInput.GetString("Märke och modell: ");
+            string color = askForInput.GetString("Färg: ");
+            int numberOfWheels = askForInput.GetInt("Antal hjul: ");
+            string powerSource = askForInput.GetString("Drivmedel: ");
+            string registrationNumber = askForInput.GetFromUnSelectionString("Registreringsnummer: ", gh.GetAllRegistrationNumbers());
+
+            // Each class special prop and creation of the instance
+            IVehicle newVehicle;
+            switch (selectedVehicleTypeString.ToLower())
+            {
+                case "airplane":
+                    int numberOfEngines = askForInput.GetInt("Antal motorer: ");
+                    newVehicle = new Airplane(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfEngines);
+                    break;
+                case "boat":
+                    int length = askForInput.GetInt("Längd: ");
+                    double draft = askForInput.GetDouble("Djup gång: ");
+                    newVehicle = new Boat(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, length, draft);
+                    break;
+                case "bus":
+                    int numberOfSeats = askForInput.GetInt("Antal platser: ");
+                    newVehicle = new Bus(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfSeats);
+                    break;
+                case "car":
+                    bool isConvertible = askForInput.ConfirmYes("Är det en cabriolet (j/n)? ");
+                    newVehicle = new Car(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, isConvertible);
+                    break;
+                case "motorcycle":
+                    int cylinderVolume = askForInput.GetInt("Cylinder volymen: ");
+                    newVehicle = new Motorcycle(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, cylinderVolume);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("Unknown vehicle type");
+            }
+
+            gh.ParkVehicle(newVehicle);
+
+
+        }
+        internal void UnPark(string[] registrationSearch)
         {
             if (!gh.HaveAGarage())
             {
@@ -160,9 +220,9 @@ namespace Exercise_5_Garage
         internal void ListVehiclesByType(string[] _)
         {
             if (!gh.HaveAGarage())
-            { 
-                ui.OutputData("Garage saknas\n"); 
-                return; 
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
             }
             var v = gh.GetParkedVehicles();
             var groups = v.GroupBy(
@@ -183,7 +243,8 @@ namespace Exercise_5_Garage
                 return;
             }
             string searchString;
-            if(rnToFind.Length < 1) {
+            if (rnToFind.Length < 1)
+            {
                 searchString = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");
             }
             else
