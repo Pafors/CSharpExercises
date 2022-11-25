@@ -29,7 +29,6 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        // TODO add tuple with fail info
         public (bool, string) ParkVehicle(T vehicle)
         {
             if (GetAllRegistrationNumbers().Contains(vehicle.RegistrationNumber, StringComparer.OrdinalIgnoreCase))
@@ -47,7 +46,6 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             vehicleStorage[(int)freeParkingSpot] = vehicle;
             return (true, "");
         }
-
         public bool UnParkVehicle(string registrationNumber)
         {
             for (int i = 0; i < vehicleStorage.Length; i++)
@@ -61,12 +59,10 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             }
             return false;
         }
-
         public int NumberOfParkedVehicles()
         {
             return size - GetNumberOfAvailableParkingSpots();
         }
-
         public List<int> AvailableParkingSpots()
         {
             // Build a new anonymous object with array index and vehicle data, then
@@ -80,19 +76,21 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             // Count the values in the list
             return AvailableParkingSpots().Count;
         }
-
+        public IEnumerable<IVehicle> FindAny(string searchTerm)
+        {
+            return (IEnumerable<IVehicle>)vehicleStorage
+                .Where(v => v != null && v.Matches(searchTerm));
+        }
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
             // TODO Make safe copy/clone/string
             return (IEnumerable<IVehicle>)vehicleStorage
                 .Where(v => v != null && v.RegistrationNumber.ToUpper().Contains(searchTerm.ToUpper()));
         }
-
         public int GetSize()
         {
             return size;
         }
-
         public List<string> GetAllRegistrationNumbers()
         {
             return vehicleStorage.Where(v => v != null).Select(v => v.RegistrationNumber).ToList();

@@ -33,6 +33,7 @@ namespace Exercise_5_Garage
                 { Menu.UnPark, UnPark },
                 { Menu.ListVehicles, ListVehicles },
                 { Menu.ListVehiclesByType, ListVehiclesByType },
+                { Menu.FindAny, FindAny },
                 { Menu.FindByRegistration, FindByRegistration },
                 { Menu.Quit, ExitApplication },
                 { Menu.ShortQuit, ExitApplication }
@@ -137,6 +138,7 @@ namespace Exercise_5_Garage
                 // TODO parse
             }
 
+            // TODO Cleanup
             ui.OutputData("Fordons typer: ");
             var vehicleTypes = gh.GetVehicleTypes();
             var vehicleNames = gh.GetVehicleTypes().Select(t => t.Name.ToLower()).ToList();
@@ -240,6 +242,29 @@ namespace Exercise_5_Garage
             {
                 ui.OutputData($"{grping.VehicleType}: ");
                 ui.OutputData($"{grping.Count}\n");
+            }
+        }
+        internal void FindAny(string[] searchTerms)
+        {
+            // TODO add multiple matches as an boolean AND
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
+            string searchString;
+            if (searchTerms.Length < 1)
+            {
+                searchString = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");
+            }
+            else
+            {
+                searchString = searchTerms[0];
+            }
+            ui.OutputData("MATCHES:\n");
+            foreach (var match in gh.FindAny(searchString))
+            {
+                ui.OutputData($"{match}\n");
             }
         }
         internal void FindByRegistration(string[] rnToFind)

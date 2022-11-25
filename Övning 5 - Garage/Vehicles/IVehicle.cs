@@ -9,5 +9,6 @@ namespace Exercise_5_Garage.Vehicles
         int NumberOfWheels { get; set; }
         string PowerSource { get; set; }
         string RegistrationNumber { get; set; }
+        bool Matches(string searchText);
     }
 }

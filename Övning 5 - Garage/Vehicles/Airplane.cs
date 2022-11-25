@@ -19,6 +19,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             return $"{base.ToString()}, {NumberOfEngines}";
         }
-
+        public override bool Matches(string searchText)
+        {
+            return base.Matches(searchText) || NumberOfEngines.ToString() == searchText;
+        }
     }
 }

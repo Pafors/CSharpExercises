@@ -20,6 +20,13 @@ namespace Exercise_5_Garage.Vehicles
         {
             return $"{base.ToString()}, {Convertible}";
         }
+
+        public override bool Matches(string searchText)
+        {
+            return base.Matches(searchText) || 
+                Convertible && 
+                (searchText.Contains("cab", StringComparison.OrdinalIgnoreCase) || searchText.Contains("conv", StringComparison.OrdinalIgnoreCase));
+        }
     }
 
 }

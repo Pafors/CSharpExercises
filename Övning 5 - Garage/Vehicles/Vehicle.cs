@@ -9,11 +9,11 @@ namespace Exercise_5_Garage.Vehicles
 {
     public abstract class Vehicle : IVehicle
     {
-        public string BrandAndModel { get ; set; }
+        public string BrandAndModel { get; set; }
         public string Color { get; set; }
         public int NumberOfWheels { get; set; }
-        public string PowerSource { get; set; } 
-        public string RegistrationNumber { get; set; } 
+        public string PowerSource { get; set; }
+        public string RegistrationNumber { get; set; }
 
         public Vehicle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber)
         {
@@ -28,6 +28,15 @@ namespace Exercise_5_Garage.Vehicles
         {
             return $"{BrandAndModel}, {Color}, {NumberOfWheels}, {PowerSource}, {RegistrationNumber}";
         }
+
+        public virtual bool Matches(string searchText)
+        {
+            return BrandAndModel.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                Color.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                NumberOfWheels.ToString().Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                PowerSource.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                RegistrationNumber.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+        }
     }
-    
+
 }
