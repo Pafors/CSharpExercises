@@ -113,13 +113,14 @@ namespace Exercise_5_Garage
             };
             foreach (var vehicle in vehicles)
             {
-                if (gh.ParkVehicle(vehicle))
+                (bool result, string reason) = gh.ParkVehicle(vehicle);
+                if (result)
                 {
-                    ui.OutputData($"Parked: {vehicle}\n");
+                    ui.OutputData($"Parked: {vehicle.RegistrationNumber}\n");
                 }
                 else
                 {
-                    ui.OutputData($"Not parked: {vehicle}\n");
+                    ui.OutputData($"Not parked {vehicle.RegistrationNumber}: {reason}\n");
                 }
             }
         }
@@ -192,7 +193,6 @@ namespace Exercise_5_Garage
                 ui.OutputData("Garage saknas\n");
                 return;
             }
-            // TODO registrationSearch
             string regNumber;
             if (registrationSearch.Length < 1)
             {
@@ -202,8 +202,15 @@ namespace Exercise_5_Garage
             {
                 regNumber = registrationSearch[0];
             }
-            // TODO Success or not
-            gh.UnParkVehicle(regNumber);
+            // Vehicle will be unparked if its registration number are in the garage
+            if (gh.UnParkVehicle(regNumber))
+            {
+                ui.OutputData($"Fordon med registreringsnummer '{regNumber}' är avparkerad\n");
+            }
+            else
+            {
+                ui.OutputData($"*** Garaget saknar ett fordon med registreringsnummer '{regNumber}'\n");
+            }
         }
         internal void ListVehicles(string[] _)
         {

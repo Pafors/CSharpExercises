@@ -26,7 +26,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Fordonen ska implementeras som klassen Vehicle och subklasser till den.
 // ● Vehicle innehåller samtliga egenskaper som ska finnas i samtliga fordonstyper.
 //   T.ex. registreringsnummer, färg, antal hjul och andra egenskaper ni kan komma på.
-// TODO ●  Registreringsnumret är unikt
+// ●  Registreringsnumret är unikt
 // ● Det måste minst finnas följande subklasser:
 //   ○ Airplane
 //   ○ Motorcycle

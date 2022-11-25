@@ -28,14 +28,11 @@ namespace Exercise_5_Garage.Handlers
                 garageToHandle = garage;
             }
         }
-        public bool ParkVehicle(T vehicle)
+        public (bool, string) ParkVehicle(T vehicle)
         {
-            if (garageToHandle == null) { return false; }
-
-
-
-
-            return garageToHandle.ParkVehicle(vehicle);
+            if (garageToHandle == null) { return (false, "Garage saknas"); }
+            (bool result, string reason) = garageToHandle.ParkVehicle(vehicle);
+            return (result, reason);
         }
         public bool UnParkVehicle(string registrationNumber)
         {
