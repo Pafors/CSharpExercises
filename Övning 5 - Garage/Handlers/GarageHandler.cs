@@ -10,9 +10,9 @@ namespace Exercise_5_Garage.Handlers
 {
     public class GarageHandler<T> : IGarageHandler<T> where T : IVehicle
     {
-        private Garage<T>? garageToHandle;
+        private IGarage<T>? garageToHandle;
         public GarageHandler() { }
-        public GarageHandler(Garage<T> garage)
+        public GarageHandler(IGarage<T> garage)
         {
             garageToHandle = garage;
         }
@@ -20,7 +20,7 @@ namespace Exercise_5_Garage.Handlers
         {
             SetGarageToHandle(new Garage<T>(wantedSize));
         }
-        public void SetGarageToHandle(Garage<T> garage)
+        public void SetGarageToHandle(IGarage<T> garage)
         {
             if (garage != null)
             {
@@ -109,9 +109,3 @@ namespace Exercise_5_Garage.Handlers
         }
     }
 }
-
-
-//En GarageHandler.För att abstrahera ett lager så att det inte finns någon direkt
-//kontakt mellan användargränssnittet och garage klassen.Detta görs lämpligen
-//genom en klass som hanterar funktionaliteten som gränssnittet behöver ha
-//tillgång till.

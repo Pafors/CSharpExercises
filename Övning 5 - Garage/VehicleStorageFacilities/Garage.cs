@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Exercise_5_Garage.VehicleStorageFacilities
 {
-    public class Garage<T> : IEnumerable<T> where T : IVehicle
+    public class Garage<T> : IEnumerable<T>, IGarage<T> where T : IVehicle
     {
         private T?[] vehicleStorage;
         private readonly int size;
@@ -51,9 +51,9 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             {
                 if (vehicleStorage[i] == null) { continue; }
                 if (vehicleStorage[i]!.RegistrationNumber.ToLower() == registrationNumber.ToLower())
-                { 
-                    vehicleStorage[i] = default(T); 
-                    return true; 
+                {
+                    vehicleStorage[i] = default(T);
+                    return true;
                 }
             }
             return false;
@@ -103,7 +103,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             Dictionary<string, string> mergedTerms = new();
             foreach (var vehicle in vehicleStorage)
             {
-                if(vehicle == null) continue;
+                if (vehicle == null) continue;
                 mergedTerms = mergedTerms.Union(vehicle.SearchTerms).ToDictionary(pair => pair.Key, pair => pair.Value);
             }
             return mergedTerms;

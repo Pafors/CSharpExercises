@@ -18,7 +18,7 @@ namespace Exercise_5_Garage.Handlers
         void NewGarage(int wantedSize);
         int NumberOfParkedVehicles();
         (bool, string) ParkVehicle(T vehicle);
-        void SetGarageToHandle(Garage<T> garage);
+        void SetGarageToHandle(IGarage<T> garage);
         bool UnParkVehicle(string registrationNumber);
         Dictionary<string, string> GetSearchTerms();
     }
