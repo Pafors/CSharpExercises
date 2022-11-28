@@ -14,10 +14,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             NumberOfEngines = numberOfEngines;
         }
-
         public override string ToString()
         {
-            return $"{base.ToString()}, {NumberOfEngines}";
+            return $"{base.ToString()}, ANTAL MOTORER: {NumberOfEngines}";
         }
         public override bool MatchesAny(string searchText)
         {

@@ -10,17 +10,15 @@ namespace Exercise_5_Garage.Vehicles
     public class Car : Vehicle
     {
         public bool Convertible { get; protected set; }
-
         public Car(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, bool convertible) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             Convertible= convertible;
         }
-
         public override string ToString()
         {
-            return $"{base.ToString()}, {Convertible}";
+            string trueFalseString = Convertible? "Ja" : "Nej";
+            return $"{base.ToString()}, CABRIOLET: {trueFalseString}";
         }
-
         public override bool MatchesAny(string searchText)
         {
             return base.MatchesAny(searchText) || 

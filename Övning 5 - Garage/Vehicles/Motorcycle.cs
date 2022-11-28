@@ -14,10 +14,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             CylinderVolume = cylinderVolume;
         }
-
         public override string ToString()
         {
-            return $"{base.ToString()}, {CylinderVolume}";
+            return $"{base.ToString()}, CYLINDERVOLYM: {CylinderVolume} cc";
         }
         public override bool MatchesAny(string searchText)
         {

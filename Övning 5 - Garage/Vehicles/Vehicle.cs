@@ -15,7 +15,6 @@ namespace Exercise_5_Garage.Vehicles
         public int NumberOfWheels { get; set; }
         public string PowerSource { get; set; }
         public string RegistrationNumber { get; set; }
-
         public Vehicle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber)
         {
             BrandAndModel = brandAndModel;
@@ -24,15 +23,14 @@ namespace Exercise_5_Garage.Vehicles
             PowerSource = powerSource;
             RegistrationNumber = registrationNumber;
         }
-
         public override string ToString()
         {
-            return $"{BrandAndModel}, {Color}, {NumberOfWheels}, {PowerSource}, {RegistrationNumber}";
+            return $"TYP: {GetVehicleType()}, MÄRKE MODELL: {BrandAndModel}, FÄRG: {Color}, ANTAL HJUL: {NumberOfWheels}, DRIVMEDEL: {PowerSource}, REG.NUMMER: {RegistrationNumber}";
         }
-
         public virtual bool MatchesAny(string searchText)
         {
-            return BrandAndModel.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+            return GetVehicleType().Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                BrandAndModel.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
                 Color.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
                 NumberOfWheels.ToString() == searchText ||
                 PowerSource.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
@@ -42,6 +40,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             switch (vehicleProp.ToLower())
             {
+                case "typ":
+                case "t":
+                    return GetVehicleType().Contains(searchText, StringComparison.OrdinalIgnoreCase);
                 case "brandandmodel":
                 case "brand":
                 case "märke":
@@ -71,6 +72,10 @@ namespace Exercise_5_Garage.Vehicles
                     return false;
             }
         }
+        public string GetVehicleType()
+        {
+            string vehicleType = this.GetType().ToString().Split(".").Last();
+            return vehicleType;
+        }
     }
-
 }

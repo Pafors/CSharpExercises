@@ -16,10 +16,9 @@ namespace Exercise_5_Garage.Vehicles
             Length = length;
             Draft = draft;
         }
-
         public override string ToString()
         {
-            return $"{base.ToString()}, {Length}, {Draft}";
+            return $"{base.ToString()}, LÄNGD: {Length} m, DJUP: {Draft} m";
         }
         public override bool MatchesAny(string searchText)
         {

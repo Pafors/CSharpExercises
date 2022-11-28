@@ -14,16 +14,14 @@ namespace Exercise_5_Garage.Vehicles
         {
             NumberOfSeats = numberOfSeats;
         }
-
         public override string ToString()
         {
-            return $"{base.ToString()}, {NumberOfSeats}";
+            return $"{base.ToString()}, ANTAL SÄTEN: {NumberOfSeats}";
         }
         public override bool MatchesAny(string searchText)
         {
             return base.MatchesAny(searchText) || NumberOfSeats.ToString() == searchText;
         }
-
         public override bool MatchesProp(string vehicleProp, string searchText)
         {
             switch (vehicleProp.ToLower())
