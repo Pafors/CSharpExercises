@@ -41,7 +41,6 @@ namespace Exercise_5_Garage.Handlers
         public IEnumerable<IVehicle> GetParkedVehicles()
         {
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
-            // TODO Make it a copy/clone
             return (IEnumerable<IVehicle>)garageToHandle.ToList();
         }
         public IEnumerable<List<IVehicle>> GetParkedVehiclesByType()
@@ -80,7 +79,6 @@ namespace Exercise_5_Garage.Handlers
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
-            // TODO Make safe copy/clone/string
             return garageToHandle.FindByRegistration(searchTerm);
         }
         public List<string> GetAllRegistrationNumbers()

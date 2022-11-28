@@ -19,7 +19,6 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             TransportType = transportType;
             size = garageSize;
         }
-
         public IEnumerator<T> GetEnumerator()
         {
             foreach (var vehicle in vehicleStorage)
@@ -29,11 +28,10 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             }
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         public (bool, string) ParkVehicle(T vehicle)
         {
             if (GetAllRegistrationNumbers().Contains(vehicle.RegistrationNumber, StringComparer.OrdinalIgnoreCase))
-            { return (false, "Dublett av registreringsnummer"); }
+            { return (false, "DUBLETT AV REGISTRERINGSNUMMER"); }
             // Find the first available free "parking spot" in the array
             int? freeParkingSpot;
             var availableParkingSpots = AvailableParkingSpots();
@@ -41,7 +39,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             // No available, return false from the operation
             if (availableParkingSpots.Count == 0 || freeParkingSpot == null)
             {
-                return (false, "Garaget fullt");
+                return (false, "GARAGET FULLT");
             }
             // Spot found, park the vehicle
             vehicleStorage[(int)freeParkingSpot] = vehicle;
@@ -89,7 +87,6 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
-            // TODO Make safe copy/clone/string
             return (IEnumerable<IVehicle>)vehicleStorage
                 .Where(v => v != null && v.RegistrationNumber.ToUpper().Contains(searchTerm.ToUpper()));
         }

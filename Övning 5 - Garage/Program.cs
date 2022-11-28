@@ -75,7 +75,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Implementera sen funktionaliteten tills testet går igenom.
 
 // BONUS
-// TODO Möjlighet att också kunna söka på de fordonsspecifika egenskaperna.
+// Möjlighet att också kunna söka på de fordonsspecifika egenskaperna.
 // TODO Läsa in storleken på garaget via konfiguration.
 // TODO Hantera flera garage.
 

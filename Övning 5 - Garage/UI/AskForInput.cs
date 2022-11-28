@@ -100,7 +100,7 @@ namespace Exercise_5_Garage.UI
 
         public (string Command, string[]? Args) GetCommand()
         {
-            var commandArgs = GetString("Command> ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var commandArgs = GetString("COMMAND> ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             string[]? args;
             if (commandArgs.Length < 1)
             {

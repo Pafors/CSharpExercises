@@ -47,7 +47,7 @@ namespace Exercise_5_Garage
                 }
                 else
                 {
-                    ui.OutputData($"*** Kommandot '{command}' saknas, försök igen\n");
+                    ui.OutputData($"*** KOMMANDOT '{command}' SAKNAS, FÖRSÖK IGEN\n");
                     Menu.WriteMenu(ui);
                 }
             }
@@ -61,14 +61,14 @@ namespace Exercise_5_Garage
             }
             else
             {
-                ui.OutputData("0/0 (garage saknas)");
+                ui.OutputData("0/0 (GARAGE SAKNAS)");
             }
             ui.OutputData(" ]\n");
         }
         internal void NewGarage(string[] size)
         {
             int wantedSize = 0;
-            if (!gh.HaveAGarage() || (gh.HaveAGarage() && askForInput.ConfirmYes("Det finns redan ett garage, vill du fortsätta (j/n)? ")))
+            if (!gh.HaveAGarage() || (gh.HaveAGarage() && askForInput.ConfirmYes("DET FINNS REDAN ETT GARAGE, VILL DU FORTSÄTTA (J/N)? ")))
             {
                 if (size.Length > 0)
                 {
@@ -79,7 +79,7 @@ namespace Exercise_5_Garage
                 }
                 else
                 {
-                    wantedSize = askForInput.GetInt("Önskad storlek: ");
+                    wantedSize = askForInput.GetInt("ÖNSKAD STORLEK: ");
                 }
                 if (wantedSize > 0)
                 {
@@ -108,77 +108,75 @@ namespace Exercise_5_Garage
                 (bool result, string reason) = gh.ParkVehicle(vehicle);
                 if (result)
                 {
-                    ui.OutputData($"Parked: '{vehicle.RegistrationNumber}'\n");
+                    ui.OutputData($"PARKED: '{vehicle.RegistrationNumber}'\n");
                 }
                 else
                 {
-                    ui.OutputData($"Not parked '{vehicle.BrandAndModel}' with registration number '{vehicle.RegistrationNumber}': {reason}\n");
+                    ui.OutputData($"NOT PARKED '{vehicle.BrandAndModel}' WITH REGISTRATION NUMBER '{vehicle.RegistrationNumber}': {reason}\n");
                 }
             }
         }
         internal void Park(string[] vehicleData)
         {
-            // TODO använda "params"?
+            // TODO park använda "params"?
 
             if (!HaveGarage(gh)) { return; }
             if (gh.GetNumberOfAvailableParkingSpots() < 1)
             {
-                ui.OutputData("*** Garaget är fullt\n");
+                ui.OutputData("*** GARAGET ÄR FULLT\n");
                 return;
             }
             if (vehicleData.Length > 1)
             {
-                // TODO parse
+                // TODO park parse?
             }
 
-            // TODO Cleanup
-            ui.OutputData("Fordons typer: ");
+            // TODO park Cleanup
+            ui.OutputData("FORDONS TYPER: ");
             var vehicleTypes = gh.GetVehicleTypes();
             var vehicleNames = gh.GetVehicleTypes().Select(t => t.Name.ToLower()).ToList();
             foreach (var vehicleName in vehicleNames) { ui.OutputData($"{vehicleName} "); }
             ui.OutputData("\n");
-            var selectedVehicleTypeString = askForInput.GetFromSelectionString("Välj typ: ", vehicleNames);
+            var selectedVehicleTypeString = askForInput.GetFromSelectionString("VÄLJ FORDONS TYP: ", vehicleNames);
             Type? selectedVehicleType = vehicleTypes.Where(t => t.Name.ToLower() == selectedVehicleTypeString.ToLower()).FirstOrDefault();
             ArgumentNullException.ThrowIfNull(selectedVehicleType);
 
-            string brandAndModel = askForInput.GetString("Märke och modell: ");
-            string color = askForInput.GetString("Färg: ");
-            int numberOfWheels = askForInput.GetInt("Antal hjul: ");
-            string powerSource = askForInput.GetString("Drivmedel: ");
-            string registrationNumber = askForInput.GetFromUnSelectionString("Registreringsnummer: ", gh.GetAllRegistrationNumbers());
+            string brandAndModel = askForInput.GetString("MÄRKE OCH MODELL: ");
+            string color = askForInput.GetString("FÄRG: ");
+            int numberOfWheels = askForInput.GetInt("ANTAL HJUL: ");
+            string powerSource = askForInput.GetString("DRIVMEDEL: ");
+            string registrationNumber = askForInput.GetFromUnSelectionString("REGISTRERINGSNUMMER: ", gh.GetAllRegistrationNumbers());
 
             // Each class special prop and creation of the instance
             IVehicle newVehicle;
             switch (selectedVehicleTypeString.ToLower())
             {
                 case "airplane":
-                    int numberOfEngines = askForInput.GetInt("Antal motorer: ");
+                    int numberOfEngines = askForInput.GetInt("ANTAL MOTORER: ");
                     newVehicle = new Airplane(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfEngines);
                     break;
                 case "boat":
-                    int length = askForInput.GetInt("Längd: ");
-                    double draft = askForInput.GetDouble("Djup gång: ");
+                    int length = askForInput.GetInt("LÄNGD: ");
+                    double draft = askForInput.GetDouble("DJUP GÅNG: ");
                     newVehicle = new Boat(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, length, draft);
                     break;
                 case "bus":
-                    int numberOfSeats = askForInput.GetInt("Antal platser: ");
+                    int numberOfSeats = askForInput.GetInt("ANTAL PLATSER: ");
                     newVehicle = new Bus(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfSeats);
                     break;
                 case "car":
-                    bool isConvertible = askForInput.ConfirmYes("Är det en cabriolet (j/n)? ");
+                    bool isConvertible = askForInput.ConfirmYes("ÄR DET EN CABRIOLET (J/N)? ");
                     newVehicle = new Car(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, isConvertible);
                     break;
                 case "motorcycle":
-                    int cylinderVolume = askForInput.GetInt("Cylinder volym: ");
+                    int cylinderVolume = askForInput.GetInt("CYLINDER VOLYM: ");
                     newVehicle = new Motorcycle(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, cylinderVolume);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("Unknown vehicle type");
+                    throw new ArgumentOutOfRangeException("UNKNOWN VEHICLE TYPE");
             }
 
             gh.ParkVehicle(newVehicle);
-
-
         }
         internal void UnPark(string[] registrationSearch)
         {
@@ -186,7 +184,7 @@ namespace Exercise_5_Garage
             string regNumber;
             if (registrationSearch.Length < 1)
             {
-                regNumber = askForInput.GetString("Vilket registreringsnummer vill du avparkera?\n");
+                regNumber = askForInput.GetString("VILKET REGISTRERINGSNUMMER VILL DU AVPARKERA?\n");
             }
             else
             {
@@ -195,11 +193,11 @@ namespace Exercise_5_Garage
             // Vehicle will be unparked if its registration number are in the garage
             if (gh.UnParkVehicle(regNumber))
             {
-                ui.OutputData($"Fordon med registreringsnummer '{regNumber}' är avparkerad\n");
+                ui.OutputData($"FORDON MED REGISTRERINGSNUMMER '{regNumber}' ÄR AVPARKERAD\n");
             }
             else
             {
-                ui.OutputData($"*** Garaget saknar ett fordon med registreringsnummer '{regNumber}'\n");
+                ui.OutputData($"*** GARAGET SAKNAR ETT FORDON MED REGISTRERINGSNUMMER '{regNumber}'\n");
             }
         }
         internal void ListVehicles(string[] _)
@@ -212,11 +210,7 @@ namespace Exercise_5_Garage
         }
         internal void ListVehiclesByType(string[] _)
         {
-            if (!gh.HaveAGarage())
-            {
-                ui.OutputData("*** Garage saknas\n");
-                return;
-            }
+            if (!HaveGarage(gh)) { return; }
             var v = gh.GetParkedVehicles();
             var groups = v.GroupBy(
                 v => v.GetType().ToString(),
@@ -226,8 +220,8 @@ namespace Exercise_5_Garage
             ui.OutputData($"FORDONSTYP OCH ANTAL\n");
             foreach (var grping in groups)
             {
-                ui.OutputData($"{grping.VehicleType, 12}: ");
-                ui.OutputData($"{grping.Count} st\n");
+                ui.OutputData($"{grping.VehicleType,12}: ");
+                ui.OutputData($"{grping.Count}\n");
             }
         }
         internal void FindAny(string[] searchTerms)
@@ -236,13 +230,13 @@ namespace Exercise_5_Garage
             // No parameters in input, ask for them
             if (searchTerms.Length < 1)
             {
-                searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                searchTerms = askForInput.GetString("ANGE SÖK TERMER (MELLANSLAG ÄR AVDELARE): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
 
             // First get a list of all vehicles, which will be be filtered for each match
             List<IVehicle> intersectResult = gh.GetParkedVehicles().ToList();
 
-            // Filters so only those terms that matches any of the props will stay
+            // Filters so only those terms that matches any of the props will stay, boolean AND
             foreach (var searchTerm in searchTerms)
             {
                 intersectResult = intersectResult.Intersect(gh.FindAny(searchTerm)).ToList();
@@ -252,51 +246,57 @@ namespace Exercise_5_Garage
         }
         internal void FindByProp(string[] searchTerms)
         {
-            if (!gh.HaveAGarage())
-            {
-                ui.OutputData("*** Garage saknas\n");
-                return;
-            }
-            // TODO PROPS BY GARAGE
-            var uniqueSearchTerms = gh.GetSearchTerms();
-            if (uniqueSearchTerms == null) { return; }
-            foreach (var searchTerm in uniqueSearchTerms)
-            {
-                ui.OutputData($"{searchTerm.Key, 7} {searchTerm.Value}\n");
-            }
-            ui.OutputData("Exempel på sökning: 'type:car color:blue', 'ps:diesel wheels:4'\n");
+            if (!HaveGarage(gh)) { return; }
+
             // No parameters in input, ask for them
             if (searchTerms.Length < 1)
             {
-                // TODO lägga till andra egenskaper
-                searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                // No parameters to the command, show example and available props
+                ui.OutputData("EXEMPEL PÅ SÖKNING: 'type:car color:blue', 'ps:diesel wheels:4'\n");
+                // Gets the possible props of the vehicles stored in the garage
+                var uniqueSearchTerms = gh.GetSearchTerms();
+                // Failsafe check if a null return
+                if (uniqueSearchTerms == null) { return; }
+                // Show terms available
+                foreach (var searchTerm in uniqueSearchTerms)
+                {
+                    ui.OutputData($"{searchTerm.Key,7} {searchTerm.Value}\n");
+                }
+                searchTerms = askForInput.GetString("ANGE SÖK TERMER (MELLANSLAG ÄR AVDELARE): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
+
+            // If no search terms are provided, return
+            if(searchTerms.Length < 1) { return; }
+            int validSearchTerms = 0;
 
             // First get a list of all vehicles, which will be be filtered for each match
             List<IVehicle> intersectResult = gh.GetParkedVehicles().ToList();
 
-            // Keep only the results that matches the selected props
+            // Keep only the results that matches the selected props, boolean AND:ish
             foreach (var searchTerm in searchTerms)
             {
                 // Split each search term ("vehicleProp:searchText") into it's parts
                 string[] searchData = searchTerm.Split(":", StringSplitOptions.RemoveEmptyEntries);
                 // If prop or text terms are missing, skip this search term
-                if ( searchData.Length != 2 ) { continue; }
+                if (searchData.Length != 2) { continue; }
                 string vehicleProp = searchData[0];
                 string searchText = searchData[1];
+                validSearchTerms++;
                 intersectResult = intersectResult.Intersect(gh.FindByProp(vehicleProp, searchText)).ToList();
             }
+            // If no valid search terms are provided, show nothing
+            if (validSearchTerms < 1) { return; }
             ShowSearchResults(intersectResult);
 
         }
         internal void FindByRegistration(string[] rnToFind)
         {
-            if(!HaveGarage(gh)) {  return ; }
+            if (!HaveGarage(gh)) { return; }
             string searchString;
             // No parameters in input, ask for it
             if (rnToFind.Length < 1)
             {
-                searchString = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");
+                searchString = askForInput.GetString("VILKET REGISTRERINGSNUMMER VILL DU SÖKA EFTER?\n");
             }
             else
             {
@@ -321,7 +321,7 @@ namespace Exercise_5_Garage
         {
             if (!gh.HaveAGarage())
             {
-                ui.OutputData("*** Garage saknas\n");
+                ui.OutputData("*** GARAGE SAKNAS\n");
                 return false;
             }
             return true;
