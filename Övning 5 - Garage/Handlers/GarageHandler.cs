@@ -10,7 +10,6 @@ namespace Exercise_5_Garage.Handlers
 {
     public class GarageHandler<T> : IGarageHandler<T> where T : IVehicle
     {
-        // TODO Make it an "IGarage"
         private Garage<T>? garageToHandle;
         public GarageHandler() { }
         public GarageHandler(Garage<T> garage)

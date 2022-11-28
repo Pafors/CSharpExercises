@@ -40,6 +40,7 @@ namespace Exercise_5_Garage.Vehicles
         {
             switch (vehicleProp.ToLower())
             {
+                case "type":
                 case "typ":
                 case "t":
                     return GetVehicleType().Contains(searchText, StringComparison.OrdinalIgnoreCase);
