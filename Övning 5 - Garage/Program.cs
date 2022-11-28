@@ -43,7 +43,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Det ska gå att:
 // ● Lista samtliga parkerade fordon
 // ● Lista fordonstyper och hur många av varje som står i garaget
-// TODO ● Lägga till och ta bort fordon ur garaget
+// ● Lägga till och ta bort fordon ur garaget
 // ● Sätta en kapacitet (antal parkeringsplatser) vid instansieringen av ett nytt garage
 // ● Möjlighet att populera garaget med ett antal fordon från start.
 // ● Hitta ett specifikt fordon via registreringsnumret. Det ska gå fungera med både
@@ -73,6 +73,12 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Experimentera gärna med att skriva testen före ni implementerat funktionaliteten!
 // Använd er sedan ctrl . för att generera era objekt och metoder.
 // Implementera sen funktionaliteten tills testet går igenom.
+
+// BONUS
+// TODO Möjlighet att också kunna söka på de fordonsspecifika egenskaperna.
+// TODO Läsa in storleken på garaget via konfiguration.
+// TODO Hantera flera garage.
+
 
 IUI ui = new ConsoleUI();
 //var storageFacilityManager = new Manager(ui, new GarageHandler<IVehicle>(new Garage<IVehicle>(4)));

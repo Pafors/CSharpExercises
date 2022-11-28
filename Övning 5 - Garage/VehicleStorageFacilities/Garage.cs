@@ -79,7 +79,12 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         public IEnumerable<IVehicle> FindAny(string searchTerm)
         {
             return (IEnumerable<IVehicle>)vehicleStorage
-                .Where(v => v != null && v.Matches(searchTerm));
+                .Where(v => v != null && v.MatchesAny(searchTerm));
+        }
+        public IEnumerable<IVehicle> FindByProp(string vehicleProp, string searchText)
+        {
+            return (IEnumerable<IVehicle>)vehicleStorage
+               .Where(v => v != null && v.MatchesProp(vehicleProp, searchText));
         }
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
@@ -93,7 +98,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         public List<string> GetAllRegistrationNumbers()
         {
-            return vehicleStorage.Where(v => v != null).Select(v => v.RegistrationNumber).ToList();
+            return vehicleStorage.Where(v => v != null).Select(v => v!.RegistrationNumber).ToList();
         }
     }
 }

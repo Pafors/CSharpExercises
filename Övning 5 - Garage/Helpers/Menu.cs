@@ -16,6 +16,7 @@ namespace Exercise_5_Garage.Helpers
         public const string ListVehicles = "list";
         public const string ListVehiclesByType = "types";
         public const string FindAny = "find";
+        public const string FindByProp = "findp";
         public const string FindByRegistration = "findreg";
         public const string Quit = "quit";
         public const string ShortQuit = "q";
@@ -30,6 +31,7 @@ namespace Exercise_5_Garage.Helpers
             ui.OutputData($"'{ListVehicles}' Visar parkerade fordon\n");
             ui.OutputData($"'{ListVehiclesByType}' Visar parkerade fordon per typ\n");
             ui.OutputData($"'{FindAny}' Hitta fordon\n");
+            ui.OutputData($"'{FindByProp}' Hitta fordon via egenskap\n");
             ui.OutputData($"'{FindByRegistration}' Hitta fordon via registreringsnummer\n");
             ui.OutputData($"'{Quit}' Avsluta\n");
             ui.OutputData("\n");

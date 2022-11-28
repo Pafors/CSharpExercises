@@ -19,9 +19,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             return $"{base.ToString()}, {CylinderVolume}";
         }
-        public override bool Matches(string searchText)
+        public override bool MatchesAny(string searchText)
         {
-            return base.Matches(searchText) || CylinderVolume.ToString() == searchText;
+            return base.MatchesAny(searchText) || CylinderVolume.ToString() == searchText;
         }
     }
 }

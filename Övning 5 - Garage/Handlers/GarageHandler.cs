@@ -73,6 +73,11 @@ namespace Exercise_5_Garage.Handlers
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
             return garageToHandle.FindAny(searchTerm);
         }
+        public IEnumerable<IVehicle> FindByProp(string vehicleProp, string searchText)
+        {
+            if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }
+            return garageToHandle.FindByProp(vehicleProp, searchText);
+        }
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
             if (garageToHandle == null) { return Enumerable.Empty<IVehicle>(); }

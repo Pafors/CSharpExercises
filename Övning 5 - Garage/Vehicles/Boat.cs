@@ -21,9 +21,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             return $"{base.ToString()}, {Length}, {Draft}";
         }
-        public override bool Matches(string searchText)
+        public override bool MatchesAny(string searchText)
         {
-            return base.Matches(searchText) || 
+            return base.MatchesAny(searchText) || 
                 Length.ToString() == searchText ||
                 Draft.ToString() == searchText;
         }

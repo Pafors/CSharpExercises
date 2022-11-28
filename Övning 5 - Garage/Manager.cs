@@ -25,6 +25,7 @@ namespace Exercise_5_Garage
                 { Menu.ListVehicles, ListVehicles },
                 { Menu.ListVehiclesByType, ListVehiclesByType },
                 { Menu.FindAny, FindAny },
+                { Menu.FindByProp, FindByProp },
                 { Menu.FindByRegistration, FindByRegistration },
                 { Menu.Quit, ExitApplication },
                 { Menu.ShortQuit, ExitApplication }
@@ -97,7 +98,8 @@ namespace Exercise_5_Garage
                 new Car("Honda CRV", "Silver", 4, "Petrol", "QWE123", convertible: false),
                 new Bus("Scania", "Green", 8,"Diesel", "BUS042", 40),
                 new Bus("Scania", "Yellow", 8, "Diesel", "BUS043", 40),
-                new Bus("Scania", "Red", 8, "Diesel", "BUS044", 40),
+                new Bus("Scania", "Yellow", 8, "Diesel", "BUS043", 40),
+                new Bus("Scania", "Red", 8, "Electrical", "BZZ232", 40),
                 new Airplane("Airbus 340", "White", 12, "Jet", "JA8090", 4),
                 new Boat("Vindö 32", "White", 0, "Diesel", "WNDPWR42x", 9, 1.3),
                 new Motorcycle("Honda Goldwing", "Black", 2, "Petrol", "CRZ001", 1833),
@@ -112,7 +114,7 @@ namespace Exercise_5_Garage
                 }
                 else
                 {
-                    ui.OutputData($"Not parked {vehicle.RegistrationNumber}: {reason}\n");
+                    ui.OutputData($"Not parked {vehicle.BrandAndModel} with registration number {vehicle.RegistrationNumber}: {reason}\n");
                 }
             }
         }
@@ -242,10 +244,9 @@ namespace Exercise_5_Garage
                 ui.OutputData("Garage saknas\n");
                 return;
             }
-            string searchString;
             if (searchTerms.Length < 1)
             {
-                searchTerms = askForInput.GetString("Ange sök termer: ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
 
             // Get each terms match into a list
@@ -256,11 +257,38 @@ namespace Exercise_5_Garage
                 intersectResult = intersectResult.Intersect(gh.FindAny(searchTerm)).ToList();
             }
 
-            // TODO add multiple matches as an boolean AND
+            // TODO Snyggare utskrift
             foreach (var match in intersectResult)
             {
                 ui.OutputData($"MATCHY: {match}\n");
             }
+        }
+        internal void FindByProp(string[] searchTerms)
+        {
+            if (!gh.HaveAGarage())
+            {
+                ui.OutputData("Garage saknas\n");
+                return;
+            }
+            if (searchTerms.Length < 1)
+            {
+                searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            // Get each terms match into a list
+            //List<IVehicle> intersectResult = gh.GetParkedVehicles().ToList();
+
+            //foreach (var searchTerm in searchTerms)
+            //{
+            string[] searchData = searchTerms[0].Split(":", StringSplitOptions.RemoveEmptyEntries);
+                string vehicleProp = searchData[0] ?? "";
+                string searchText = searchData[1] ?? "";
+                foreach(var match in gh.FindByProp(vehicleProp, searchText))
+            {
+                ui.OutputData($"MATCHIE: {match}\n");
+            }
+            //}
+
         }
         internal void FindByRegistration(string[] rnToFind)
         {
