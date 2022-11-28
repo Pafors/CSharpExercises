@@ -1,12 +1,7 @@
 ﻿using Exercise_5_Garage.Vehicles;
 using Exercise_5_Garage;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
-using System;
-using System.Security.Cryptography;
 using Exercise_5_Garage.UI;
 using Exercise_5_Garage.Handlers;
-using Exercise_5_Garage.VehicleStorageFacilities;
 
 // I MER PROGRAMMERINGS VÄNLIGA TERMER SKALL VI ALLTSÅ SOM MINIMUM HA:
 // ● En kollektion av fordon; klassen Garage.
@@ -75,9 +70,9 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Implementera sen funktionaliteten tills testet går igenom.
 
 // BONUS
-// Möjlighet att också kunna söka på de fordonsspecifika egenskaperna.
-// TODO Läsa in storleken på garaget via konfiguration.
-// TODO Hantera flera garage.
+// ● Möjlighet att också kunna söka på de fordonsspecifika egenskaperna.
+// TODO ● Läsa in storleken på garaget via konfiguration.
+// TODO ● Hantera flera garage.
 
 
 IUI ui = new ConsoleUI();
@@ -86,4 +81,3 @@ ArgumentNullException.ThrowIfNull(gh);
 //var storageFacilityManager = new Manager(ui, new GarageHandler<IVehicle>(new Garage<IVehicle>(4)));
 var storageFacilityManager = new Manager(ui, gh);
 storageFacilityManager.StartUpLoop();
-
