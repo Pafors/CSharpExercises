@@ -27,5 +27,19 @@ namespace Exercise_5_Garage.Vehicles
                 Length.ToString() == searchText ||
                 Draft.ToString() == searchText;
         }
+        public override bool MatchesProp(string vehicleProp, string searchText)
+        {
+            switch (vehicleProp.ToLower())
+            {
+                case "length":
+                case "l":
+                    return Length.ToString() == searchText;
+                case "draft":
+                case "d":
+                    return Draft.ToString() == searchText;
+                default:
+                    return base.MatchesProp(vehicleProp, searchText);
+            }
+        }
     }
 }

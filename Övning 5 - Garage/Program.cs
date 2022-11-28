@@ -48,7 +48,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // ● Möjlighet att populera garaget med ett antal fordon från start.
 // ● Hitta ett specifikt fordon via registreringsnumret. Det ska gå fungera med både
 //   ABC123 samt Abc123 eller AbC123.
-// TODO ● Söka efter fordon utifrån en egenskap eller flera (alla möjliga kombinationer från
+// ● Söka efter fordon utifrån en egenskap eller flera (alla möjliga kombinationer från
 //   basklassen Vehicle ). Exempelvis:
 //   ○ Alla svarta fordon med fyra hjul.
 //   ○ Alla motorcyklar som är rosa och har 3 hjul.

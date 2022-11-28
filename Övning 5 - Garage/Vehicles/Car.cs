@@ -27,6 +27,38 @@ namespace Exercise_5_Garage.Vehicles
                 Convertible && 
                 (searchText.Contains("cab", StringComparison.OrdinalIgnoreCase) || searchText.Contains("conv", StringComparison.OrdinalIgnoreCase));
         }
+        public override bool MatchesProp(string vehicleProp, string searchText)
+        {
+            bool checkFor;
+            switch (searchText.ToLower())
+            {
+                case "yes":
+                case "y":
+                case "ja":
+                case "j":
+                    checkFor = true;
+                    break;
+                case "no":
+                case "nej":
+                case "n":
+                    checkFor= false;
+                    break;
+                default:
+                    // Putting in a "convertible:" and forgetting "yes/no" is probably a "yes"
+                    checkFor= true;
+                    break;
+            }
+            switch (vehicleProp.ToLower())
+            {
+                case "convertible":
+                case "cabrilolet":
+                case "conv":
+                case "cab":
+                    return Convertible == checkFor;
+                default:
+                    return base.MatchesProp(vehicleProp, searchText);
+            }
+        }
     }
 
 }

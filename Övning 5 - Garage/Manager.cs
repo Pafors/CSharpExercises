@@ -2,15 +2,16 @@
 using Exercise_5_Garage.Helpers;
 using Exercise_5_Garage.UI;
 using Exercise_5_Garage.Vehicles;
+using System.Linq;
 
 namespace Exercise_5_Garage
 {
     internal class Manager
     {
         private readonly IUI ui;
-        private GarageHandler<IVehicle> gh;
+        private readonly GarageHandler<IVehicle> gh;
         private readonly Dictionary<string, Action<string[]>> commandMenu;
-        private AskForInput askForInput;
+        private readonly AskForInput askForInput;
 
         public Manager(IUI ui, GarageHandler<IVehicle> garageHandler)
         {
@@ -38,7 +39,7 @@ namespace Exercise_5_Garage
             // Command loop
             while (true)
             {
-                showStats();
+                ShowStats();
                 (string command, string[]? cmdArgs) = askForInput.GetCommand();
                 if (commandMenu.ContainsKey(command))
                 {
@@ -51,7 +52,7 @@ namespace Exercise_5_Garage
                 }
             }
         }
-        private void showStats()
+        private void ShowStats()
         {
             ui.OutputData("[ ");
             if (gh.HaveAGarage())
@@ -96,6 +97,7 @@ namespace Exercise_5_Garage
             var vehicles = new List<IVehicle>() {
                 new Car("Volvo 240", "Blue", 4, "Diesel", "JAC495", convertible: false),
                 new Car("Honda CRV", "Silver", 4, "Petrol", "QWE123", convertible: false),
+                new Car("Land Rover", "Green", 4, "Diesel", "TRN707", convertible: true),
                 new Bus("Scania", "Green", 8,"Diesel", "BUS042", 40),
                 new Bus("Scania", "Yellow", 8, "Diesel", "BUS043", 40),
                 new Bus("Scania", "Yellow", 8, "Diesel", "BUS043", 40),
@@ -120,6 +122,7 @@ namespace Exercise_5_Garage
         }
         internal void Park(string[] vehicleData)
         {
+            // TODO använda "params"?
             if (!gh.HaveAGarage())
             {
                 ui.OutputData("Garage saknas\n");
@@ -141,7 +144,7 @@ namespace Exercise_5_Garage
             Type? selectedVehicleType = vehicleTypes.Where(t => t.Name.ToLower() == selectedVehicleTypeString.ToLower()).FirstOrDefault();
             ArgumentNullException.ThrowIfNull(selectedVehicleType);
             ui.OutputData($"FULLNAME {selectedVehicleType.FullName}\n");
-            
+
             string brandAndModel = askForInput.GetString("Märke och modell: ");
             string color = askForInput.GetString("Färg: ");
             int numberOfWheels = askForInput.GetInt("Antal hjul: ");
@@ -237,6 +240,7 @@ namespace Exercise_5_Garage
                 ui.OutputData($"{grping.Count}\n");
             }
         }
+        // TODO cleanup find results, show amount etc
         internal void FindAny(string[] searchTerms)
         {
             if (!gh.HaveAGarage())
@@ -272,22 +276,27 @@ namespace Exercise_5_Garage
             }
             if (searchTerms.Length < 1)
             {
+                // TODO lägga till andra egenskaper
+                ui.OutputData("Möjliga egenskaper att söka på är:\n" + "'bm:' Märke och modelln" + "'color:' Färg\n" + "'nw:' Antal hjul\n" + "'ps:' Drivmedel\n" + "'rn:' Registreringsnummer\n" + "''" + "'XXX' TODO");
                 searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
 
             // Get each terms match into a list
-            //List<IVehicle> intersectResult = gh.GetParkedVehicles().ToList();
+            List<IVehicle> intersectResult = gh.GetParkedVehicles().ToList();
 
-            //foreach (var searchTerm in searchTerms)
-            //{
-            string[] searchData = searchTerms[0].Split(":", StringSplitOptions.RemoveEmptyEntries);
-                string vehicleProp = searchData[0] ?? "";
-                string searchText = searchData[1] ?? "";
-                foreach(var match in gh.FindByProp(vehicleProp, searchText))
+            foreach (var searchTerm in searchTerms)
+            {
+                string[] searchData = searchTerm.Split(":", StringSplitOptions.RemoveEmptyEntries);
+                // If prop or text terms are missing, skip this search term
+                if ( searchData.Length != 2 ) { continue; }
+                string vehicleProp = searchData[0];
+                string searchText = searchData[1];
+                intersectResult = intersectResult.Intersect(gh.FindByProp(vehicleProp, searchText)).ToList();
+            }
+            foreach (var match in intersectResult)
             {
                 ui.OutputData($"MATCHIE: {match}\n");
             }
-            //}
 
         }
         internal void FindByRegistration(string[] rnToFind)
