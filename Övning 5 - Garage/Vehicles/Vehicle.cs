@@ -15,6 +15,14 @@ namespace Exercise_5_Garage.Vehicles
         public int NumberOfWheels { get; set; }
         public string PowerSource { get; set; }
         public string RegistrationNumber { get; set; }
+        public Dictionary<string, string> SearchTerms { get; set; } = new() {
+                { "type", "Type of vehicle" },
+                { "bm", "Brand and model" },
+                { "color", "Color" },
+                { "wheels", "Number of wheels" },
+                { "ps", "Power source" },
+                { "rn", "Registration number" }
+            };
         public Vehicle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber)
         {
             BrandAndModel = brandAndModel;

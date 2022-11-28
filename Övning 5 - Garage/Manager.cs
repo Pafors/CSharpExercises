@@ -233,6 +233,7 @@ namespace Exercise_5_Garage
         internal void FindAny(string[] searchTerms)
         {
             if (!HaveGarage(gh)) { return; }
+            // No parameters in input, ask for them
             if (searchTerms.Length < 1)
             {
                 searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
@@ -256,10 +257,18 @@ namespace Exercise_5_Garage
                 ui.OutputData("*** Garage saknas\n");
                 return;
             }
+            // TODO PROPS BY GARAGE
+            var uniqueSearchTerms = gh.GetSearchTerms();
+            if (uniqueSearchTerms == null) { return; }
+            foreach (var searchTerm in uniqueSearchTerms)
+            {
+                ui.OutputData($"{searchTerm.Key, 7} {searchTerm.Value}\n");
+            }
+            ui.OutputData("Exempel på sökning: 'type:car color:blue', 'ps:diesel wheels:4'\n");
+            // No parameters in input, ask for them
             if (searchTerms.Length < 1)
             {
                 // TODO lägga till andra egenskaper
-                ui.OutputData("Möjliga egenskaper att söka på är:\n" + "'bm:' Märke och modelln" + "'color:' Färg\n" + "'nw:' Antal hjul\n" + "'ps:' Drivmedel\n" + "'rn:' Registreringsnummer\n" + "''" + "'XXX' TODO");
                 searchTerms = askForInput.GetString("Ange sök termer (mellanslag är avdelare): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
 
@@ -284,6 +293,7 @@ namespace Exercise_5_Garage
         {
             if(!HaveGarage(gh)) {  return ; }
             string searchString;
+            // No parameters in input, ask for it
             if (rnToFind.Length < 1)
             {
                 searchString = askForInput.GetString("Vilket registreringsnummer vill du söka efter?\n");

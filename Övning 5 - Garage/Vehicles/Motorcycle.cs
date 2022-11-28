@@ -13,6 +13,7 @@ namespace Exercise_5_Garage.Vehicles
         public Motorcycle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, int cylinderVolume) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             CylinderVolume = cylinderVolume;
+            SearchTerms.Add("cv", "Cylinder volume (motorcycle)");
         }
         public override string ToString()
         {
@@ -26,10 +27,9 @@ namespace Exercise_5_Garage.Vehicles
         {
             switch (vehicleProp.ToLower())
             {
-                case "numberofengines":
-                case "numengines":
-                case "negines":
-                case "ne":
+                case "cylindervolume":
+                case "cvolume":
+                case "cv":
                     return CylinderVolume.ToString() == searchText;
                 default:
                     return base.MatchesProp(vehicleProp, searchText);

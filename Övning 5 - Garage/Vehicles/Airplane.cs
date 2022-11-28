@@ -13,6 +13,7 @@ namespace Exercise_5_Garage.Vehicles
         public Airplane(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, int numberOfEngines) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             NumberOfEngines = numberOfEngines;
+            SearchTerms.Add("ne","Number of engines (airplane)");
         }
         public override string ToString()
         {

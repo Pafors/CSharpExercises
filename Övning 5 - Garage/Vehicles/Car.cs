@@ -13,6 +13,7 @@ namespace Exercise_5_Garage.Vehicles
         public Car(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, bool convertible) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             Convertible= convertible;
+            SearchTerms.Add("conv", "Convertible yes/no (car)");
         }
         public override string ToString()
         {

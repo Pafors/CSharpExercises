@@ -79,6 +79,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // TODO Läsa in storleken på garaget via konfiguration.
 // TODO Hantera flera garage.
 
+// TODO make IGARAGE
 
 IUI ui = new ConsoleUI();
 IGarageHandler<IVehicle> gh = new GarageHandler<IVehicle>();

@@ -13,6 +13,7 @@ namespace Exercise_5_Garage.Vehicles
         public Bus(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, int numberOfSeats) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
             NumberOfSeats = numberOfSeats;
+            SearchTerms.Add("ns", "Number of seats (bus)");
         }
         public override string ToString()
         {
@@ -29,7 +30,7 @@ namespace Exercise_5_Garage.Vehicles
                 case "numberofseats":
                 case "numseats":
                 case "seats":
-                case "s":
+                case "ns":
                     return NumberOfSeats.ToString() == searchText;
                 default:
                     return base.MatchesProp(vehicleProp, searchText);

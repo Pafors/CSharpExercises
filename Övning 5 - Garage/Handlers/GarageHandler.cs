@@ -94,11 +94,6 @@ namespace Exercise_5_Garage.Handlers
         public bool HaveAGarage()
         {
             return garageToHandle != null;
-            //if (garageToHandle != null)
-            //{
-            //    return true;
-            //}
-            //return false;
         }
         public IEnumerable<Type> GetVehicleTypes()
         {
@@ -109,6 +104,11 @@ namespace Exercise_5_Garage.Handlers
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && !p.IsAbstract);
+        }
+        public Dictionary<string, string> GetSearchTerms()
+        {
+            if (garageToHandle == null) return new Dictionary<string, string>();
+                return garageToHandle.GetSearchTerms();
         }
     }
 }

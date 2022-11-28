@@ -9,6 +9,7 @@ namespace Exercise_5_Garage.Vehicles
         int NumberOfWheels { get; set; }
         string PowerSource { get; set; }
         string RegistrationNumber { get; set; }
+        Dictionary<string, string> SearchTerms { get; set; }
         string GetVehicleType();
         bool MatchesAny(string searchText);
         bool MatchesProp(string vehicleProp, string searchText);

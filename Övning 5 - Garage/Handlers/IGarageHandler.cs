@@ -20,5 +20,6 @@ namespace Exercise_5_Garage.Handlers
         (bool, string) ParkVehicle(T vehicle);
         void SetGarageToHandle(Garage<T> garage);
         bool UnParkVehicle(string registrationNumber);
+        Dictionary<string, string> GetSearchTerms();
     }
 }

@@ -15,6 +15,8 @@ namespace Exercise_5_Garage.Vehicles
         {
             Length = length;
             Draft = draft;
+            SearchTerms.Add("l", "Length (boat)");
+            SearchTerms.Add("d", "Draft (boat)");
         }
         public override string ToString()
         {

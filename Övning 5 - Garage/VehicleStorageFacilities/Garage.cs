@@ -2,6 +2,7 @@
 using Exercise_5_Garage.Vehicles;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercise_5_Garage.VehicleStorageFacilities
 {
@@ -99,6 +100,16 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         public List<string> GetAllRegistrationNumbers()
         {
             return vehicleStorage.Where(v => v != null).Select(v => v!.RegistrationNumber).ToList();
+        }
+        public Dictionary<string, string> GetSearchTerms()
+        {
+            Dictionary<string, string> mergedTerms = new();
+            foreach (var vehicle in vehicleStorage)
+            {
+                if(vehicle == null) continue;
+                mergedTerms = mergedTerms.Union(vehicle.SearchTerms).ToDictionary(pair => pair.Key, pair => pair.Value);
+            }
+            return mergedTerms;
         }
     }
 }
