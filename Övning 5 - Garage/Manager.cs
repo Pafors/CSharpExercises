@@ -251,8 +251,8 @@ namespace Exercise_5_Garage
             // No parameters in input, ask for them
             if (searchTerms.Length < 1)
             {
-                // No parameters to the command, show example and available props
-                ui.OutputData("EXEMPEL PÅ SÖKNING: 'type:car color:blue', 'ps:diesel wheels:4'\n");
+                // No parameters to the command, available props and an example
+
                 // Gets the possible props of the vehicles stored in the garage
                 var uniqueSearchTerms = gh.GetSearchTerms();
                 // Failsafe check if a null return
@@ -262,6 +262,7 @@ namespace Exercise_5_Garage
                 {
                     ui.OutputData($"{searchTerm.Key,7} {searchTerm.Value}\n");
                 }
+                ui.OutputData("EXEMPEL PÅ SÖKNING: 'type:car color:blue', 'ps:diesel wheels:4'\n");
                 searchTerms = askForInput.GetString("ANGE SÖK TERMER (MELLANSLAG ÄR AVDELARE): ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             }
 
