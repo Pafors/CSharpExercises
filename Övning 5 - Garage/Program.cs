@@ -81,7 +81,9 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 
 
 IUI ui = new ConsoleUI();
+IGarageHandler<IVehicle> gh = new GarageHandler<IVehicle>();
+ArgumentNullException.ThrowIfNull(gh);
 //var storageFacilityManager = new Manager(ui, new GarageHandler<IVehicle>(new Garage<IVehicle>(4)));
-var storageFacilityManager = new Manager(ui, new GarageHandler<IVehicle>());
+var storageFacilityManager = new Manager(ui, gh);
 storageFacilityManager.StartUpLoop();
 

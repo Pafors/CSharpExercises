@@ -39,7 +39,7 @@ namespace Exercise_5_Garage.UI
             {
                 var userInput = GetString(inputPrompt);
                 if(selection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
-                ui.OutputData("*** Finns inte som valmöjlighet, försök igen");
+                ui.OutputData("*** Finns inte som valmöjlighet, försök igen\n");
             } while (true);
         }
         public string GetFromUnSelectionString(string inputPrompt, List<string> nonSelection)

@@ -24,15 +24,15 @@ namespace Exercise_5_Garage.Helpers
         public static void WriteMenu(IUI ui)
         {
             ui.OutputData("\nFORDONS GARAGETS KOMMANDON\n");
-            ui.OutputData($"'{NewGarage}' Skapar ett nytt garage\n");
+            ui.OutputData($"'{NewGarage} (nnn)' Skapar ett nytt garage\n");
             ui.OutputData($"'{Populate}' Fyller på med lite fordon\n");
-            ui.OutputData($"'{Park}' Parkerar ett fordon\n");
-            ui.OutputData($"'{UnPark}' Avparkerar ett fordon\n");
+            ui.OutputData($"'{Park}' Parkerar ett nytt fordon\n");
+            ui.OutputData($"'{UnPark} (rn)' Avparkerar ett fordon\n");
             ui.OutputData($"'{ListVehicles}' Visar parkerade fordon\n");
             ui.OutputData($"'{ListVehiclesByType}' Visar parkerade fordon per typ\n");
-            ui.OutputData($"'{FindAny}' Hitta fordon\n");
-            ui.OutputData($"'{FindByProp}' Hitta fordon via egenskap\n");
-            ui.OutputData($"'{FindByRegistration}' Hitta fordon via registreringsnummer\n");
+            ui.OutputData($"'{FindAny} (nnn nnn ...)' Hitta fordon\n");
+            ui.OutputData($"'{FindByProp} (prop:nnn prop:nnn ...)' Hitta fordon via egenskap\n");
+            ui.OutputData($"'{FindByRegistration} (rn)' Hitta fordon via registreringsnummer\n");
             ui.OutputData($"'{Quit}' Avsluta\n");
             ui.OutputData("\n");
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Exercise_5_Garage.Handlers
 {
-    public class GarageHandler<T> where T : IVehicle
+    public class GarageHandler<T> : IGarageHandler<T> where T : IVehicle
     {
         // TODO Make it an "IGarage"
         private Garage<T>? garageToHandle;
