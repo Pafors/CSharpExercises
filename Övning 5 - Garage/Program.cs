@@ -18,7 +18,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 //   kontakt mellan användargränssnittet och garage klassen. Detta görs lämpligen
 //   genom en klass som hanterar funktionaliteten som gränssnittet behöver ha
 //   tillgång till.
-// TODO ● Vi programmerar inte direkt mot konkreta typer så vi använder oss av Interfaces
+// ● Vi programmerar inte direkt mot konkreta typer så vi använder oss av Interfaces
 //   för det tex I UI, IHandler, IVehicle. (Tips är att bryta ut till interface när
 //   implementationen är klar om man tycker den här delen är svår)
 
@@ -66,7 +66,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // Applikationen skall fel hantera indata på ett robust sätt, så att den inte kraschar vid
 // felaktig inmatning eller användning.
 
-// TODO UNIT TESTING
+// UNIT TESTING
 // Testen ska skapas i ett eget testprojekt. Vi begränsar oss till att testa de publika
 // metoderna i klassen Garage . (Att skriva test för hela applikationen ses som en extra
 // uppgift om tid finns)
