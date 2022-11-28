@@ -50,6 +50,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             for (int i = 0; i < vehicleStorage.Length; i++)
             {
                 if (vehicleStorage[i] == null) { continue; }
+                Console.WriteLine($"{vehicleStorage[i]!.RegistrationNumber.ToLower()} == {registrationNumber.ToLower()}");
                 if (vehicleStorage[i]!.RegistrationNumber.ToLower() == registrationNumber.ToLower())
                 {
                     vehicleStorage[i] = default(T);
