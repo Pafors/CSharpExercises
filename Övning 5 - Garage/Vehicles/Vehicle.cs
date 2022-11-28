@@ -9,7 +9,6 @@ namespace Exercise_5_Garage.Vehicles
 {
     public abstract class Vehicle : IVehicle
     {
-        // TODO change from "set" to "init"?
         public string BrandAndModel { get; set; }
         public string Color { get; set; }
         public int NumberOfWheels { get; set; }

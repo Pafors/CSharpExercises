@@ -97,7 +97,6 @@ namespace Exercise_5_Garage.Handlers
         {
             //return new List<string>() { "Airplane", "Boat", "Bus", "Car", "Motorcycle" };
 
-            // TODO add filter for "medium"
             var type = typeof(IVehicle);
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())

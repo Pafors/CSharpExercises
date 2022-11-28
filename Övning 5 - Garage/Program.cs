@@ -54,7 +54,7 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 //   ○ Alla motorcyklar som är rosa och har 3 hjul.
 //   ○ Alla lastbilar
 //   ○ Alla röda fordon
-// TODO ● Användaren ska få feedback på att saker gått bra eller dåligt. Till exempel när vi
+// ● Användaren ska få feedback på att saker gått bra eller dåligt. Till exempel när vi
 //   parkerat ett fordon vill vi få en bekräftelse på att fordonet är parkerat. Om det inte
 //   går vill användaren få veta varför.
 
@@ -79,7 +79,6 @@ using Exercise_5_Garage.VehicleStorageFacilities;
 // TODO Läsa in storleken på garaget via konfiguration.
 // TODO Hantera flera garage.
 
-// TODO make IGARAGE
 
 IUI ui = new ConsoleUI();
 IGarageHandler<IVehicle> gh = new GarageHandler<IVehicle>();
