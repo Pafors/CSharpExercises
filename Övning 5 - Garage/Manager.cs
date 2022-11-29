@@ -57,7 +57,7 @@ namespace Exercise_5_Garage
         private void ShowStats()
         {
             // Shows data on the garage
-            ui.OutputData("[ LEDIGA PLATSER: ");
+            ui.OutputData("\n[ LEDIGA PLATSER: ");
             if (gh.HaveAGarage())
             {
                 ui.OutputData($"{gh.GetNumberOfAvailableParkingSpots()}/{gh.GetSizeOfGarage()}");
