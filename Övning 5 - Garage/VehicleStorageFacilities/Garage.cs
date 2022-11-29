@@ -105,7 +105,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
             foreach (var vehicle in vehicleStorage)
             {
                 if (vehicle == null) continue;
-                mergedTerms = mergedTerms.Union(vehicle.SearchTerms).ToDictionary(pair => pair.Key, pair => pair.Value);
+                mergedTerms = mergedTerms.Union(vehicle.GetSearchTerms()).ToDictionary(pair => pair.Key, pair => pair.Value);
             }
             return mergedTerms;
         }

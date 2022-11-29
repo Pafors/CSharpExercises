@@ -15,6 +15,10 @@ namespace Exercise_5_Garage.Vehicles
             Convertible = convertible;
             SearchTerms.Add("conv", "Convertible yes/no (car)");
         }
+        public Car() {
+            SearchTerms.Add("conv", "Convertible yes/no (car)");
+            InputProperties.Add("Convertible", "ÄR DET EN CABRIOLET (J/N)");
+        }
         public override string ToString()
         {
             string trueFalseString = Convertible ? "Ja" : "Nej";

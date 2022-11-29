@@ -9,12 +9,12 @@ namespace Exercise_5_Garage.Vehicles
 {
     public abstract class Vehicle : IVehicle
     {
-        public string BrandAndModel { get; set; }
-        public string Color { get; set; }
-        public int NumberOfWheels { get; set; }
-        public string PowerSource { get; set; }
-        public string RegistrationNumber { get; set; }
-        public Dictionary<string, string> SearchTerms { get; set; } = new() {
+        public string BrandAndModel { get; set; } = "";
+        public string Color { get; set; } = "";
+        public int NumberOfWheels { get; set; } = 0;
+        public string PowerSource { get; set; } = "";
+        public string RegistrationNumber { get; set; } = "";
+        public Dictionary<string, string> SearchTerms = new() {
                 { "type", "Type of vehicle" },
                 { "bm", "Brand and model" },
                 { "color", "Color" },
@@ -22,6 +22,14 @@ namespace Exercise_5_Garage.Vehicles
                 { "ps", "Power source" },
                 { "rn", "Registration number" }
             };
+        public Dictionary<string, string> InputProperties = new()
+        {
+            { "BrandAndModel", "MÄRKE OCH MODELL" },
+            { "Color", "FÄRG" },
+            { "NumberOfWheels", "ANTAL HJUL" },
+            { "PowerSource", "DRIVMEDEL"},
+            { "RegistrationNumber", "REGISTRERINGSNUMMER"}
+        };
         public Vehicle(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber)
         {
             BrandAndModel = brandAndModel;
@@ -30,6 +38,9 @@ namespace Exercise_5_Garage.Vehicles
             PowerSource = powerSource;
             RegistrationNumber = registrationNumber;
         }
+        public Vehicle() { }
+        public Dictionary<string, string> GetSearchTerms() => SearchTerms;
+        public Dictionary<string, string> GetinputProperties() => InputProperties;
         public override string ToString()
         {
             return $"TYP: {GetVehicleType()}, MÄRKE MODELL: {BrandAndModel}, FÄRG: {Color}, ANTAL HJUL: {NumberOfWheels}, DRIVMEDEL: {PowerSource}, REG.NUMMER: {RegistrationNumber}";

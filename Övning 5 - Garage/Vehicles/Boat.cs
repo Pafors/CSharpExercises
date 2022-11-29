@@ -18,6 +18,12 @@ namespace Exercise_5_Garage.Vehicles
             SearchTerms.Add("l", "Length (boat)");
             SearchTerms.Add("d", "Draft (boat)");
         }
+        public Boat() {
+            SearchTerms.Add("l", "Length (boat)");
+            SearchTerms.Add("d", "Draft (boat)");
+            InputProperties.Add("Length", "LÄNGD");
+            InputProperties.Add("Draft", "DJUPGÅNG");
+        }
         public override string ToString()
         {
             return $"{base.ToString()}, LÄNGD: {Length} m, DJUP: {Draft} m";

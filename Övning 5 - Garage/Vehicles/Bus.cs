@@ -15,6 +15,10 @@ namespace Exercise_5_Garage.Vehicles
             NumberOfSeats = numberOfSeats;
             SearchTerms.Add("ns", "Number of seats (bus)");
         }
+        public Bus() {
+            SearchTerms.Add("ns", "Number of seats (bus)");
+            InputProperties.Add("NumberOfSeats", "ANTAL PLATSER");
+        }
         public override string ToString()
         {
             return $"{base.ToString()}, ANTAL SÄTEN: {NumberOfSeats}";

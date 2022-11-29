@@ -15,6 +15,10 @@ namespace Exercise_5_Garage.Vehicles
             CylinderVolume = cylinderVolume;
             SearchTerms.Add("cv", "Cylinder volume (motorcycle)");
         }
+        public Motorcycle() {
+            SearchTerms.Add("cv", "Cylinder volume (motorcycle)");
+            InputProperties.Add("CylinderVolume", "CYLINDER VOLYM");
+        }
         public override string ToString()
         {
             return $"{base.ToString()}, CYLINDERVOLYM: {CylinderVolume} cc";

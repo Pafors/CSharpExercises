@@ -15,6 +15,10 @@ namespace Exercise_5_Garage.Vehicles
             NumberOfEngines = numberOfEngines;
             SearchTerms.Add("ne","Number of engines (airplane)");
         }
+        public Airplane() {
+            SearchTerms.Add("ne", "Number of engines (airplane)");
+            InputProperties.Add("NumberOfEngines", "ANTAL MOTORER");
+        }
         public override string ToString()
         {
             return $"{base.ToString()}, ANTAL MOTORER: {NumberOfEngines}";

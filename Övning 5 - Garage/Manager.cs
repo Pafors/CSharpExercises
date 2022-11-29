@@ -3,6 +3,7 @@ using Exercise_5_Garage.Helpers;
 using Exercise_5_Garage.UI;
 using Exercise_5_Garage.Vehicles;
 using System.Linq;
+using System.Reflection;
 
 namespace Exercise_5_Garage
 {
@@ -118,20 +119,14 @@ namespace Exercise_5_Garage
         }
         internal void Park(string[] vehicleData)
         {
-            // TODO park använda "params"?
-
             if (!HaveGarage(gh)) { return; }
             if (gh.GetNumberOfAvailableParkingSpots() < 1)
             {
                 ui.OutputData("*** GARAGET ÄR FULLT\n");
                 return;
             }
-            if (vehicleData.Length > 1)
-            {
-                // TODO park parse?
-            }
 
-            // TODO park Cleanup
+            // TODO park Cleanup and comments
             ui.OutputData("FORDONS TYPER: ");
             var vehicleTypes = gh.GetVehicleTypes();
             var vehicleNames = gh.GetVehicleTypes().Select(t => t.Name.ToLower()).ToList();
@@ -141,42 +136,62 @@ namespace Exercise_5_Garage
             Type? selectedVehicleType = vehicleTypes.Where(t => t.Name.ToLower() == selectedVehicleTypeString.ToLower()).FirstOrDefault();
             ArgumentNullException.ThrowIfNull(selectedVehicleType);
 
-            string brandAndModel = askForInput.GetString("MÄRKE OCH MODELL: ");
-            string color = askForInput.GetString("FÄRG: ");
-            int numberOfWheels = askForInput.GetInt("ANTAL HJUL: ");
-            string powerSource = askForInput.GetString("DRIVMEDEL: ");
-            string registrationNumber = askForInput.GetFromUnSelectionString("REGISTRERINGSNUMMER: ", gh.GetAllRegistrationNumbers());
-
-            // Each class special prop and creation of the instance
-            IVehicle newVehicle;
-            switch (selectedVehicleTypeString.ToLower())
+            IVehicle newVehicle = (IVehicle)Activator.CreateInstance(selectedVehicleType)!;
+            foreach (var prop in newVehicle.GetType().GetProperties())
             {
-                case "airplane":
-                    int numberOfEngines = askForInput.GetInt("ANTAL MOTORER: ");
-                    newVehicle = new Airplane(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfEngines);
-                    break;
-                case "boat":
-                    int length = askForInput.GetInt("LÄNGD: ");
-                    double draft = askForInput.GetDouble("DJUP GÅNG: ");
-                    newVehicle = new Boat(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, length, draft);
-                    break;
-                case "bus":
-                    int numberOfSeats = askForInput.GetInt("ANTAL PLATSER: ");
-                    newVehicle = new Bus(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfSeats);
-                    break;
-                case "car":
-                    bool isConvertible = askForInput.ConfirmYes("ÄR DET EN CABRIOLET (J/N)? ");
-                    newVehicle = new Car(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, isConvertible);
-                    break;
-                case "motorcycle":
-                    int cylinderVolume = askForInput.GetInt("CYLINDER VOLYM: ");
-                    newVehicle = new Motorcycle(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, cylinderVolume);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("UNKNOWN VEHICLE TYPE");
+                switch (prop.PropertyType.Name)
+                {
+                    case "String":
+                        prop.SetValue(newVehicle, askForInput.GetString($"{newVehicle.GetinputProperties()[prop.Name]}: "));
+                        break;
+                    case "Boolean":
+                        prop.SetValue(newVehicle, askForInput.ConfirmYes($"{newVehicle.GetinputProperties()[prop.Name]}? "));
+                        break;
+                    case "Int32":
+                        prop.SetValue(newVehicle, askForInput.GetInt($"{newVehicle.GetinputProperties()[prop.Name]}: "));
+                        break;
+                    default:
+                        break;
+                }
             }
-
             gh.ParkVehicle(newVehicle);
+            return;
+
+            //string brandAndModel = askForInput.GetString("MÄRKE OCH MODELL: ");
+            //string color = askForInput.GetString("FÄRG: ");
+            //int numberOfWheels = askForInput.GetInt("ANTAL HJUL: ");
+            //string powerSource = askForInput.GetString("DRIVMEDEL: ");
+            //string registrationNumber = askForInput.GetFromUnSelectionString("REGISTRERINGSNUMMER: ", gh.GetAllRegistrationNumbers());
+
+            //// Each class special prop and creation of the instance
+            //switch (selectedVehicleTypeString.ToLower())
+            //{
+            //    case "airplane":
+            //        int numberOfEngines = askForInput.GetInt("ANTAL MOTORER: ");
+            //        newVehicle = new Airplane(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfEngines);
+            //        break;
+            //    case "boat":
+            //        int length = askForInput.GetInt("LÄNGD: ");
+            //        double draft = askForInput.GetDouble("DJUP GÅNG: ");
+            //        newVehicle = new Boat(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, length, draft);
+            //        break;
+            //    case "bus":
+            //        int numberOfSeats = askForInput.GetInt("ANTAL PLATSER: ");
+            //        newVehicle = new Bus(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfSeats);
+            //        break;
+            //    case "car":
+            //        bool isConvertible = askForInput.ConfirmYes("ÄR DET EN CABRIOLET (J/N)? ");
+            //        newVehicle = new Car(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, isConvertible);
+            //        break;
+            //    case "motorcycle":
+            //        int cylinderVolume = askForInput.GetInt("CYLINDER VOLYM: ");
+            //        newVehicle = new Motorcycle(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, cylinderVolume);
+            //        break;
+            //    default:
+            //        throw new ArgumentOutOfRangeException("UNKNOWN VEHICLE TYPE");
+            //}
+
+            //gh.ParkVehicle(newVehicle);
         }
         internal void UnPark(string[] registrationSearch)
         {
