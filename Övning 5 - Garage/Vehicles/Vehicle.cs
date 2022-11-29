@@ -48,32 +48,15 @@ namespace Exercise_5_Garage.Vehicles
             switch (vehicleProp.ToLower())
             {
                 case "type":
-                case "typ":
-                case "t":
                     return GetVehicleType().Contains(searchText, StringComparison.OrdinalIgnoreCase);
-                case "brandandmodel":
-                case "brand":
-                case "märke":
-                case "model":
-                case "modell":
                 case "bm":
                     return BrandAndModel.Contains(searchText, StringComparison.OrdinalIgnoreCase);
                 case "color":
-                case "colour":
-                case "färg":
                     return Color.Contains(searchText, StringComparison.OrdinalIgnoreCase);
                 case "wheels":
-                case "numwheels":
-                case "nwheels":
-                case "nw":
                     return NumberOfWheels.ToString() == searchText;
-                case "powersource":
-                case "power":
-                case "fuel":
                 case "ps":
                     return PowerSource.Contains(searchText, StringComparison.OrdinalIgnoreCase);
-                case "registrationnumber":
-                case "regnum":
                 case "rn":
                     return RegistrationNumber.Contains(searchText, StringComparison.OrdinalIgnoreCase);
                 default:

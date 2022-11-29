@@ -27,8 +27,6 @@ namespace Exercise_5_Garage.Vehicles
         {
             switch (vehicleProp.ToLower())
             {
-                case "cylindervolume":
-                case "cvolume":
                 case "cv":
                     return CylinderVolume.ToString() == searchText;
                 default:

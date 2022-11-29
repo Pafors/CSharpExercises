@@ -26,7 +26,7 @@ namespace Exercise_5_Garage.UI
                 }
                 else
                 {
-                    ui.OutputData("*** Felaktig inmatning, försök igen\n");
+                    ui.OutputData("*** FELAKTIG INMATNING, FÖRSÖK IGEN\n");
                 };
             }
             while (true);
@@ -64,7 +64,7 @@ namespace Exercise_5_Garage.UI
             {
                 var userInput = GetString(inputPrompt);
                 if (!nonSelection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
-                ui.OutputData("*** Finns redan, skriv ett nytt");
+                ui.OutputData("*** FINNS REDAN, SKRIV ETT NYTT\n");
             } while (true);
         }
         public int GetInt(string inputPrompt)
@@ -78,7 +78,7 @@ namespace Exercise_5_Garage.UI
                 }
                 else
                 {
-                    ui.OutputData("*** Felaktigt värde, försök igen\n");
+                    ui.OutputData("*** FELAKTIGT VÄRDE, FÖRSÖK IGEn\n");
                 }
             }
             while (true);
@@ -94,7 +94,7 @@ namespace Exercise_5_Garage.UI
                 }
                 else
                 {
-                    ui.OutputData("*** Felaktigt värde, försök igen\n");
+                    ui.OutputData("*** FELAKTIGT VÄRDE, FÖRSÖK IGEN\n");
                 }
             }
             while (true);

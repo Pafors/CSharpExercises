@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Exercise_5_Garage.Extensions
 {
+    // Was used, but not anymore
     public static class ListExtensions
     {
         public static string CommaSeparated(this List<string> list)

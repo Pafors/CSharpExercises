@@ -32,10 +32,8 @@ namespace Exercise_5_Garage.Vehicles
         {
             switch (vehicleProp.ToLower())
             {
-                case "length":
                 case "l":
                     return Length.ToString() == searchText;
-                case "draft":
                 case "d":
                     return Draft.ToString() == searchText;
                 default:

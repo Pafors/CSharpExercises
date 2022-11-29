@@ -27,9 +27,6 @@ namespace Exercise_5_Garage.Vehicles
         {
             switch (vehicleProp.ToLower())
             {
-                case "numberofengines":
-                case "numengines":
-                case "negines":
                 case "ne":
                     return NumberOfEngines.ToString() == searchText;
                 default:

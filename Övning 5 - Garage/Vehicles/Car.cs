@@ -12,18 +12,18 @@ namespace Exercise_5_Garage.Vehicles
         public bool Convertible { get; protected set; }
         public Car(string brandAndModel, string color, int numberOfWheels, string powerSource, string registrationNumber, bool convertible) : base(brandAndModel, color, numberOfWheels, powerSource, registrationNumber)
         {
-            Convertible= convertible;
+            Convertible = convertible;
             SearchTerms.Add("conv", "Convertible yes/no (car)");
         }
         public override string ToString()
         {
-            string trueFalseString = Convertible? "Ja" : "Nej";
+            string trueFalseString = Convertible ? "Ja" : "Nej";
             return $"{base.ToString()}, CABRIOLET: {trueFalseString}";
         }
         public override bool MatchesAny(string searchText)
         {
-            return base.MatchesAny(searchText) || 
-                Convertible && 
+            return base.MatchesAny(searchText) ||
+                Convertible &&
                 (searchText.Contains("cab", StringComparison.OrdinalIgnoreCase) || searchText.Contains("conv", StringComparison.OrdinalIgnoreCase));
         }
         public override bool MatchesProp(string vehicleProp, string searchText)
@@ -31,28 +31,20 @@ namespace Exercise_5_Garage.Vehicles
             bool checkFor;
             switch (searchText.ToLower())
             {
-                case "yes":
-                case "y":
-                case "ja":
-                case "j":
-                    checkFor = true;
-                    break;
                 case "no":
                 case "nej":
+                case "nix":
                 case "n":
-                    checkFor= false;
+                    checkFor = false;
                     break;
                 default:
-                    // Putting in a "convertible:" and forgetting "yes/no" is probably a "yes"
-                    checkFor= true;
+                    // Putting in a "convertible:" and anything after is probably a "yes"
+                    checkFor = true;
                     break;
             }
             switch (vehicleProp.ToLower())
             {
-                case "convertible":
-                case "cabrilolet":
                 case "conv":
-                case "cab":
                     return Convertible == checkFor;
                 default:
                     return base.MatchesProp(vehicleProp, searchText);

@@ -12,7 +12,7 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         IEnumerable<IVehicle> FindByProp(string vehicleProp, string searchText);
         IEnumerable<IVehicle> FindByRegistration(string searchTerm);
         List<string> GetAllRegistrationNumbers();
-        IEnumerator<T> GetEnumerator();
+        //IEnumerator<T> GetEnumerator(); // TODO XXXXXX
         int GetNumberOfAvailableParkingSpots();
         Dictionary<string, string> GetSearchTerms();
         int GetSize();
