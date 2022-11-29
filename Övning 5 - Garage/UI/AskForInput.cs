@@ -14,7 +14,6 @@ namespace Exercise_5_Garage.UI
         {
             this.ui = ui;
         }
-
         public string GetString(string inputPrompt)
         {
             do
@@ -32,14 +31,31 @@ namespace Exercise_5_Garage.UI
             }
             while (true);
         }
-
         public string GetFromSelectionString(string inputPrompt, List<string> selection)
         {
             do
             {
                 var userInput = GetString(inputPrompt);
-                if(selection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
-                ui.OutputData("*** Finns inte som valmöjlighet, försök igen\n");
+                if (selection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
+                ui.OutputData("*** FINNS INTE SOM VALMÖJLIGHET, FÖRSÖK IGEN\n");
+            } while (true);
+        }
+        public string GetMultipleFromSelectionString(string inputPrompt, List<string> selection)
+        {
+            do
+            {
+                var userInputItems = GetString(inputPrompt);
+                bool validInput = true;
+                foreach (var userInput in userInputItems.Split(" ", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (!selection.Contains(userInput, StringComparer.OrdinalIgnoreCase))
+                    {
+                        ui.OutputData($"*** '{userInput}' FINNS INTE SOM VALMÖJLIGHET, FÖRSÖK IGEN\n");
+                        validInput = false;
+                    }
+
+                }
+                if (validInput) { return userInputItems; }
             } while (true);
         }
         public string GetFromUnSelectionString(string inputPrompt, List<string> nonSelection)
@@ -47,11 +63,10 @@ namespace Exercise_5_Garage.UI
             do
             {
                 var userInput = GetString(inputPrompt);
-                if(!nonSelection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
+                if (!nonSelection.Contains(userInput, StringComparer.OrdinalIgnoreCase)) { return userInput; }
                 ui.OutputData("*** Finns redan, skriv ett nytt");
             } while (true);
         }
-
         public int GetInt(string inputPrompt)
         {
             do
@@ -84,7 +99,6 @@ namespace Exercise_5_Garage.UI
             }
             while (true);
         }
-
         public bool ConfirmYes(string confirmPrompt)
         {
             string confirmExit = GetString(confirmPrompt);
@@ -97,7 +111,6 @@ namespace Exercise_5_Garage.UI
                 return false;
             }
         }
-
         public (string Command, string[]? Args) GetCommand()
         {
             var commandArgs = GetString("COMMAND> ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
