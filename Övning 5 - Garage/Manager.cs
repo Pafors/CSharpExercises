@@ -248,17 +248,16 @@ namespace Exercise_5_Garage
         {
             if (!HaveGarage(gh)) { return; }
 
+            // Gets the possible props of the vehicles stored in the garage
+            var uniqueSearchTermsAvailable = gh.GetSearchTerms();
+            // Failsafe check if a null return
+            if (uniqueSearchTermsAvailable == null) { return; }
+
             // No parameters in input, ask for them
             if (searchTerms.Length < 1)
             {
-                // No parameters to the command, available props and an example
-
-                // Gets the possible props of the vehicles stored in the garage
-                var uniqueSearchTerms = gh.GetSearchTerms();
-                // Failsafe check if a null return
-                if (uniqueSearchTerms == null) { return; }
-                // Show terms available
-                foreach (var searchTerm in uniqueSearchTerms)
+                // No parameters to the command, show available props (search terms) and an example
+                foreach (var searchTerm in uniqueSearchTermsAvailable)
                 {
                     ui.OutputData($"{searchTerm.Key,7} {searchTerm.Value}\n");
                 }
@@ -267,7 +266,7 @@ namespace Exercise_5_Garage
             }
 
             // If no search terms are provided, return
-            if(searchTerms.Length < 1) { return; }
+            if (searchTerms.Length < 1) { return; }
             int validSearchTerms = 0;
 
             // First get a list of all vehicles, which will be be filtered for each match
@@ -282,6 +281,9 @@ namespace Exercise_5_Garage
                 if (searchData.Length != 2) { continue; }
                 string vehicleProp = searchData[0];
                 string searchText = searchData[1];
+                // Skip if not a valid search term
+                if (!uniqueSearchTermsAvailable.ContainsKey(vehicleProp.ToLower())) { continue;                }
+                // Count how many valid search terms entered by user
                 validSearchTerms++;
                 intersectResult = intersectResult.Intersect(gh.FindByProp(vehicleProp, searchText)).ToList();
             }
