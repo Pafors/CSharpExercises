@@ -126,17 +126,24 @@ namespace Exercise_5_Garage
                 return;
             }
 
-            // TODO park Cleanup and comments
+            // Show vehicle types
             ui.OutputData("FORDONS TYPER: ");
             var vehicleTypes = gh.GetVehicleTypes();
             var vehicleNames = gh.GetVehicleTypes().Select(t => t.Name.ToLower()).ToList();
             foreach (var vehicleName in vehicleNames) { ui.OutputData($"{vehicleName} "); }
             ui.OutputData("\n");
+            // Ask for vehicle type, as a string
             var selectedVehicleTypeString = askForInput.GetFromSelectionString("VÄLJ FORDONS TYP: ", vehicleNames);
+            // Get Type from string selection of vehicle
             Type? selectedVehicleType = vehicleTypes.Where(t => t.Name.ToLower() == selectedVehicleTypeString.ToLower()).FirstOrDefault();
+            // Bail out if null, perhaps return with fail message is better
             ArgumentNullException.ThrowIfNull(selectedVehicleType);
 
+            // Make an instance of selected vehicle type from Type
             IVehicle newVehicle = (IVehicle)Activator.CreateInstance(selectedVehicleType)!;
+            // TODO Fail if newVehicle is null
+
+            // Get properties from selected vehicle object and ask for input from user depending on the type, use prompt from class
             foreach (var prop in newVehicle.GetType().GetProperties())
             {
                 switch (prop.PropertyType.Name)
@@ -154,44 +161,8 @@ namespace Exercise_5_Garage
                         break;
                 }
             }
+            // Make the new vehicle a part of the garage
             gh.ParkVehicle(newVehicle);
-            return;
-
-            //string brandAndModel = askForInput.GetString("MÄRKE OCH MODELL: ");
-            //string color = askForInput.GetString("FÄRG: ");
-            //int numberOfWheels = askForInput.GetInt("ANTAL HJUL: ");
-            //string powerSource = askForInput.GetString("DRIVMEDEL: ");
-            //string registrationNumber = askForInput.GetFromUnSelectionString("REGISTRERINGSNUMMER: ", gh.GetAllRegistrationNumbers());
-
-            //// Each class special prop and creation of the instance
-            //switch (selectedVehicleTypeString.ToLower())
-            //{
-            //    case "airplane":
-            //        int numberOfEngines = askForInput.GetInt("ANTAL MOTORER: ");
-            //        newVehicle = new Airplane(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfEngines);
-            //        break;
-            //    case "boat":
-            //        int length = askForInput.GetInt("LÄNGD: ");
-            //        double draft = askForInput.GetDouble("DJUP GÅNG: ");
-            //        newVehicle = new Boat(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, length, draft);
-            //        break;
-            //    case "bus":
-            //        int numberOfSeats = askForInput.GetInt("ANTAL PLATSER: ");
-            //        newVehicle = new Bus(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, numberOfSeats);
-            //        break;
-            //    case "car":
-            //        bool isConvertible = askForInput.ConfirmYes("ÄR DET EN CABRIOLET (J/N)? ");
-            //        newVehicle = new Car(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, isConvertible);
-            //        break;
-            //    case "motorcycle":
-            //        int cylinderVolume = askForInput.GetInt("CYLINDER VOLYM: ");
-            //        newVehicle = new Motorcycle(brandAndModel, color, numberOfWheels, powerSource, registrationNumber, cylinderVolume);
-            //        break;
-            //    default:
-            //        throw new ArgumentOutOfRangeException("UNKNOWN VEHICLE TYPE");
-            //}
-
-            //gh.ParkVehicle(newVehicle);
         }
         internal void UnPark(string[] registrationSearch)
         {
