@@ -1,6 +1,4 @@
-﻿using Exercise_5_Garage.Types;
-
-namespace Exercise_5_Garage.Vehicles
+﻿namespace Exercise_5_Garage.Vehicles
 {
     public interface IVehicle
     {

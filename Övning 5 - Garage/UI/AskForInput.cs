@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Exercise_5_Garage.UI
+﻿namespace Exercise_5_Garage.UI
 {
     internal class AskForInput
     {
@@ -16,6 +9,7 @@ namespace Exercise_5_Garage.UI
         }
         public string GetString(string inputPrompt)
         {
+            // Standaed get string from user
             do
             {
                 ui.OutputData(inputPrompt);
@@ -33,6 +27,7 @@ namespace Exercise_5_Garage.UI
         }
         public string GetFromSelectionString(string inputPrompt, List<string> selection)
         {
+            // Get string, but string is only valid if the input is one of the "selection"
             do
             {
                 var userInput = GetString(inputPrompt);
@@ -42,6 +37,9 @@ namespace Exercise_5_Garage.UI
         }
         public string GetMultipleFromSelectionString(string inputPrompt, List<string> selection)
         {
+            // Get multiple strings, but string is only valid if the "selection" contains any of the input in any order
+            // Example of valid: inputstring is "123 abc" and selection is "abc def 123"
+            // Example of nonvalid: inputstring is "123 abc zxc" and selection is "abc def 123"
             do
             {
                 var userInputItems = GetString(inputPrompt);
@@ -60,6 +58,7 @@ namespace Exercise_5_Garage.UI
         }
         public string GetFromUnSelectionString(string inputPrompt, List<string> nonSelection)
         {
+            // Input and is valid if it doesn't contain anything from "nonSelection".
             do
             {
                 var userInput = GetString(inputPrompt);
@@ -69,9 +68,10 @@ namespace Exercise_5_Garage.UI
         }
         public int GetInt(string inputPrompt)
         {
+            // First get a string, then try to parse it to an int
             do
             {
-                // Check that the received input is a valid number (valid uint)
+                // Check that the received input is a valid number (valid int)
                 if (int.TryParse(GetString(inputPrompt), out int userInput))
                 {
                     return userInput;
@@ -85,9 +85,10 @@ namespace Exercise_5_Garage.UI
         }
         public double GetDouble(string inputPrompt)
         {
+            // First get a string, then try to parse it to an double
             do
             {
-                // Check that the received input is a valid number (valid uint)
+                // Check that the received input is a valid number (valid double)
                 if (double.TryParse(GetString(inputPrompt), out double userInput))
                 {
                     return userInput;
@@ -101,6 +102,7 @@ namespace Exercise_5_Garage.UI
         }
         public bool ConfirmYes(string confirmPrompt)
         {
+            // Boolean input, can be used to confirm any "yes/no"
             string confirmExit = GetString(confirmPrompt);
             if (confirmExit.ToLower() == "j" || confirmExit.ToLower() == "ja")
             {
@@ -113,6 +115,7 @@ namespace Exercise_5_Garage.UI
         }
         public (string Command, string[]? Args) GetCommand()
         {
+            // Command line input, returns a tuple with "command" and it's "args"
             var commandArgs = GetString("COMMAND> ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
             string[]? args;
             if (commandArgs.Length < 1)

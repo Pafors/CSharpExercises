@@ -2,8 +2,6 @@
 using Exercise_5_Garage.Helpers;
 using Exercise_5_Garage.UI;
 using Exercise_5_Garage.Vehicles;
-using System.Linq;
-using System.Reflection;
 
 namespace Exercise_5_Garage
 {
@@ -18,6 +16,8 @@ namespace Exercise_5_Garage
         {
             this.ui = ui;
             gh = garageHandler;
+
+            // Holder of commands (Actions)
             commandMenu = new Dictionary<string, Action<string[]>>
             {
                 { Menu.NewGarage, NewGarage },
@@ -32,12 +32,13 @@ namespace Exercise_5_Garage
                 { Menu.Quit, ExitApplication },
                 { Menu.ShortQuit, ExitApplication }
             };
+            // Instantiate the input helper
             askForInput = new AskForInput(ui);
         }
         internal void StartUpLoop()
         {
             Menu.WriteMenu(ui);
-            // Command loop
+            // Main loop for commands
             while (true)
             {
                 ShowStats();
@@ -55,6 +56,7 @@ namespace Exercise_5_Garage
         }
         private void ShowStats()
         {
+            // Shows data on the garage
             ui.OutputData("[ LEDIGA PLATSER: ");
             if (gh.HaveAGarage())
             {
@@ -68,9 +70,11 @@ namespace Exercise_5_Garage
         }
         internal void NewGarage(string[] size)
         {
+            // User wants a new garage, verify overwrite if garagehandler already have an instance of a garage
             int wantedSize = 0;
             if (!gh.HaveAGarage() || (gh.HaveAGarage() && askForInput.ConfirmYes("DET FINNS REDAN ETT GARAGE, VILL DU FORTSÄTTA (J/N)? ")))
             {
+                // Have arguments for a size, use it
                 if (size.Length > 0)
                 {
                     if (int.TryParse(size[0], out int parsedSize))
@@ -78,6 +82,7 @@ namespace Exercise_5_Garage
                         wantedSize = parsedSize;
                     }
                 }
+                // No argument, ask for size
                 else
                 {
                     wantedSize = askForInput.GetInt("ÖNSKAD STORLEK: ");
@@ -91,6 +96,7 @@ namespace Exercise_5_Garage
         internal void Populate(string[] _)
         {
             if (!HaveGarage(gh)) { return; }
+            // Setup some vehicles
             var vehicles = new List<IVehicle>() {
                 new Car("Volvo 240", "Blue", 4, "Diesel", "JAC495", convertible: false),
                 new Car("Honda CRV", "Silver", 4, "Petrol", "QWE123", convertible: false),
@@ -104,6 +110,7 @@ namespace Exercise_5_Garage
                 new Motorcycle("Honda Goldwing", "Black", 2, "Petrol", "CRZ001", 1833),
                 new Motorcycle("Honda Silverwing", "Purple", 2, "Petrol", "CRZ001", 1433)
             };
+            // Iterate and add vehicles to the garage
             foreach (var vehicle in vehicles)
             {
                 (bool result, string reason) = gh.ParkVehicle(vehicle);
@@ -132,10 +139,13 @@ namespace Exercise_5_Garage
             var vehicleNames = gh.GetVehicleTypes().Select(t => t.Name.ToLower()).ToList();
             foreach (var vehicleName in vehicleNames) { ui.OutputData($"{vehicleName} "); }
             ui.OutputData("\n");
+
             // Ask for vehicle type, as a string
             var selectedVehicleTypeString = askForInput.GetFromSelectionString("VÄLJ FORDONS TYP: ", vehicleNames);
+
             // Get Type from string selection of vehicle
             Type? selectedVehicleType = vehicleTypes.Where(t => t.Name.ToLower() == selectedVehicleTypeString.ToLower()).FirstOrDefault();
+
             // Bail out if null, perhaps return with fail message is better
             ArgumentNullException.ThrowIfNull(selectedVehicleType);
 
@@ -167,23 +177,33 @@ namespace Exercise_5_Garage
         internal void UnPark(string[] registrationSearch)
         {
             if (!HaveGarage(gh)) { return; }
-            string regNumber;
+            // Using registration number as the unique property for unparking a vehicle
+            List<string> regNumbers = new List<string>();
             if (registrationSearch.Length < 1)
             {
-                regNumber = askForInput.GetString("VILKET REGISTRERINGSNUMMER VILL DU AVPARKERA?\n");
+                // Split and add to list of regnumbers to unpark
+                string regNumbersInput = askForInput.GetString("VILKET REGISTRERINGSNUMMER VILL DU AVPARKERA?\n");
+                foreach (var rn in regNumbersInput.Split(" ", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    regNumbers.Add(rn);
+                }
             }
             else
             {
-                regNumber = registrationSearch[0];
+                // Use argument as the list to unpark
+                regNumbers = registrationSearch.ToList();
             }
-            // Vehicle will be unparked if its registration number are in the garage
-            if (gh.UnParkVehicle(regNumber))
+            foreach (string regNumber in regNumbers)
             {
-                ui.OutputData($"FORDON MED REGISTRERINGSNUMMER '{regNumber}' ÄR AVPARKERAD\n");
-            }
-            else
-            {
-                ui.OutputData($"*** GARAGET SAKNAR ETT FORDON MED REGISTRERINGSNUMMER '{regNumber}'\n");
+                // Vehicle will be unparked if its registration number are in the garage
+                if (gh.UnParkVehicle(regNumber))
+                {
+                    ui.OutputData($"FORDON MED REGISTRERINGSNUMMER '{regNumber}' ÄR AVPARKERAD\n");
+                }
+                else
+                {
+                    ui.OutputData($"*** GARAGET SAKNAR ETT FORDON MED REGISTRERINGSNUMMER '{regNumber}'\n");
+                }
             }
         }
         internal void ListVehicles(string[] _)
@@ -197,7 +217,10 @@ namespace Exercise_5_Garage
         internal void ListVehiclesByType(string[] _)
         {
             if (!HaveGarage(gh)) { return; }
+            // Get all parked vehicles
             var v = gh.GetParkedVehicles();
+            // TODO Analyze the "GroupBy()" more
+            // Group by Type (vehicle type) and count how many per type
             var groups = v.GroupBy(
                 v => v.GetType().ToString(),
                 v => v.GetType(),
@@ -236,6 +259,7 @@ namespace Exercise_5_Garage
 
             // Gets the possible props of the vehicles stored in the garage
             var uniqueSearchTermsAvailable = gh.GetSearchTerms();
+            
             // Failsafe check if a null return
             if (uniqueSearchTermsAvailable == null) { return; }
 
@@ -268,7 +292,7 @@ namespace Exercise_5_Garage
                 string vehicleProp = searchData[0];
                 string searchText = searchData[1];
                 // Skip if not a valid search term
-                if (!uniqueSearchTermsAvailable.ContainsKey(vehicleProp.ToLower())) { continue;                }
+                if (!uniqueSearchTermsAvailable.ContainsKey(vehicleProp.ToLower())) { continue; }
                 // Count how many valid search terms entered by user
                 validSearchTerms++;
                 intersectResult = intersectResult.Intersect(gh.FindByProp(vehicleProp, searchText)).ToList();
@@ -276,7 +300,6 @@ namespace Exercise_5_Garage
             // If no valid search terms are provided, show nothing
             if (validSearchTerms < 1) { return; }
             ShowSearchResults(intersectResult);
-
         }
         internal void FindByRegistration(string[] rnToFind)
         {

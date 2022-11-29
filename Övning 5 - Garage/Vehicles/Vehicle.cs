@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Exercise_5_Garage.Types;
-
-namespace Exercise_5_Garage.Vehicles
+﻿namespace Exercise_5_Garage.Vehicles
 {
     public abstract class Vehicle : IVehicle
     {
@@ -14,6 +7,7 @@ namespace Exercise_5_Garage.Vehicles
         public int NumberOfWheels { get; set; } = 0;
         public string PowerSource { get; set; } = "";
         public string RegistrationNumber { get; set; } = "";
+        // "SearchTerms" is used for "FindByProp" to show the options to search for
         public Dictionary<string, string> SearchTerms = new() {
                 { "type", "Type of vehicle" },
                 { "bm", "Brand and model" },
@@ -22,6 +16,7 @@ namespace Exercise_5_Garage.Vehicles
                 { "ps", "Power source" },
                 { "rn", "Registration number" }
             };
+        // "InputProperties" is used in the Reflection, to get the apropriate questions to ask for the member
         public Dictionary<string, string> InputProperties = new()
         {
             { "BrandAndModel", "MÄRKE OCH MODELL" },
@@ -45,6 +40,7 @@ namespace Exercise_5_Garage.Vehicles
         {
             return $"TYP: {GetVehicleType()}, MÄRKE MODELL: {BrandAndModel}, FÄRG: {Color}, ANTAL HJUL: {NumberOfWheels}, DRIVMEDEL: {PowerSource}, REG.NUMMER: {RegistrationNumber}";
         }
+        // The free search "FindAny" uses this for matching
         public virtual bool MatchesAny(string searchText)
         {
             return GetVehicleType().Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
@@ -54,6 +50,7 @@ namespace Exercise_5_Garage.Vehicles
                 PowerSource.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
                 RegistrationNumber.Contains(searchText, StringComparison.OrdinalIgnoreCase);
         }
+        // The search by property "FindByProp" uses this for matching
         public virtual bool MatchesProp(string vehicleProp, string searchText)
         {
             switch (vehicleProp.ToLower())

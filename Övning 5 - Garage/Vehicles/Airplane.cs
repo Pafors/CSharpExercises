@@ -1,11 +1,4 @@
-﻿using Exercise_5_Garage.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Exercise_5_Garage.Vehicles
+﻿namespace Exercise_5_Garage.Vehicles
 {
     public class Airplane : Vehicle
     {

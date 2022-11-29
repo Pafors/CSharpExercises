@@ -1,9 +1,4 @@
 ﻿using Exercise_5_Garage.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exercise_5_Garage.Helpers
 {
@@ -27,13 +22,14 @@ namespace Exercise_5_Garage.Helpers
             ui.OutputData($"'{NewGarage} (nnn)' Skapar ett nytt garage\n");
             ui.OutputData($"'{Populate}' Fyller på med lite fordon\n");
             ui.OutputData($"'{Park}' Parkerar ett nytt fordon\n");
-            ui.OutputData($"'{UnPark} (rn)' Avparkerar ett fordon\n");
+            ui.OutputData($"'{UnPark} (rn1 rn2 ...)' Avparkerar ett fordon\n");
             ui.OutputData($"'{ListVehicles}' Visar parkerade fordon\n");
             ui.OutputData($"'{ListVehiclesByType}' Visar parkerade fordon per typ\n");
             ui.OutputData($"'{FindAny} (nnn nnn ...)' Hitta fordon\n");
             ui.OutputData($"'{FindByProp} (prop:nnn prop:nnn ...)' Hitta fordon via egenskap\n");
             ui.OutputData($"'{FindByRegistration} (rn)' Hitta fordon via registreringsnummer\n");
             ui.OutputData($"'{Quit}' Avsluta\n");
+            ui.OutputData("NOTERA: Parametrar inom parantes är valfria, anges de inte som argument frågas de efter.");
             ui.OutputData("\n");
         }
     }

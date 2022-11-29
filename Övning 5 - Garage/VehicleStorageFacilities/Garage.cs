@@ -1,8 +1,6 @@
 ﻿using Exercise_5_Garage.Types;
 using Exercise_5_Garage.Vehicles;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Exercise_5_Garage.VehicleStorageFacilities
 {
@@ -30,9 +28,10 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public (bool, string) ParkVehicle(T vehicle)
         {
+            // Don't accept a vehicle that has the same registration numbers as an already parked vehicle
             if (GetAllRegistrationNumbers().Contains(vehicle.RegistrationNumber, StringComparer.OrdinalIgnoreCase))
             { return (false, "DUBLETT AV REGISTRERINGSNUMMER"); }
-            // Find the first available free "parking spot" in the array
+            // Find the first available free "parking spot" ("null") in the array
             int? freeParkingSpot;
             var availableParkingSpots = AvailableParkingSpots();
             freeParkingSpot = availableParkingSpots.FirstOrDefault();
@@ -47,10 +46,10 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         public bool UnParkVehicle(string registrationNumber)
         {
+            // Unpark and set to the default ("null") value to indicate free parking slot
             for (int i = 0; i < vehicleStorage.Length; i++)
             {
                 if (vehicleStorage[i] == null) { continue; }
-                Console.WriteLine($"{vehicleStorage[i]!.RegistrationNumber.ToLower()} == {registrationNumber.ToLower()}");
                 if (vehicleStorage[i]!.RegistrationNumber.ToLower() == registrationNumber.ToLower())
                 {
                     vehicleStorage[i] = default(T);
@@ -65,8 +64,8 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         public List<int> AvailableParkingSpots()
         {
-            // Build a new anonymous object with array index and vehicle data, then
-            // find the first "null" and return the index. Return the index found as a list.
+            // Build a new anonymous object with array index and vehicle data, then find
+            // the first "null" and return the index. Return all the index found as a list.
             return vehicleStorage.Select((v, i) => new { Index = i, Vehicle = v })
                                  .Where(p => p.Vehicle == null)
                                  .Select(p => p.Index).ToList();
@@ -78,16 +77,19 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         public IEnumerable<IVehicle> FindAny(string searchTerm)
         {
+            // Iterate through all the vehicles and check for a match
             return (IEnumerable<IVehicle>)vehicleStorage
                 .Where(v => v != null && v.MatchesAny(searchTerm));
         }
         public IEnumerable<IVehicle> FindByProp(string vehicleProp, string searchText)
         {
+            // Iterate through all the vehicles and check for a match
             return (IEnumerable<IVehicle>)vehicleStorage
                .Where(v => v != null && v.MatchesProp(vehicleProp, searchText));
         }
         public IEnumerable<IVehicle> FindByRegistration(string searchTerm)
         {
+            // Iterate through all the vehicles and check for a match
             return (IEnumerable<IVehicle>)vehicleStorage
                 .Where(v => v != null && v.RegistrationNumber.ToUpper().Contains(searchTerm.ToUpper()));
         }
@@ -97,11 +99,13 @@ namespace Exercise_5_Garage.VehicleStorageFacilities
         }
         public List<string> GetAllRegistrationNumbers()
         {
+            // Iterate through all the vehicles and return all the registration numbers as a list
             return vehicleStorage.Where(v => v != null).Select(v => v!.RegistrationNumber).ToList();
         }
         public Dictionary<string, string> GetSearchTerms()
         {
             Dictionary<string, string> mergedTerms = new();
+            // Iterate through all the vehicles and make a dictionary of all possible search terms for properties
             foreach (var vehicle in vehicleStorage)
             {
                 if (vehicle == null) continue;
